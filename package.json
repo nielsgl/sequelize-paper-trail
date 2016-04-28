@@ -21,7 +21,7 @@
     "type": "git",
     "url": "https://github.com/nielsgl/sequelize-trails.git"
   },
-  "private": true,
+  "private": false,
   "keywords": [
     "sequelize",
     "sequelize-plugin",

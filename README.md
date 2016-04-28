@@ -12,7 +12,7 @@ Track changes to your models, for auditing or versioning. See how a model looked
 
 ## Problems
 
-Please use GitHub's [issue tracker](https://github.com/nielsgl/sequelize_paper_trail/issues).
+Please use GitHub's [issue tracker](https://github.com/nielsgl/sequelize-paper-trail/issues).
 
 ## Inspirations
 
