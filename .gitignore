@@ -1,0 +1,15 @@
+# Logs
+logs
+*.log
+
+# Dependency directory
+node_modules
+
+# Temporal files
+.DS_Store
+
+# IDE directory
+.idea
+
+# Build
+lib

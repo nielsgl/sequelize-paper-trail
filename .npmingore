@@ -1,0 +1,19 @@
+# Source
+src
+
+# Test
+test
+
+# Temporal files
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules
+
+# Configurations
+.gitignore
