@@ -139,16 +139,13 @@ export default (sequelize: sequelize, options: object): object => {
       }
       // this.revisionable = true;
       this.refreshAttributes();
-      log(this.attributes["revision"]);
 
       if(options.enableMigration) {
         var tableName: string = this.getTableName();
         sequelize.getQueryInterface().describeTable(tableName)
         .then(function(attributes: any) {
           if(!attributes['revision']) {
-            log('adding revision')
-            log(tableName)
-            // console.log(Object.getOwnPropertyNames(this));
+            if(debug) { log('adding revision attribute to the database'); }
             sequelize.getQueryInterface().addColumn(
                 tableName,
                 'revision',
@@ -156,9 +153,11 @@ export default (sequelize: sequelize, options: object): object => {
                   type: Sequelize.INTEGER,
                   defaultValue: 0
                 }
-            ).then(function(ad: any) {
-              log('--ad--')
-              log(ad);
+            ).then(() => {
+              return null;
+            }).catch((err: any) => {
+              log('something went really wrong..');
+              log(err);
               return null;
             });
           }
@@ -171,36 +170,6 @@ export default (sequelize: sequelize, options: object): object => {
       this.addHook("afterCreate", afterHook);
       this.addHook("afterUpdate", afterHook);
       return this;
-    },
-    enablePaperTrail: function () {
-      log('enabling paper trail');
-      // log(this.attributes["revision"])
-      var tableName: string = this.getTableName();
-      sequelize.getQueryInterface().describeTable(tableName)
-          .then(function(attributes: any) {
-            log('attribs')
-            if(!attributes['revision']) {
-              log('adding revision')
-              log(tableName)
-              // console.log(Object.getOwnPropertyNames(this));
-              return sequelize.getQueryInterface().addColumn(
-                  tableName,
-                  'revision',
-                  {
-                    type: Sequelize.INTEGER,
-                    defaultValue: 0
-                  }
-              ).then(function(ad: any) {
-                log('--ad--')
-                log(ad);
-                return null;
-            })
-          }
-        return null;
-      });
-      // log('this')
-      // console.log(Object.getOwnPropertyNames(this));
-      // log(this.name)
     }
   });
 
