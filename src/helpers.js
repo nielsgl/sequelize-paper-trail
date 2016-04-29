@@ -6,7 +6,6 @@ var _ = require('lodash');
 
 export default {
     test: (): boolean => {
-        console.log('hello')
         return true;
     },
     calcDelta: (current: object, next: object, exclude: object): object => {
