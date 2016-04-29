@@ -10,6 +10,3 @@ node_modules
 
 # IDE directory
 .idea
-
-# Build
-lib
