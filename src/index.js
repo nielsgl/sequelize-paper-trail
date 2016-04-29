@@ -128,18 +128,72 @@ export default (sequelize: sequelize, options: object): object => {
   _.extend(sequelize.Model.prototype, {
     hasPaperTrail: function () {
       if(debug) { log('Enabling paper trail on', this.name); }
+      log(this.getTableName())
+      log(this.attributes["revision"])
+      // log(sequelize.getQueryInterface())
+      // if (!this.attributes["revision"]) {
+      //   return sequelize.getQueryInterface().addColumn(
+      //       this.getTableName(),
+      //       'revision',
+      //       {
+      //         type: Sequelize.INTEGER,
+      //         defaultValue: 0
+      //       }
+      //   ).then(function(ad: any) {
+      //     log('--ad--')
+      //     log(ad);
+      //     this.revisionable = true;
+      //     this.refreshAttributes();
+      //     // log(this.attributes)
+      //     this.addHook("beforeCreate", beforeHook);
+      //     this.addHook("beforeUpdate", beforeHook);
+      //     this.addHook("afterCreate", afterHook);
+      //     this.addHook("afterUpdate", afterHook);
+      //     return this;
+      //   })
+      // }
       this.attributes["revision"] = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       }
-      this.revisionable = true;
+      // this.revisionable = true;
       this.refreshAttributes();
-      
+      log(this.attributes["revision"])
       this.addHook("beforeCreate", beforeHook);
       this.addHook("beforeUpdate", beforeHook);
       this.addHook("afterCreate", afterHook);
       this.addHook("afterUpdate", afterHook);
       return this;
+    },
+    enablePaperTrail: function () {
+      log('enabling paper trail');
+      // log(this.attributes["revision"])
+      var tableName: string = this.getTableName();
+      sequelize.getQueryInterface().describeTable(tableName)
+          .then(function(attributes: any) {
+            log('attribs')
+            if(!attributes['revision']) {
+              log('adding revision')
+              log(tableName)
+              // console.log(Object.getOwnPropertyNames(this));
+              return sequelize.getQueryInterface().addColumn(
+                  tableName,
+                  'revision',
+                  {
+                    type: Sequelize.INTEGER,
+                    defaultValue: 0
+                  }
+              ).then(function(ad: any) {
+                log('--ad--')
+                log(ad);
+                return null;
+            })
+          }
+        return null;
+      });
+      // log('this')
+      // console.log(Object.getOwnPropertyNames(this));
+      // log(this.name)
     }
   });
 
