@@ -87,6 +87,10 @@ export default (sequelize: sequelize, options: object): object => {
     options.enableCompression = false;
   }
 
+  // automatically add the column to the database if it doesn't exist
+  if(!options.enableMigration) {
+    options.enableMigration = true;
+  }
 
   if (debug) {
     log('parsed options:');
@@ -128,37 +132,40 @@ export default (sequelize: sequelize, options: object): object => {
   _.extend(sequelize.Model.prototype, {
     hasPaperTrail: function () {
       if(debug) { log('Enabling paper trail on', this.name); }
-      log(this.getTableName())
-      log(this.attributes["revision"])
-      // log(sequelize.getQueryInterface())
-      // if (!this.attributes["revision"]) {
-      //   return sequelize.getQueryInterface().addColumn(
-      //       this.getTableName(),
-      //       'revision',
-      //       {
-      //         type: Sequelize.INTEGER,
-      //         defaultValue: 0
-      //       }
-      //   ).then(function(ad: any) {
-      //     log('--ad--')
-      //     log(ad);
-      //     this.revisionable = true;
-      //     this.refreshAttributes();
-      //     // log(this.attributes)
-      //     this.addHook("beforeCreate", beforeHook);
-      //     this.addHook("beforeUpdate", beforeHook);
-      //     this.addHook("afterCreate", afterHook);
-      //     this.addHook("afterUpdate", afterHook);
-      //     return this;
-      //   })
-      // }
+
       this.attributes["revision"] = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       }
       // this.revisionable = true;
       this.refreshAttributes();
-      log(this.attributes["revision"])
+      log(this.attributes["revision"]);
+
+      if(options.enableMigration) {
+        var tableName: string = this.getTableName();
+        sequelize.getQueryInterface().describeTable(tableName)
+        .then(function(attributes: any) {
+          if(!attributes['revision']) {
+            log('adding revision')
+            log(tableName)
+            // console.log(Object.getOwnPropertyNames(this));
+            sequelize.getQueryInterface().addColumn(
+                tableName,
+                'revision',
+                {
+                  type: Sequelize.INTEGER,
+                  defaultValue: 0
+                }
+            ).then(function(ad: any) {
+              log('--ad--')
+              log(ad);
+              return null;
+            });
+          }
+          return null;
+        });
+      }
+
       this.addHook("beforeCreate", beforeHook);
       this.addHook("beforeUpdate", beforeHook);
       this.addHook("afterCreate", afterHook);
