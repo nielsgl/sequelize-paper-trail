@@ -116,7 +116,7 @@ Please use GitHub's [issue tracker](https://github.com/nielsgl/sequelize-paper-t
 * [Sequelize-Revisions](https://github.com/bkniffler/sequelize-revisions)
 * [Paper Trail](https://github.com/airblade/paper_trail)
 
-## Intellectual Property
+---
 
 Copyright (c) 2016 Niels van Galen Last (nvangalenlast@gmail.com).
 Released under the MIT license.
