@@ -115,18 +115,18 @@ var options = {
 ### Options documentation
 
 | Option | Type | Default Value | Description |
-|-------------------------|---------|-----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+|-------------------------|---------|-----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [debug] | Boolean | false | Enables logging to the console. |
 | [exclude] | Array | ['id', 'createdAt', 'updatedAt', 'deletedAt', 'created_at', 'updated_at', 'deleted_at'] | Array of global attributes to exclude from the paper trail. |
 | [revisionAttribute] | String | 'revision' | Name of the attribute in the table that corresponds to the current revision. |
 | [revisionModel] | String | 'Revisions' | Name of the model that keeps the revision models. |
 | [revisionChangeModel] | String | 'RevisionChanges' | Name of the model that tracks all the attributes that have changed during each create and update call. |
-| [underscored] | Boolean | false |  |
-| [underscoredAttributes] | Boolean | false |  |
-| [defaultAttributes] | Object | { document_id: 'documentId', revisionId: 'revisionId' } |  |
+| [underscored] | Boolean | false | The [revisionModel] and [revisionChangeModel] have 'createdAt' and 'updatedAt' attributes, by default, setting this option to true changes it to 'created_at' and 'updated_at'. |
+| [underscoredAttributes] | Boolean | false | The [revisionModel] has a [defaultAttribute] 'documentId', and the [revisionChangeModel] has a  [defaultAttribute] 'revisionId, by default, setting this option to true changes it to 'document_id' and 'revision_id'. |
+| [defaultAttributes] | Object | { documentId: 'documentId', revisionId: 'revisionId' } |  |
 | [UUID] | Boolean | false | (only for Postgres) uses UUID's instead of id's. |
 | [enableCompression] | Boolean | false | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes. |
-| [enableMigration] | Boolean | true | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled. |
+| [enableMigration] | Boolean | false | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled. |
 
 ## Local development and running tests
 
