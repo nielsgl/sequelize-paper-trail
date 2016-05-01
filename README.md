@@ -5,18 +5,34 @@
 
 <!-- [![NPM](https://nodei.co/npm/sequelize-paper-trail.png?downloads=true)](https://nodei.co/npm/sequelize-paper-trail/) -->
 
-* [![node-version](https://img.shields.io/node/v/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![node-version](https://img.shields.io/node/v/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 [![npm-version](https://img.shields.io/npm/v/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 [![David](https://img.shields.io/david/nielsgl/sequelize-paper-trail.svg?maxAge=3600)]()
 [![David](https://img.shields.io/david/dev/nielsgl/sequelize-paper-trail.svg?maxAge=3600)]()
 
-* [![GitHub release](https://img.shields.io/github/release/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![GitHub release](https://img.shields.io/github/release/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 [![GitHub tag](https://img.shields.io/github/tag/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 [![GitHub commits](https://img.shields.io/github/commits-since/nielsgl/sequelize-paper-trail/v0.2.3.svg)]()
 [![npm-downloads](https://img.shields.io/npm/dt/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 
-* [![license](https://img.shields.io/github/license/nielsgl/sequelize-paper-trail.svg)]()
+[![license](https://img.shields.io/github/license/nielsgl/sequelize-paper-trail.svg)](https://github.com/nielsgl/sequelize-paper-trail/blob/master/LICENSE)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Example](#example)
+- [Options](#options)
+- [Local development and running tests](#local-development-and-running-tests)
+- [Support](#support)
+- [Contributing](#contributing)
+- [Author](#author)
+- [Thanks](#thanks)
+- [Links](#links)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
 
@@ -45,7 +61,7 @@ which loads the Paper Trail library, and the `defineModels()` method sets up a `
 Model.hasPaperTrail();
 ```
 
-## Example
+### Example
 
 ```javascript
 var Sequelize = require('sequelize');
@@ -117,7 +133,7 @@ npm test
 
 ## Support
 
-Please use
+Please use:
 * GitHub's [issue tracker](https://github.com/nielsgl/sequelize-paper-trail/issues)
 * Tweet directly to ``
 
@@ -131,15 +147,14 @@ Please use
 
 ## Author
 
-Your Name – [@nielsgl](https://twitter.com/nielsgl) – nvangalenlast@gmail.com
+© [Niels van Galen Last](https://nielsgl.com) – [@nielsgl](https://twitter.com/nielsgl) – nvangalenlast@gmail.com  
+Distributed under the MIT license. See ``LICENSE`` for more information.  
+[https://github.com/nielsgl/sequelize-paper-trail](https://github.com/nielsgl/)  
 
-Distributed under the MIT license. See ``LICENSE`` for more information.
+## Thanks
 
-[https://github.com/nielsgl/sequelize-paper-trail](https://github.com/nielsgl/)
-
-## Inspirations
-
+This project was inspired by:
 * [Sequelize-Revisions](https://github.com/bkniffler/sequelize-revisions)
 * [Paper Trail](https://github.com/airblade/paper_trail)
 
-
+## Links
