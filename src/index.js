@@ -305,7 +305,7 @@ export default (sequelize: sequelize, options: object): object => {
 
   return {
     // Return defineModels()
-    defineModels: function(){
+    defineModels: function(db: object) {
       var attributes = {
         model: {
           type: Sequelize.TEXT,
@@ -374,6 +374,9 @@ export default (sequelize: sequelize, options: object): object => {
       });
 
       RevisionChange.belongsTo(Revision);
+
+      db[Revision.name] = Revision;
+      db[RevisionChange.name] = RevisionChange;
 
       // TODO: Option to track the user that triggered the revision
       if (false && options.userModel) {
