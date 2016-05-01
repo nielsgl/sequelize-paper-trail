@@ -2,13 +2,45 @@
 
 > Track changes to your models, for auditing or versioning. See how a model looked at any stage in its lifecycle, revert it to any version, or restore it after it has been destroyed.
 
+
+<!-- [![NPM](https://nodei.co/npm/sequelize-paper-trail.png?downloads=true)](https://nodei.co/npm/sequelize-paper-trail/) -->
+
+[![node-version](https://img.shields.io/node/v/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![npm-version](https://img.shields.io/npm/v/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![David](https://img.shields.io/david/nielsgl/sequelize-paper-trail.svg?maxAge=3600)]()
+[![David](https://img.shields.io/david/dev/nielsgl/sequelize-paper-trail.svg?maxAge=3600)]()
+
+[![GitHub release](https://img.shields.io/github/release/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![GitHub tag](https://img.shields.io/github/tag/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![GitHub commits](https://img.shields.io/github/commits-since/nielsgl/sequelize-paper-trail/v0.2.3.svg)]()
+[![npm-downloads](https://img.shields.io/npm/dt/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+
+[![license](https://img.shields.io/github/license/nielsgl/sequelize-paper-trail.svg)](https://github.com/nielsgl/sequelize-paper-trail/blob/master/LICENSE)
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Example](#example)
+- [Options](#options)
+- [Local development and running tests](#local-development-and-running-tests)
+- [Support](#support)
+- [Contributing](#contributing)
+- [Author](#author)
+- [Thanks](#thanks)
+- [Links](#links)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Installation
 
 ```bash
 npm install --save sequelize-paper-trail
 ```
 
-## Basic Setup
+## Usage
 
 Sequelize Paper Trail assumes that you already set up your Sequelize connection, for example, like this:
 ```javascript
@@ -29,7 +61,7 @@ which loads the Paper Trail library, and the `defineModels()` method sets up a `
 Model.hasPaperTrail();
 ```
 
-## Full Example
+### Example
 
 ```javascript
 var Sequelize = require('sequelize');
@@ -49,6 +81,8 @@ User.hasPaperTrail();
 ## Options
 
 Paper Trail supports various options that can be passed into the initialization. The following are the default options:
+
+### Default options
 
 ```javascript
 // Default options
@@ -78,6 +112,22 @@ var options = {
 };
 ```
 
+### Options documentation
+
+| Option | Type | Default Value | Description |
+|-------------------------|---------|-----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [debug] | Boolean | false | Enables logging to the console. |
+| [exclude] | Array | ['id', 'createdAt', 'updatedAt', 'deletedAt', 'created_at', 'updated_at', 'deleted_at'] | Array of global attributes to exclude from the paper trail. |
+| [revisionAttribute] | String | 'revision' | Name of the attribute in the table that corresponds to the current revision. |
+| [revisionModel] | String | 'Revisions' | Name of the model that keeps the revision models. |
+| [revisionChangeModel] | String | 'RevisionChanges' | Name of the model that tracks all the attributes that have changed during each create and update call. |
+| [underscored] | Boolean | false | The [revisionModel] and [revisionChangeModel] have 'createdAt' and 'updatedAt' attributes, by default, setting this option to true changes it to 'created_at' and 'updated_at'. |
+| [underscoredAttributes] | Boolean | false | The [revisionModel] has a [defaultAttribute] 'documentId', and the [revisionChangeModel] has a  [defaultAttribute] 'revisionId, by default, setting this option to true changes it to 'document_id' and 'revision_id'. |
+| [defaultAttributes] | Object | { documentId: 'documentId', revisionId: 'revisionId' } |  |
+| [UUID] | Boolean | false | (only for Postgres) uses UUID's instead of id's. |
+| [enableCompression] | Boolean | false | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes. |
+| [enableMigration] | Boolean | false | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled. |
+
 ## Local development and running tests
 
 Clone repo:
@@ -99,9 +149,11 @@ npm test
 
 *Note: the current test suite is very limited in coverage.*
 
-## Problems
+## Support
 
-Please use GitHub's [issue tracker](https://github.com/nielsgl/sequelize-paper-trail/issues).
+Please use:
+* GitHub's [issue tracker](https://github.com/nielsgl/sequelize-paper-trail/issues)
+* Tweet directly to ``
 
 ## Contributing
 
@@ -111,12 +163,16 @@ Please use GitHub's [issue tracker](https://github.com/nielsgl/sequelize-paper-t
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-## Inspirations
+## Author
 
+© [Niels van Galen Last](https://nielsgl.com) – [@nielsgl](https://twitter.com/nielsgl) – nvangalenlast@gmail.com  
+Distributed under the MIT license. See ``LICENSE`` for more information.  
+[https://github.com/nielsgl/sequelize-paper-trail](https://github.com/nielsgl/)  
+
+## Thanks
+
+This project was inspired by:
 * [Sequelize-Revisions](https://github.com/bkniffler/sequelize-revisions)
 * [Paper Trail](https://github.com/airblade/paper_trail)
 
----
-
-Copyright (c) 2016 Niels van Galen Last (nvangalenlast@gmail.com).
-Released under the MIT license.
+## Links
