@@ -21,12 +21,14 @@ export default (sequelize: sequelize, options: object): object => {
   if(options.debug) {
     debug = options.debug;
   }
+
+  // TODO: implement logging option
   var log = options.log || console.log;
 
   // show the current sequelize and options objects
   if (debug) {
-    log('sequelize object:');
-    log(sequelize);
+    // log('sequelize object:');
+    // log(sequelize);
     log('options object:');
     log(options);
   }
@@ -77,6 +79,7 @@ export default (sequelize: sequelize, options: object): object => {
   }
 
   // HACK to track the user that made the changes
+  // TODO: needs to be implemented
   if(!options.userModel) {
     options.userModel = 'User';
   }
@@ -87,9 +90,9 @@ export default (sequelize: sequelize, options: object): object => {
     options.enableCompression = false;
   }
 
-  // automatically add the column to the database if it doesn't exist
+  // add the column to the database if it doesn't exist
   if(!options.enableMigration) {
-    options.enableMigration = true;
+    options.enableMigration = false;
   }
 
   if (debug) {
