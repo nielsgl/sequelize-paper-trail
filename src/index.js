@@ -172,6 +172,16 @@ export default (sequelize: sequelize, options: object): object => {
       this.addHook("beforeUpdate", beforeHook);
       this.addHook("afterCreate", afterHook);
       this.addHook("afterUpdate", afterHook);
+
+      // create association
+      this.hasMany(sequelize.models.Revision, {
+        foreignKey: "document_id",
+        constraints: false,
+        scope: {
+          model: this.name
+        }
+      });
+
       return this;
     }
   });
