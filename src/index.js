@@ -140,7 +140,7 @@ export default (sequelize: sequelize, options: object): object => {
         type: Sequelize.INTEGER,
         defaultValue: 0
       }
-      // this.revisionable = true;
+      this.revisionable = true;
       this.refreshAttributes();
 
       if(options.enableMigration) {
