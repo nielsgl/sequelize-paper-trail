@@ -368,10 +368,12 @@ export default (sequelize: sequelize, options: object): object => {
         underscored: options.underscored
       });
       // Set associations
+      Revision.hasMany(RevisionChange, {
         foreignKey: options.defaultAttributes.revisionId,
         constraints: false
-        // as: "changes"
       });
+
+      RevisionChange.belongsTo(Revision);
 
       // TODO: Option to track the user that triggered the revision
       if (false && options.userModel) {
