@@ -2,6 +2,24 @@
 
 > Track changes to your models, for auditing or versioning. See how a model looked at any stage in its lifecycle, revert it to any version, or restore it after it has been destroyed.
 
+
+<!-- [![NPM](https://nodei.co/npm/sequelize-paper-trail.png?downloads=true)](https://nodei.co/npm/sequelize-paper-trail/) -->
+
+*
+[![node-version](https://img.shields.io/node/v/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![npm-version](https://img.shields.io/npm/v/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![David](https://img.shields.io/david/nielsgl/sequelize-paper-trail.svg?maxAge=3600)]()
+[![David](https://img.shields.io/david/dev/nielsgl/sequelize-paper-trail.svg?maxAge=3600)]()
+
+*
+[![GitHub release](https://img.shields.io/github/release/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![GitHub tag](https://img.shields.io/github/tag/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![npm-downloads](https://img.shields.io/npm/dt/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+
+*
+[![license](https://img.shields.io/github/license/nielsgl/sequelize-paper-trail.svg)]()
+
+
 ## Installation
 
 ```bash
