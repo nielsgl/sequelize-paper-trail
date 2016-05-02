@@ -137,7 +137,7 @@ export default (sequelize: sequelize, options: object): object => {
     hasPaperTrail: function () {
       if(debug) { log('Enabling paper trail on', this.name); }
 
-      this.attributes["revision"] = {
+      this.attributes[options.revisionAttribute] = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       }
@@ -148,11 +148,11 @@ export default (sequelize: sequelize, options: object): object => {
         var tableName: string = this.getTableName();
         sequelize.getQueryInterface().describeTable(tableName)
         .then(function(attributes: any) {
-          if(!attributes['revision']) {
+          if(!attributes[options.revisionAttribute]) {
             if(debug) { log('adding revision attribute to the database'); }
             sequelize.getQueryInterface().addColumn(
                 tableName,
-                'revision',
+                options.revisionAttribute,
                 {
                   type: Sequelize.INTEGER,
                   defaultValue: 0
@@ -267,12 +267,10 @@ export default (sequelize: sequelize, options: object): object => {
       var revision = Revision.build({
         model: opt.model.name,
         document_id: instance.get("id"),
-        revision: instance.get(options.revisionAttribute),
         // TODO: Hacky, but necessary to get immutable current representation
-        document: currentVersion,
-        // TODO: Get user from instance.context, hacky workaround, any better idea?
-        user_id: 1// options.userModel && user ? user.id : null
+        document: currentVersion
       });
+      revision[options.revisionAttribute] = instance.get(options.revisionAttribute);
 
       // Save revision
       return revision.save()
@@ -322,19 +320,22 @@ export default (sequelize: sequelize, options: object): object => {
           type: Sequelize.TEXT,
           allowNull: false
         },
-        revision: {
-          type: Sequelize.INTEGER,
-          allowNull: false
-        },
         document: {
           type: Sequelize.JSON,
           allowNull: false
         }
       };
+
       attributes[options.defaultAttributes.documentId] =  {
         type: Sequelize.INTEGER,
         allowNull: false,
       };
+
+      attributes[options.revisionAttribute] = {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      };
+
       if(debug) {
         log('attributes');
         log(attributes);
