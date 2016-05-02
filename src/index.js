@@ -53,12 +53,12 @@ export default (sequelize: sequelize, options: object): object => {
 
   // model name for revision table
   if(!options.revisionModel){
-    options.revisionModel = "Revisions";
+    options.revisionModel = "Revision";
   }
 
   // model name for revision changes tables
   if(!options.revisionChangeModel){
-    options.revisionChangeModel = "RevisionChanges";
+    options.revisionChangeModel = "RevisionChange";
   }
 
   // support UUID for postgresql
@@ -140,7 +140,7 @@ export default (sequelize: sequelize, options: object): object => {
         type: Sequelize.INTEGER,
         defaultValue: 0
       }
-      // this.revisionable = true;
+      this.revisionable = true;
       this.refreshAttributes();
 
       if(options.enableMigration) {
@@ -172,6 +172,16 @@ export default (sequelize: sequelize, options: object): object => {
       this.addHook("beforeUpdate", beforeHook);
       this.addHook("afterCreate", afterHook);
       this.addHook("afterUpdate", afterHook);
+
+      // create association
+      this.hasMany(sequelize.models.Revision, {
+        foreignKey: "document_id",
+        constraints: false,
+        scope: {
+          model: this.name
+        }
+      });
+
       return this;
     }
   });
@@ -227,8 +237,8 @@ export default (sequelize: sequelize, options: object): object => {
     }
 
     if(instance.context && instance.context.delta && instance.context.delta.length > 0) {
-      var Revisions = sequelize.model(options.revisionModel);
-      var RevisionChanges = sequelize.model(options.revisionChangeModel);
+      var Revision = sequelize.model(options.revisionModel);
+      var RevisionChange = sequelize.model(options.revisionChangeModel);
       var delta = instance.context.delta;
 
       if(options.enableCompression) {
@@ -253,7 +263,7 @@ export default (sequelize: sequelize, options: object): object => {
       }
 
       // Build revision
-      var revision = Revisions.build({
+      var revision = Revision.build({
         model: opt.model.name,
         document_id: instance.get("id"),
         revision: instance.get(options.revisionAttribute),
@@ -271,7 +281,7 @@ export default (sequelize: sequelize, options: object): object => {
           var o = helpers.diffToString(difference.item ? difference.item.lhs : difference.lhs);
           var n = helpers.diffToString(difference.item ? difference.item.rhs : difference.rhs);
 
-          var d = RevisionChanges.build({
+          var d = RevisionChange.build({
             path: difference.path[0],
             document: difference,
             //revisionId: data.id,
@@ -281,7 +291,7 @@ export default (sequelize: sequelize, options: object): object => {
           d.save()
           .then(function(d: any){
             // Add diff to revision
-            revision.addChange(d);
+            revision.addRevisionChange(d);
             return null;
           })
           .catch((err: any) => {
@@ -305,7 +315,7 @@ export default (sequelize: sequelize, options: object): object => {
 
   return {
     // Return defineModels()
-    defineModels: function(){
+    defineModels: function(db: object) {
       var attributes = {
         model: {
           type: Sequelize.TEXT,
@@ -337,10 +347,10 @@ export default (sequelize: sequelize, options: object): object => {
         attributes.documentId.type = Sequelize.UUID;
       }
       // Revision model
-      var Revisions = sequelize.define(options.revisionModel, attributes, {
+      var Revision = sequelize.define(options.revisionModel, attributes, {
         underscored: options.underscored
       });
-
+    
       attributes = {
         path: {
           type: Sequelize.TEXT,
@@ -364,25 +374,29 @@ export default (sequelize: sequelize, options: object): object => {
       }
 
       // RevisionChange model
-      var RevisionChanges = sequelize.define(options.revisionChangeModel, attributes, {
+      var RevisionChange = sequelize.define(options.revisionChangeModel, attributes, {
         underscored: options.underscored
       });
       // Set associations
-      Revisions.hasMany(RevisionChanges, {
+      Revision.hasMany(RevisionChange, {
         foreignKey: options.defaultAttributes.revisionId,
-        constraints: true,
-        as: "changes"
+        constraints: false
       });
+
+      RevisionChange.belongsTo(Revision);
+
+      db[Revision.name] = Revision;
+      db[RevisionChange.name] = RevisionChange;
 
       // TODO: Option to track the user that triggered the revision
       if (false && options.userModel) {
-        Revisions.belongsTo(sequelize.model(options.userModel), {
+        Revision.belongsTo(sequelize.model(options.userModel), {
           foreignKey: "user_id",
           constraints: true,
           as: "user"
         });
       }
-      return Revisions;
+      return Revision;
     }
   }
 };
