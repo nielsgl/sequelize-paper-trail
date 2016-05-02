@@ -33,6 +33,11 @@ export default (sequelize: sequelize, options: object): object => {
     log(options);
   }
 
+  // attribute name for revision number in the models
+  if(!options.revisionAttribute){
+    options.revisionAttribute = "revision";
+  }
+
   // fields we want to exclude from audit trails
   if(!options.exclude){
     options.exclude = [
@@ -42,13 +47,9 @@ export default (sequelize: sequelize, options: object): object => {
       "deletedAt", // if the model is paranoid
       "created_at",
       "updated_at",
-      "deleted_at"
+      "deleted_at",
+      options.revisionAttribute
     ];
-  }
-
-  // attribute name for revision number in the models
-  if(!options.revisionAttribute){
-    options.revisionAttribute = "revision";
   }
 
   // model name for revision table
