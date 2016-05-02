@@ -174,7 +174,7 @@ export default (sequelize: sequelize, options: object): object => {
       this.addHook("afterUpdate", afterHook);
 
       // create association
-      this.hasMany(sequelize.models.Revision, {
+      this.hasMany(sequelize.models[options.revisionModel], {
         foreignKey: "document_id",
         constraints: false,
         scope: {
@@ -291,7 +291,7 @@ export default (sequelize: sequelize, options: object): object => {
           d.save()
           .then(function(d: any){
             // Add diff to revision
-            revision.addRevisionChange(d);
+            revision['add' + options.revisionChangeModel](d);
             return null;
           })
           .catch((err: any) => {
@@ -377,6 +377,7 @@ export default (sequelize: sequelize, options: object): object => {
       var RevisionChange = sequelize.define(options.revisionChangeModel, attributes, {
         underscored: options.underscored
       });
+    
       // Set associations
       Revision.hasMany(RevisionChange, {
         foreignKey: options.defaultAttributes.revisionId,
