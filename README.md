@@ -12,7 +12,7 @@
 
 [![GitHub release](https://img.shields.io/github/release/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 [![GitHub tag](https://img.shields.io/github/tag/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
-[![GitHub commits](https://img.shields.io/github/commits-since/nielsgl/sequelize-paper-trail/1.1.0.svg)]()
+[![GitHub commits](https://img.shields.io/github/commits-since/nielsgl/sequelize-paper-trail/1.2.0.svg)]()
 [![npm-downloads](https://img.shields.io/npm/dt/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 
 [![license](https://img.shields.io/github/license/nielsgl/sequelize-paper-trail.svg)](https://github.com/nielsgl/sequelize-paper-trail/blob/master/LICENSE)
@@ -108,7 +108,8 @@ var options = {
   },
   userModel: 'User',
   enableCompression: false,
-  enableMigration: true
+  enableMigration: true,
+  enableStrictDiff: true
 };
 ```
 
@@ -127,6 +128,7 @@ var options = {
 | [UUID] | Boolean | false | (only for Postgres) uses UUID's instead of id's. |
 | [enableCompression] | Boolean | false | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes. |
 | [enableMigration] | Boolean | false | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled. |
+| [enableStrictDiff] | Boolean | true | Reports integers and strings as different, e.g. `3.14` !== `'3.14'` |
 
 ## Demo
 
