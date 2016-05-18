@@ -8,7 +8,7 @@ export default {
     test: (): boolean => {
         return true;
     },
-    calcDelta: (current: object, next: object, exclude: object): object => {
+    calcDelta: (current: object, next: object, exclude: object, strict: boolean): object => {
         const DEBUG = false;
         if(DEBUG) {
             console.log('current', current);
@@ -41,9 +41,21 @@ export default {
             var str = JSON.stringify(i).replace("\"__data\",", "");
             return JSON.parse(str);
         })
-        // .filter(function(i: any){
-        //     return i.path.join(",").indexOf("_") === -1;
-        // })
+        .filter(function(i: any) {
+            // return i.path.join(",").indexOf("_") === -1;
+            // console.log('i', i)
+            if (!strict && (i.kind === 'E')) {
+                // console.log('str & num', i.lhs == i.rhs)
+                // console.log('str & num (strict)', i.lhs === i.rhs)
+                if (i.lhs != i.rhs) {
+                    return i;
+                }
+            }
+            else {
+                return i;
+            }
+
+        })
         .filter(function(i: any) {
             // console.log('i', i);
             return exclude.every(function(x: any) {

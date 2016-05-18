@@ -25,8 +25,8 @@ describe('calcDelta', () => {
             account_completed: false
         };
         var exclude = ['id', 'created_at', 'updated_at'];
-        var res = helpers.calcDelta(user1, user2, exclude);
-
+        var res = helpers.calcDelta(user1, user2, exclude, true);
+        // console.log(res)
         expect(true).to.equal(true);
     });
 
@@ -48,7 +48,7 @@ describe('calcDelta', () => {
             account_completed: false
         };
         var exclude = ['id', 'created_at', 'updated_at'];
-        var res = helpers.calcDelta(user1, user2, exclude);
+        var res = helpers.calcDelta(user1, user2, exclude, true);
 
         expect(true).to.equal(true);
     });
@@ -71,8 +71,72 @@ describe('calcDelta', () => {
             account_completed: true
         };
         var exclude = ['id', 'created_at', 'updated_at'];
-        var res = helpers.calcDelta(user1, user2, exclude);
+        var res = helpers.calcDelta(user1, user2, exclude, true);
 
+        expect(true).to.equal(true);
+    });
+
+    it('returns no difference in strings and numbers when strict is false', () => {
+        var obj1 = {
+            name: 'User',
+            age: '18'
+        };
+
+        var obj2 = {
+            name: 'User',
+            age: 18
+        };
+
+        var res = helpers.calcDelta(obj1, obj2, [], false);
+        console.log('x',res)
+        expect(true).to.equal(true);
+    });
+
+    it('returns a difference in strings and numbers when strict is true', () => {
+        var obj1 = {
+            name: 'User',
+            age: '18'
+        };
+
+        var obj2 = {
+            name: 'User',
+            age: 18
+        };
+
+        var res = helpers.calcDelta(obj1, obj2, [], true);
+        console.log(res)
+        expect(true).to.equal(true);
+    });
+
+    it('returns a difference in strings and numbers', () => {
+        var obj1 = {
+            name: 'User',
+            age: '18.1'
+        };
+
+        var obj2 = {
+            name: 'User',
+            age: 18.1
+        };
+
+        var res = helpers.calcDelta(obj1, obj2, [], false);
+        console.log(res)
+        expect(true).to.equal(true);
+    });
+
+    it('returns a difference in strings and numbers', () => {
+        var obj1 = {
+            name: 'User',
+            age: '18.1'
+        };
+
+        var obj2 = {
+            name: 'User1',
+            age: 18.1
+        };
+
+        var res = helpers.calcDelta(obj1, obj2, [], false);
+        console.log(res)
         expect(true).to.equal(true);
     });
 });

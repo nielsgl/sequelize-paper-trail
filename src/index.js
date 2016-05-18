@@ -95,6 +95,14 @@ export default (sequelize: sequelize, options: object): object => {
   if(!options.enableMigration) {
     options.enableMigration = false;
   }
+  
+  // enable strict diff
+  // when true: 10 !== '10'
+  // when false: 10 == '10'
+  // default: true
+  if(!options.enableStrictDiff) {
+    options.enableStrictDiff = true;
+  }
 
   if (debug) {
     log('parsed options:');
@@ -214,7 +222,7 @@ export default (sequelize: sequelize, options: object): object => {
     instance.set(options.revisionAttribute, instance._previousDataValues[options.revisionAttribute]);
 
     // Get diffs
-    var delta = helpers.calcDelta(previousVersion, currentVersion, options.exclude);
+    var delta = helpers.calcDelta(previousVersion, currentVersion, options.exclude, options.enableStrictDiff);
 
     if(debug) {
       log('delta:');
