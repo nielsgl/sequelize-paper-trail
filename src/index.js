@@ -82,7 +82,7 @@ export default (sequelize: sequelize, options: object): object => {
   // HACK to track the user that made the changes
   // TODO: needs to be implemented
   if(!options.userModel) {
-    options.userModel = 'User';
+    options.userModel = false;
   }
 
   // full revisions or compressed revisions (track only the difference in models)
@@ -245,6 +245,8 @@ export default (sequelize: sequelize, options: object): object => {
       log('opt:', opt);
     }
 
+    var ns = process.namespaces['current_user_request'];
+
     if(instance.context && instance.context.delta && instance.context.delta.length > 0) {
       var Revision = sequelize.model(options.revisionModel);
       var RevisionChange = sequelize.model(options.revisionChangeModel);
@@ -276,7 +278,8 @@ export default (sequelize: sequelize, options: object): object => {
         model: opt.model.name,
         document_id: instance.get("id"),
         // TODO: Hacky, but necessary to get immutable current representation
-        document: currentVersion
+        document: currentVersion,
+        user_id: ns.get('current_user_id')
       });
       revision[options.revisionAttribute] = instance.get(options.revisionAttribute);
 
@@ -358,6 +361,11 @@ export default (sequelize: sequelize, options: object): object => {
       }
       // Revision model
       var Revision = sequelize.define(options.revisionModel, attributes, {
+        classMethods: {
+          associate: function(models: any) {
+            Revision.belongsTo(sequelize.model(options.userModel));
+          }
+        },
         underscored: options.underscored
       });
     
@@ -408,6 +416,40 @@ export default (sequelize: sequelize, options: object): object => {
         });
       }
       return Revision;
+    },
+    enableUserRevisions: function(db: object) {
+      console.log('hello user');
+      console.log(options)
+
+      if(!db[options.revisionChangeModel].attributes['user_id']) {
+        console.log('adding user_id');
+        // sequelize.getQueryInterface().addColumn(
+        //     'Brokerages',
+        //     'id',
+        //     {
+        //       allowNull: false,
+        //       autoIncrement: true,
+        //       primaryKey: true,
+        //       type: Sequelize.INTEGER
+        //     }
+        // ).then(function (x) {
+        //   // console.log(x);
+        // })
+        // console.log(db.sequelize)
+        db.sequelize.models[options.revisionChangeModel].belongsTo(sequelize.model(options.userModel), {
+          foreignKey: "user_id",
+          constraints: false,
+          as: "user"
+        });
+      }
+
+
+      console.log(db[options.revisionChangeModel].attributes)
+      // db[options.revisionChangeModel].belongsTo(db[options.userModel], {
+      //   foreignKey: 'user_id',
+      //   constraints: false
+      // });
+      // return db;
     }
   }
 };
