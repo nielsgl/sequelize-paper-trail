@@ -14,7 +14,7 @@
   "scripts": {
     "test": "mocha test/* --reporter dot --compilers js:babel-register --require ./test/helper.js --recursive",
     "lint": "eslint --ext .js ./src",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "npm run lint -- --fix"
   },
   "repository": {
     "type": "git",
