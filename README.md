@@ -40,6 +40,8 @@
 npm install --save sequelize-paper-trail
 ```
 
+*Note: the current test suite is very limited in coverage.*
+
 ## Usage
 
 Sequelize Paper Trail assumes that you already set up your Sequelize connection, for example, like this:
@@ -134,34 +136,6 @@ var options = {
 | [continuationNamespace] | String | 'com.nameSpace' | Name of the name space used with the continuation-local-storage module. |
 | [continuationKey] | String | 'userId' | The continuation-local-storage key that contains the user id. |
 
-
-## Demo
-
-A working demo application is available at
-```
-https://github.com/nielsgl/sequelize-paper-trail-example
-```
-
-## Local development and running tests
-
-Clone repo:
-
-```bash
-git clone git@github.com:nielsgl/sequelize-paper-trail.git
-```
-
-Install dependencies:
-```bash
-npm install
-```
-
-Run test script:
-```bash
-npm test
-```
-
-
-*Note: the current test suite is very limited in coverage.*
 
 ## Support
 
