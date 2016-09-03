@@ -101,7 +101,7 @@ var options = {
   revisionAttribute: 'revision',
   revisionModel: 'Revision',
   revisionChangeModel: 'RevisionChange',
-  enableRevisionChangeModel: true,
+  enableRevisionChangeModel: false,
   underscored: false,
   underscoredAttributes: false,
   defaultAttributes: {
@@ -126,7 +126,7 @@ var options = {
 | [revisionAttribute] | String | 'revision' | Name of the attribute in the table that corresponds to the current revision. |
 | [revisionModel] | String | 'Revision' | Name of the model that keeps the revision models. |
 | [revisionChangeModel] | String | 'RevisionChange' | Name of the model that tracks all the attributes that have changed during each create and update call. |
-| [enableRevisionChangeModel] | Boolean | true | Disable the revision change model to save space. |
+| [enableRevisionChangeModel] | Boolean | false | Disable the revision change model to save space. |
 | [underscored] | Boolean | false | The [revisionModel] and [revisionChangeModel] have 'createdAt' and 'updatedAt' attributes, by default, setting this option to true changes it to 'created_at' and 'updated_at'. |
 | [underscoredAttributes] | Boolean | false | The [revisionModel] has a [defaultAttribute] 'documentId', and the [revisionChangeModel] has a  [defaultAttribute] 'revisionId, by default, setting this option to true changes it to 'document_id' and 'revision_id'. |
 | [defaultAttributes] | Object | { documentId: 'documentId', revisionId: 'revisionId' } |  |
