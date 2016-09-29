@@ -54,7 +54,7 @@ then adding Sequelize Paper Trail is as easy as:
 
 ```javascript
 var PaperTrail = require('sequelize-paper-trail')(sequelize, options={});
-PaperTrail.defineModels();
+PaperTrail.defineModels({});
 ```
 
 which loads the Paper Trail library, and the `defineModels()` method sets up a `Revisions` and `RevisionHistory` table. Then for each model that you want to keep a paper trail you simply add:
