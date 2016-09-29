@@ -1,6 +1,6 @@
 {
   "name": "sequelize-paper-trail",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Track changes to your Sequelize models data. Perfect for auditing or versioning.",
   "bugs": {
     "url": "https://github.com/nielsgl/sequelize-paper-trail/issues",
