@@ -1,19 +1,24 @@
-import SequelizeTrails from 'index';
-var Sequelize = require('sequelize');
+import SequelizeTrails from '../lib/index';
+
+require('./helper');
+// const SequelizeTrails = require('../lib/index');
+
+
+const Sequelize = require('sequelize');
 
 describe('SequelizeTrails', () => {
-  it('returns string', () => {
-    var sequelize = new Sequelize('','','',{
-        dialect: 'sqlite',
-        logging: console.log
-    });
-    var User = sequelize.define('User', {
-        name: Sequelize.STRING
-    });
-    // console.log(sequelize);
-    // console.log(SequelizeTrails);
-    // console.log(SequelizeTrails(sequelize));
-    // console.log(typeof(SequelizeTrails));
-    expect(typeof(SequelizeTrails(sequelize))).to.equal('object');
-   });
+	it('returns string', () => {
+		const sequelize = new Sequelize('', '', '', {
+			dialect: 'sqlite',
+			logging: console.log,
+		});
+		// const User = sequelize.define('User', {
+		// 	name: Sequelize.STRING,
+		// });
+		console.log('sequelize', sequelize);
+		console.log('SequelizeTrails', SequelizeTrails);
+		// console.log('SequelizeTrails(sequelize)', SequelizeTrails(sequelize));
+		// console.log('typeof(SequelizeTrails)', typeof(SequelizeTrails));
+		// expect(typeof (SequelizeTrails(sequelize))).to.equal('object');
+	});
 });

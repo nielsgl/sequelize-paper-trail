@@ -8,6 +8,7 @@ module.exports = {
 		"no-unused-vars": ["error", {"varsIgnorePattern": "debug|error"}],
 		//"object-curly-spacing": ["error", "never"],
 		"camelcase": "off",
+		"no-console": "off",
 
 		// doesn't work in node v4 :(
 		// "strict": "off",
