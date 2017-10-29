@@ -1,6 +1,6 @@
 {
   "name": "sequelize-paper-trail",
-  "version": "1.3.3",
+  "version": "2.0.0",
   "description": "Track changes to your Sequelize models data. Perfect for auditing or versioning.",
   "author": {
     "name": "Niels van Galen Last",
@@ -67,7 +67,7 @@
     "deep-diff": "^0.3.4",
     "diff": "^2.2.2",
     "lodash": "^4.11.1",
-    "sequelize": "^3.21.0"
+    "sequelize": "^4.19.0"
   },
   "babel": {
     "presets": [
