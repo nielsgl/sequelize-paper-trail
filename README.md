@@ -89,7 +89,7 @@ User.hasPaperTrail();
 ## User Tracking
 
 There are 2 steps to enable user tracking, ie, recording the user who created a particular revision.
-1. Enable user tracking by passing `userModel` option to init, with the name of the model which stores users in your application as the value.
+1. Enable user tracking by passing `userModel` option to `init`, with the name of the model which stores users in your application as the value.
 
 ```javascript
 var options = {
@@ -97,7 +97,7 @@ var options = {
   userModel: 'users',
 };
 ```
-2. Pass the id of the user who is responsible for the data base operation by either sequelize options or using continuation-local-storage.
+2. Pass the id of the user who is responsible for a database operation to `sequelize-paper-trail` either by sequelize options or by using `continuation-local-storage`.
 
 ```javascript
 Model.update({
