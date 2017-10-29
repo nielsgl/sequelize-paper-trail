@@ -69,6 +69,8 @@ Then for each model that you want to keep a paper trail you simply add:
 Model.hasPaperTrail();
 ```
 
+`hasPaperTrail` returns the `hasMany` association to the `revisionModel` so you can keep track of the association for reference later.
+
 ### Example
 
 ```javascript
@@ -83,7 +85,7 @@ var User = sequelize.define('User', {
   birthday: Sequelize.DATE
 });
 
-User.hasPaperTrail();
+User.Revisions = User.hasPaperTrail();
 ```
 
 ## User Tracking
