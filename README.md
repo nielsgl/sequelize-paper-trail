@@ -197,14 +197,17 @@ Please use:
 
 ## Author
 
-© [Niels van Galen Last](https://nielsgl.com) – [@nielsgl](https://twitter.com/nielsgl) – nvangalenlast@gmail.com  
-Distributed under the MIT license. See ``LICENSE`` for more information.  
-[https://github.com/nielsgl/sequelize-paper-trail](https://github.com/nielsgl/)  
+© [Niels van Galen Last](https://nielsgl.com) – [@nielsgl](https://twitter.com/nielsgl) – nvangalenlast@gmail.com
+Distributed under the MIT license. See ``LICENSE`` for more information.
+[https://github.com/nielsgl/sequelize-paper-trail](https://github.com/nielsgl/)
 
 ## Thanks
 
 This project was inspired by:
 * [Sequelize-Revisions](https://github.com/bkniffler/sequelize-revisions)
 * [Paper Trail](https://github.com/airblade/paper_trail)
+
+Contributors:
+- [@lijoantony](https://github.com/lijoantony)
 
 ## Links
