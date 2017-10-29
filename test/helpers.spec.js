@@ -1,4 +1,4 @@
-import helpers from 'helpers';
+import helpers from '../lib/helpers';
 
 describe('calcDelta', () => {
    it('returns number', () => {
@@ -88,7 +88,6 @@ describe('calcDelta', () => {
         };
 
         var res = helpers.calcDelta(obj1, obj2, [], false);
-        console.log('x',res)
         expect(true).to.equal(true);
     });
 
@@ -104,7 +103,6 @@ describe('calcDelta', () => {
         };
 
         var res = helpers.calcDelta(obj1, obj2, [], true);
-        console.log(res)
         expect(true).to.equal(true);
     });
 
@@ -120,7 +118,6 @@ describe('calcDelta', () => {
         };
 
         var res = helpers.calcDelta(obj1, obj2, [], false);
-        console.log(res)
         expect(true).to.equal(true);
     });
 
@@ -136,7 +133,6 @@ describe('calcDelta', () => {
         };
 
         var res = helpers.calcDelta(obj1, obj2, [], false);
-        console.log(res)
         expect(true).to.equal(true);
     });
 });
