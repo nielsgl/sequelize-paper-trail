@@ -1,6 +1,6 @@
 # Sequelize Paper Trail
 
-> Track changes to your models, for auditing or versioning. See how a model looked at any stage in its lifecycle, revert it to any version, or restore it after it has been destroyed.
+> Track changes to your models, for auditing or versioning. See how a model looked at any stage in its lifecycle, revert it to any version, or restore it after it has been destroyed. Record the user who created the version.
 
 
 <!-- [![NPM](https://nodei.co/npm/sequelize-paper-trail.png?downloads=true)](https://nodei.co/npm/sequelize-paper-trail/) -->
@@ -24,8 +24,10 @@
 - [Installation](#installation)
 - [Usage](#usage)
   - [Example](#example)
+- [User Tracking](#user-tracking)
 - [Options](#options)
-- [Local development and running tests](#local-development-and-running-tests)
+  - [Default options](#default-options)
+  - [Options documentation](#options-documentation)
 - [Support](#support)
 - [Contributing](#contributing)
 - [Author](#author)
@@ -53,11 +55,15 @@ var sequelize = new Sequelize('database', 'username', 'password');
 then adding Sequelize Paper Trail is as easy as:
 
 ```javascript
-var PaperTrail = require('sequelize-paper-trail')(sequelize, options={});
+var PaperTrail = require('sequelize-paper-trail').init(sequelize, options);
 PaperTrail.defineModels({});
 ```
 
-which loads the Paper Trail library, and the `defineModels()` method sets up a `Revisions` and `RevisionHistory` table. Then for each model that you want to keep a paper trail you simply add:
+which loads the Paper Trail library, and the `defineModels()` method sets up a `Revisions` and `RevisionHistory` table.
+
+*Note: If you pass `userModel` option to `init` in order to enable user tracking, `userModel` should be setup before `defineModels()` is called.*
+
+Then for each model that you want to keep a paper trail you simply add:
 
 ```javascript
 Model.hasPaperTrail();
@@ -69,7 +75,7 @@ Model.hasPaperTrail();
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('database', 'username', 'password');
 
-var PaperTrail = require('sequelize-paper-trail')(sequelize, options || {});
+var PaperTrail = require('sequelize-paper-trail').init(sequelize, options || {});
 PaperTrail.defineModels();
 
 var User = sequelize.define('User', {
@@ -78,6 +84,42 @@ var User = sequelize.define('User', {
 });
 
 User.hasPaperTrail();
+```
+
+## User Tracking
+
+There are 2 steps to enable user tracking, ie, recording the user who created a particular revision.
+1. Enable user tracking by passing `userModel` option to init, with the name of the model which stores users in your application as the value.
+
+```javascript
+var options = {
+  /* ... */
+  userModel: 'users',
+};
+```
+2. Pass the id of the user who is responsible for the data base operation by either sequelize options or using continuation-local-storage.
+
+```javascript
+Model.update({
+  /* ... */
+}, {
+  userId: user.id
+}).then(() {
+  /* ... */
+});
+```
+OR
+
+```javascript
+var session = createNamespace('com.churchdesk');
+session.set('userId', user.id);
+
+Model.update({
+  /* ... */
+}).then(() {
+  /* ... */
+});
+
 ```
 
 ## Options
@@ -102,17 +144,17 @@ var options = {
   revisionModel: 'Revision',
   revisionChangeModel: 'RevisionChange',
   enableRevisionChangeModel: false,
+  UUID: false,
   underscored: false,
   underscoredAttributes: false,
   defaultAttributes: {
     documentId: 'documentId',
     revisionId: 'revisionId'
   },
-  userModel: 'User',
   enableCompression: false,
-  enableMigration: true,
+  enableMigration: false,
   enableStrictDiff: true,
-  continuationNamespace: 'com.name-space',
+  continuationNamespace: 'com.churchdesk',
   continuationKey: 'userId'
 };
 ```
@@ -127,13 +169,15 @@ var options = {
 | [revisionModel] | String | 'Revision' | Name of the model that keeps the revision models. |
 | [revisionChangeModel] | String | 'RevisionChange' | Name of the model that tracks all the attributes that have changed during each create and update call. |
 | [enableRevisionChangeModel] | Boolean | false | Disable the revision change model to save space. |
+| [UUID] | Boolean | false | The [revisionModel] has id attribute of type UUID for postgresql. |
 | [underscored] | Boolean | false | The [revisionModel] and [revisionChangeModel] have 'createdAt' and 'updatedAt' attributes, by default, setting this option to true changes it to 'created_at' and 'updated_at'. |
 | [underscoredAttributes] | Boolean | false | The [revisionModel] has a [defaultAttribute] 'documentId', and the [revisionChangeModel] has a  [defaultAttribute] 'revisionId, by default, setting this option to true changes it to 'document_id' and 'revision_id'. |
 | [defaultAttributes] | Object | { documentId: 'documentId', revisionId: 'revisionId' } |  |
+| [userModel] | String | | Name of the model that stores users in your. |
 | [enableCompression] | Boolean | false | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes. |
 | [enableMigration] | Boolean | false | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled. |
 | [enableStrictDiff] | Boolean | true | Reports integers and strings as different, e.g. `3.14` !== `'3.14'` |
-| [continuationNamespace] | String | 'com.nameSpace' | Name of the name space used with the continuation-local-storage module. |
+| [continuationNamespace] | String | 'com.churchdesk' | Name of the name space used with the continuation-local-storage module. |
 | [continuationKey] | String | 'userId' | The continuation-local-storage key that contains the user id. |
 
 
