@@ -96,10 +96,10 @@ There are 2 steps to enable user tracking, ie, recording the user who created a 
 ```javascript
 var options = {
   /* ... */
-  userModel: 'users',
+  userModel: 'user',
 };
 ```
-2. Pass the id of the user who is responsible for a database operation to `sequelize-paper-trail` either by sequelize options or by using `continuation-local-storage`.
+2. Pass the id of the user who is responsible for a database operation to `sequelize-paper-trail` either by sequelize options or by using [continuation-local-storage](https://www.npmjs.com/package/continuation-local-storage).
 
 ```javascript
 Model.update({
@@ -113,7 +113,9 @@ Model.update({
 OR
 
 ```javascript
-var session = createNamespace('com.churchdesk');
+var createNamespace = require('continuation-local-storage').createNamespace;
+var session = createNamespace('my session');
+
 session.set('userId', user.id);
 
 Model.update({
@@ -123,6 +125,8 @@ Model.update({
 });
 
 ```
+
+In second case, you may have to call `.run()` or `.bind()` on your cls namespace, as described in the [docs](https://www.npmjs.com/package/continuation-local-storage).
 
 ## Options
 
@@ -156,7 +160,7 @@ var options = {
   enableCompression: false,
   enableMigration: false,
   enableStrictDiff: true,
-  continuationNamespace: 'com.churchdesk',
+  continuationNamespace: 'current_user_request',
   continuationKey: 'userId'
 };
 ```
@@ -179,7 +183,7 @@ var options = {
 | [enableCompression] | Boolean | false | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes. |
 | [enableMigration] | Boolean | false | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled. |
 | [enableStrictDiff] | Boolean | true | Reports integers and strings as different, e.g. `3.14` !== `'3.14'` |
-| [continuationNamespace] | String | 'com.churchdesk' | Name of the name space used with the continuation-local-storage module. |
+| [continuationNamespace] | String | 'current_user_request' | Name of the name space used with the continuation-local-storage module. |
 | [continuationKey] | String | 'userId' | The continuation-local-storage key that contains the user id. |
 
 
