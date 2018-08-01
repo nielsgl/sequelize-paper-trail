@@ -160,6 +160,7 @@ var options = {
   enableCompression: false,
   enableMigration: false,
   enableStrictDiff: true,
+  enableAutoAssociation: true,
   continuationNamespace: 'current_user_request',
   continuationKey: 'userId'
 };
@@ -179,10 +180,11 @@ var options = {
 | [underscored] | Boolean | false | The [revisionModel] and [revisionChangeModel] have 'createdAt' and 'updatedAt' attributes, by default, setting this option to true changes it to 'created_at' and 'updated_at'. |
 | [underscoredAttributes] | Boolean | false | The [revisionModel] has a [defaultAttribute] 'documentId', and the [revisionChangeModel] has a  [defaultAttribute] 'revisionId, by default, setting this option to true changes it to 'document_id' and 'revision_id'. |
 | [defaultAttributes] | Object | { documentId: 'documentId', revisionId: 'revisionId' } |  |
-| [userModel] | String | | Name of the model that stores users in your. |
+| [userModel] | String | | Name of the model that stores users in your application. |
 | [enableCompression] | Boolean | false | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes. |
 | [enableMigration] | Boolean | false | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled. |
 | [enableStrictDiff] | Boolean | true | Reports integers and strings as different, e.g. `3.14` !== `'3.14'` |
+| [enableAutoAssociation] | Boolean | true | Automatically associate Revision model with userModel |
 | [continuationNamespace] | String | 'current_user_request' | Name of the name space used with the continuation-local-storage module. |
 | [continuationKey] | String | 'userId' | The continuation-local-storage key that contains the user id. |
 
