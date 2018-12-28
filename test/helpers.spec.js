@@ -10,7 +10,7 @@ describe('calcDelta', () => {
     it('returns a difference in email addresses', () => {
         var user1 = {
             id: 1,
-            email: 'admin@scal.io',
+            email: 'test@user.com',
             encrypted_password: '$2a$10$rNIOuy1pDl7bI5dTE.xMle/vcB51V2nJVpb/EBAwG4egXE42UfDMS',
             reset_password_token: null,
             reset_password_sent_at: null,
@@ -18,7 +18,7 @@ describe('calcDelta', () => {
         };
         var user2 = {
             id: 1,
-            email: 'admin2@scal.io',
+            email: 'test2@user.com',
             encrypted_password: '$2a$10$rNIOuy1pDl7bI5dTE.xMle/vcB51V2nJVpb/EBAwG4egXE42UfDMS',
             reset_password_token: null,
             reset_password_sent_at: null,
@@ -33,7 +33,7 @@ describe('calcDelta', () => {
     it('returns a difference in null value', () => {
         var user1 = {
             id: 1,
-            email: 'admin@scal.io',
+            email: 'test@user.com',
             encrypted_password: '$2a$10$rNIOuy1pDl7bI5dTE.xMle/vcB51V2nJVpb/EBAwG4egXE42UfDMS',
             reset_password_token: null,
             reset_password_sent_at: null,
@@ -41,7 +41,7 @@ describe('calcDelta', () => {
         };
         var user2 = {
             id: 1,
-            email: 'admin@scal.io',
+            email: 'test@user.com',
             encrypted_password: '$2a$10$rNIOuy1pDl7bI5dTE.xMle/vcB51V2nJVpb/EBAwG4egXE42UfDMS',
             reset_password_token: true,
             reset_password_sent_at: null,
@@ -56,7 +56,7 @@ describe('calcDelta', () => {
     it('returns a difference in a boolean', () => {
         var user1 = {
             id: 1,
-            email: 'admin@scal.io',
+            email: 'test@user.com',
             encrypted_password: '$2a$10$rNIOuy1pDl7bI5dTE.xMle/vcB51V2nJVpb/EBAwG4egXE42UfDMS',
             reset_password_token: null,
             reset_password_sent_at: null,
@@ -64,7 +64,7 @@ describe('calcDelta', () => {
         };
         var user2 = {
             id: 1,
-            email: 'admin@scal.io',
+            email: 'test@user.com',
             encrypted_password: '$2a$10$rNIOuy1pDl7bI5dTE.xMle/vcB51V2nJVpb/EBAwG4egXE42UfDMS',
             reset_password_token: null,
             reset_password_sent_at: null,
