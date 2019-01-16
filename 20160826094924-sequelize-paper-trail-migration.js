@@ -1,5 +1,21 @@
 'use strict';
-var sequelizePaperTrailOptions = require('config').get('sequelizePaperTrailOptions');
+var sequelizePaperTrailOptions = {
+  revisionAttribute: 'revision',
+  revisionModel: 'Revisions',
+  revisionChangeModel: 'RevisionChange',
+  enableRevisionChangeModel: false,
+  UUID: false,
+  underscored: true,
+  underscoredAttributes: true,
+  defaultAttributes: {
+    documentId: 'document_id',
+    revisionId: 'revision_id'
+  },
+  enableCompression: false,
+  enableMigration: false,
+  enableStrictDiff: true,
+  continuationKey: 'userId'
+};
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -28,6 +44,9 @@ module.exports = {
       'user_id': {
         type: Sequelize.INTEGER,
         allowNull: true
+      },
+      operation: {
+        type: Sequelize.STRING(7),
       },
       createdAt: {
         allowNull: false,
