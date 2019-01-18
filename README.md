@@ -186,12 +186,14 @@ var options = {
 | [continuationNamespace] | String | | Name of the name space used with the continuation-local-storage module. |
 | [continuationKey] | String | 'userId' | The continuation-local-storage key that contains the user id. |
 
+## Limitations
+
+* This project does not support models with composite primary keys. You can work around using a unique index with multiple fields.
 
 ## Support
 
 Please use:
 * GitHub's [issue tracker](https://github.com/nielsgl/sequelize-paper-trail/issues)
-* Tweet directly to ``
 
 ## Contributing
 
@@ -214,6 +216,7 @@ This project was inspired by:
 * [Paper Trail](https://github.com/airblade/paper_trail)
 
 Contributors:
-- [@lijoantony](https://github.com/lijoantony)
+ [https://github.com/nielsgl/sequelize-paper-trail/graphs/contributors](https://github.com/nielsgl/sequelize-paper-trail/graphs/contributors)
 
 ## Links
+* [Example application](https://github.com/nielsgl/sequelize-paper-trail-example)
