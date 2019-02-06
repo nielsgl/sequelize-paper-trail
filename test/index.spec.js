@@ -5,7 +5,7 @@ import SequelizeTrails from '../lib/index';
 const db = require('../models/index.js');
 const Sequelize = db.Sequelize;
 const sequelize = db.sequelize;
-let PaperTrails = SequelizeTrails.init(sequelize, {enableMigration: true} );
+let PaperTrails = SequelizeTrails.init(sequelize, {enableMigration: true, useVersioning: true} );
 PaperTrails.defineModels();
 let User = sequelize.model('User');
 User.Revisions = User.hasPaperTrail();
