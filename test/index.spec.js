@@ -1,19 +1,54 @@
 import SequelizeTrails from '../lib/index';
-var Sequelize = require('sequelize');
 
-describe('SequelizeTrails', () => {
-  it.skip('init returns object', () => {
-    var sequelize = new Sequelize('','','',{
-        dialect: 'sqlite',
-        logging: console.log
+// const Sequelize = require('sequelize');
+// const sequelize = new Sequelize('database_test', 'root', null, {dialect: 'sqlite', storage: 'test.db'});
+const db = require('../models/index.js');
+const Sequelize = db.Sequelize;
+const sequelize = db.sequelize;
+let PaperTrails = SequelizeTrails.init(sequelize, {enableMigration: true} );
+PaperTrails.defineModels();
+let User = sequelize.model('User');
+User.Revisions = User.hasPaperTrail();
+
+describe('PaperTrails', function () {
+    it('model is revisionable', function () {
+        expect(User.revisionable).to.equal(true);
     });
-    var User = sequelize.define('User', {
-        name: Sequelize.STRING
+    it('revision increments', function (done) {
+        User.findOrCreate({where: {name: 'Dave'}}).spread((user, created) => {
+            // console.log(user.get({plain: true}));
+            expect(user.get('revision')).to.equal(0);
+            user.update({name:'David'}).then(() => {
+                user.reload().then(() => {
+                    // console.log(user.get({plain: true}));
+                    expect(user.get('revision')).to.equal(1);
+                    done();
+                }).catch(function (err) { done(err); });
+            }).catch(function (err) { done(err); });
+        }).catch(function (err) { done(err); });
     });
-    // console.log(sequelize);
-    // console.log(SequelizeTrails);
-    // console.log(SequelizeTrails(sequelize));
-    // console.log(typeof(SequelizeTrails));
-    expect(typeof(SequelizeTrails.init(sequelize))).to.equal('object');
-   });
+    it('version increments', function (done) {
+        User.findOrCreate({where: {name: 'David'}}).spread((user, created) => {
+            // console.log(user.get({plain: true}));
+            expect(user.get('version')).to.equal(1);
+            expect(user.get('revision')).to.equal(1);
+            user.set('name', 'Billy');
+            User.newVersion(user).then(() => {
+                user.reload().then(() => {
+                    // console.log(user.get({plain: true}));
+                    expect(user.get('version')).to.equal(2);
+                    expect(user.get('revision')).to.equal(0);
+                    user.update({name: 'William'}).then(() => {
+                        user.reload().then(() => {
+                            // console.log(user.get({plain: true}));
+                            expect(user.get('name')).to.equal('William');
+                            expect(user.get('version')).to.equal(2);
+                            expect(user.get('revision')).to.equal(1);
+                            done();
+                        }).catch(function (err) { done(err); });
+                    }).catch(function (err) { done(err); });
+                }).catch(function (err) { done(err); });
+            }).catch(function (err) { done(err); });
+        }).catch(function (err) { done(err); });
+    });
 });

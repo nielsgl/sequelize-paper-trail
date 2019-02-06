@@ -43,6 +43,7 @@ npm install --save sequelize-paper-trail
 ```
 
 *Note: the current test suite is very limited in coverage.*
+*Although it's getting better...*
 
 ## Usage
 
@@ -129,6 +130,25 @@ Model.update({
 To enable continuation-local-storage set `continuationNamespace` in initialization options.
 Additionally, you may also have to call `.run()` or `.bind()` on your cls namespace, as described in the [docs](https://www.npmjs.com/package/continuation-local-storage).
 
+## Versions
+
+PaperTrail also tracks versions, which are explicitly incremented, and reset the revision. Documents start at version 1, revision 0, and every update, the revision increments. But if the version is incremented, the revision is reset to 0.
+
+```javascript
+let instance = Model.findOne({where: {[criteria]}).then(() => {
+	console.log(instance.get( {plain: true} ));
+	instance.set({[many changes...]});
+	Model.newVersion(instance).then(() => { 
+		instance.reload().then(() => {
+			console.log(instance.get( {plain: true} ));
+		});
+	});
+});
+
+```
+
+In the above example, the final revision should be 0, and the version should be incremented by one from the original value
+
 ## Options
 
 Paper Trail supports various options that can be passed into the initialization. The following are the default options:
@@ -156,7 +176,8 @@ var options = {
   underscoredAttributes: false,
   defaultAttributes: {
     documentId: 'documentId',
-    revisionId: 'revisionId'
+	revisionId: 'revisionId'
+	versionId:  'versionId'
   },
   enableCompression: false,
   enableMigration: false,
@@ -178,7 +199,7 @@ var options = {
 | [UUID] | Boolean | false | The [revisionModel] has id attribute of type UUID for postgresql. |
 | [underscored] | Boolean | false | The [revisionModel] and [revisionChangeModel] have 'createdAt' and 'updatedAt' attributes, by default, setting this option to true changes it to 'created_at' and 'updated_at'. |
 | [underscoredAttributes] | Boolean | false | The [revisionModel] has a [defaultAttribute] 'documentId', and the [revisionChangeModel] has a  [defaultAttribute] 'revisionId, by default, setting this option to true changes it to 'document_id' and 'revision_id'. |
-| [defaultAttributes] | Object | { documentId: 'documentId', revisionId: 'revisionId' } |  |
+| [defaultAttributes] | Object | { documentId: 'documentId', revisionId: 'revisionId', versionId: 'versionId' } |  |
 | [userModel] | String | | Name of the model that stores users in your. |
 | [enableCompression] | Boolean | false | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes. |
 | [enableMigration] | Boolean | false | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled. |
