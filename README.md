@@ -177,6 +177,7 @@ var options = {
     'deleted_at'
   ],
   revisionAttribute: 'revision',
+  versionAttribute: 'version',
   revisionModel: 'Revision',
   revisionChangeModel: 'RevisionChange',
   enableRevisionChangeModel: false,
@@ -191,7 +192,8 @@ var options = {
   enableCompression: false,
   enableMigration: false,
   enableStrictDiff: true,
-  continuationKey: 'userId'
+  continuationKey: 'userId',
+  useVersioning: false
 };
 ```
 
@@ -202,6 +204,7 @@ var options = {
 | [debug] | Boolean | false | Enables logging to the console. |
 | [exclude] | Array | ['id', 'createdAt', 'updatedAt', 'deletedAt', 'created_at', 'updated_at', 'deleted_at', [options.revisionAttribute]] | Array of global attributes to exclude from the paper trail. |
 | [revisionAttribute] | String | 'revision' | Name of the attribute in the table that corresponds to the current revision. |
+| [versionAttribute] | String | 'version' | Name of the attribute in the table that corresponds to the current version. |
 | [revisionModel] | String | 'Revision' | Name of the model that keeps the revision models. |
 | [revisionChangeModel] | String | 'RevisionChange' | Name of the model that tracks all the attributes that have changed during each create and update call. |
 | [enableRevisionChangeModel] | Boolean | false | Disable the revision change model to save space. |
@@ -215,6 +218,7 @@ var options = {
 | [enableStrictDiff] | Boolean | true | Reports integers and strings as different, e.g. `3.14` !== `'3.14'` |
 | [continuationNamespace] | String | | Name of the name space used with the continuation-local-storage module. |
 | [continuationKey] | String | 'userId' | The continuation-local-storage key that contains the user id. |
+| [useVersioning] | Boolean | false | Disable new Versioning functionality to maintain backwards compatibility. |
 
 ## Limitations
 
