@@ -20,7 +20,7 @@ describe('PaperTrails', function () {
             expect(user.get('revision')).to.equal(0);
             user.update({name:'David'}).then(() => {
                 user.reload().then(() => {
-                    // console.log(user.get({plain: true}));
+                    console.log(user.get({plain: true}));
                     expect(user.get('revision')).to.equal(1);
                     done();
                 }).catch(function (err) { done(err); });
@@ -35,12 +35,12 @@ describe('PaperTrails', function () {
             user.set('name', 'Billy');
             User.newVersion(user).then(() => {
                 user.reload().then(() => {
-                    // console.log(user.get({plain: true}));
+                    console.log(user.get({plain: true}));
                     expect(user.get('version')).to.equal(2);
                     expect(user.get('revision')).to.equal(0);
                     user.update({name: 'William'}).then(() => {
                         user.reload().then(() => {
-                            // console.log(user.get({plain: true}));
+                            console.log(user.get({plain: true}));
                             expect(user.get('name')).to.equal('William');
                             expect(user.get('version')).to.equal(2);
                             expect(user.get('revision')).to.equal(1);
