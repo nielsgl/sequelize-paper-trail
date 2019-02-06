@@ -42,6 +42,15 @@
 npm install --save sequelize-paper-trail
 ```
 
+## Testing
+
+The very first time you run the tests (or whenever you delete the database), you need to (re-)build the database with the provided sequelize migrations. 
+
+```bash
+sequelize db:migrate --env test
+npm test
+```
+
 *Note: the current test suite is very limited in coverage.*
 *Although it's getting better...*
 

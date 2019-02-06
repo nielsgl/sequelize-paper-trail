@@ -14,33 +14,38 @@ describe('PaperTrails', function () {
     it('model is revisionable', function () {
         expect(User.revisionable).to.equal(true);
     });
+    it('model is versionable', function () {
+        expect(User.versionable).to.equal(true);
+    });
     it('revision increments', function (done) {
         User.findOrCreate({where: {name: 'Dave'}}).spread((user, created) => {
             // console.log(user.get({plain: true}));
+            expect(created).to.equal(true);
             expect(user.get('revision')).to.equal(0);
             user.update({name:'David'}).then(() => {
                 user.reload().then(() => {
-                    console.log(user.get({plain: true}));
+                    // console.log(user.get({plain: true}));
                     expect(user.get('revision')).to.equal(1);
                     done();
                 }).catch(function (err) { done(err); });
             }).catch(function (err) { done(err); });
         }).catch(function (err) { done(err); });
     });
-    it('version increments', function (done) {
+    it('version increments independently from revision', function (done) {
         User.findOrCreate({where: {name: 'David'}}).spread((user, created) => {
             // console.log(user.get({plain: true}));
+            expect(created).to.equal(false);
             expect(user.get('version')).to.equal(1);
             expect(user.get('revision')).to.equal(1);
             user.set('name', 'Billy');
             User.newVersion(user).then(() => {
                 user.reload().then(() => {
-                    console.log(user.get({plain: true}));
+                    // console.log(user.get({plain: true}));
                     expect(user.get('version')).to.equal(2);
                     expect(user.get('revision')).to.equal(0);
                     user.update({name: 'William'}).then(() => {
                         user.reload().then(() => {
-                            console.log(user.get({plain: true}));
+                            // console.log(user.get({plain: true}));
                             expect(user.get('name')).to.equal('William');
                             expect(user.get('version')).to.equal(2);
                             expect(user.get('revision')).to.equal(1);
