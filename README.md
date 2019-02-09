@@ -189,7 +189,7 @@ var options = {
 | [continuationNamespace] | String | | Name of the name space used with the continuation-local-storage module. |
 | [continuationKey] | String | 'userId' | The continuation-local-storage key that contains the user id. |
 | [belongsToUserOptions] | Object | undefined | The options used for belongsTo between userModel and Revision model |
-| [extraDataFields] | String[] | undefined | The keys that will be provided in the extra data object. |
+| [extraDataFields] | Object | undefined | The keys that will be provided in the extra data object. { key: isRequired (boolean)} format. |
 | [extraDataContinuationKey] | String | 'extraData' | The continuation-local-storage key that contains the extra data object. |
 
 ## Limitations

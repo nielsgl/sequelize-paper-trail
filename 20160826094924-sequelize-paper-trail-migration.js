@@ -21,8 +21,12 @@ var sequelizePaperTrailOptions = {
   },
   // fields which can be provided in either in the opts.extraData
   // OR
-  // CLS 'extraData' as object - will be looped over, and checked that they don't overwrite any existing ones in the revision model
-  extraDataFields: ['projectId', 'companyId'],
+  // CLS 'extraData' as object - keys will be looped over, and checked that they don't overwrite any existing ones in the revision model
+  // true/false shows whether the key is required or not
+  extraDataFields: {
+    projectId: false,
+    companyId: true,
+  ],
   extraDataContinuationKey: 'extraData',
 };
 
