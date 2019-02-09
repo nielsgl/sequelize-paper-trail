@@ -14,7 +14,16 @@ var sequelizePaperTrailOptions = {
   enableCompression: false,
   enableMigration: false,
   enableStrictDiff: true,
-  continuationKey: 'userId'
+  continuationKey: 'userId',
+  // used when associating the revision model to user
+  belongsToUserOptions: {
+    foreignKey: 'userId',
+  },
+  // fields which can be provided in either in the opts.extraData
+  // OR
+  // CLS 'extraData' as object - will be looped over, and checked that they don't overwrite any existing ones in the revision model
+  extraDataFields: ['projectId', 'companyId'],
+  extraDataContinuationKey: 'extraData',
 };
 
 module.exports = {

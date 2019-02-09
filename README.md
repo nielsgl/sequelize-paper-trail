@@ -161,7 +161,10 @@ var options = {
   enableCompression: false,
   enableMigration: false,
   enableStrictDiff: true,
-  continuationKey: 'userId'
+  continuationKey: 'userId',
+  belongsToUserOptions: undefined,
+  extraDataFields: undefined,
+  extraDataContinuationKey: 'extraData'
 };
 ```
 
@@ -185,6 +188,9 @@ var options = {
 | [enableStrictDiff] | Boolean | true | Reports integers and strings as different, e.g. `3.14` !== `'3.14'` |
 | [continuationNamespace] | String | | Name of the name space used with the continuation-local-storage module. |
 | [continuationKey] | String | 'userId' | The continuation-local-storage key that contains the user id. |
+| [belongsToUserOptions] | Object | undefined | The options used for belongsTo between userModel and Revision model |
+| [extraDataFields] | String[] | undefined | The keys that will be provided in the extra data object. |
+| [extraDataContinuationKey] | String | 'extraData' | The continuation-local-storage key that contains the extra data object. |
 
 ## Limitations
 
