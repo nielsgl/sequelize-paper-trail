@@ -26,7 +26,7 @@ var sequelizePaperTrailOptions = {
   extraDataFields: {
     projectId: false,
     companyId: true,
-  ],
+  },
   extraDataContinuationKey: 'extraData',
 };
 
