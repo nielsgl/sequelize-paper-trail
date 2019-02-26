@@ -16,9 +16,8 @@ let sequelizePaperTrailOptions = {
     enableCompression: false,
     enableMigration: false,
     enableStrictDiff: true,
-    continuationKey: 'userId',
-    // this is normally false, but we're testing with it...
-    useVersioning: true
+    continuationKey: 'userId'
+
 };
 
 module.exports = {
@@ -65,12 +64,6 @@ module.exports = {
             type: Sequelize.INTEGER,
             allowNull: false
         };
-        if(sequelizePaperTrailOptions.useVersioning) {
-	        modelAttributes[sequelizePaperTrailOptions.versionAttribute] = {
-	            type: Sequelize.INTEGER,
-	            allowNull: false
-	        };
-        }
         modelAttributes[sequelizePaperTrailOptions.revisionAttribute] = {
             type: Sequelize.INTEGER,
             allowNull: false
