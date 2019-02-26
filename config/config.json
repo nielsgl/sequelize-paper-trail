@@ -3,7 +3,7 @@
     "username": "root",
     "password": null,
     "database": "database_test",
-	"storage": "test.db",
+	"storage": ":memory:",
     "dialect": "sqlite",
 	"logging": false
   }

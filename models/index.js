@@ -25,6 +25,17 @@ fs
         db[model.name] = model;
     });
 
+fs
+	    .readdirSync(__dirname + '/../migrations/')
+	    .filter(file => {
+	        return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+	    })
+	    .forEach(file => {
+	        let migration = require(path.join(__dirname + '/../migrations/', file));
+			migration.up(sequelize.getQueryInterface(), Sequelize);
+	    });
+
+
 Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {
         db[modelName].associate(db);

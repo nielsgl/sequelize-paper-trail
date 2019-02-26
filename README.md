@@ -44,10 +44,9 @@ npm install --save sequelize-paper-trail
 
 ## Testing
 
-The very first time you run the tests (or whenever you delete the database), you need to (re-)build the database with the provided sequelize migrations. 
+The tests are designed to run on SQLite3 in-memory tables, built from Sequelize migration files. If you want to actually generate a database file, change the storage option to a filename and run the tests. 
 
 ```bash
-sequelize db:migrate --env test
 npm test
 ```
 

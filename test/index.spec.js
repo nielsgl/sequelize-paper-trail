@@ -6,12 +6,20 @@ const db = require('../models/index.js');
 const Sequelize = db.Sequelize;
 const sequelize = db.sequelize;
 
-let PaperTrails = SequelizeTrails.init(sequelize, {enableMigration: true, useVersioning: true} );
-PaperTrails.defineModels();
-let User = sequelize.model('User');
-User.Revisions = User.hasPaperTrail();
+let User;
+let PaperTrails;
 
 describe('PaperTrails', function () {
+
+    it('initialize PaperTrails', function (done) {
+        PaperTrails = SequelizeTrails.init(sequelize, {enableMigration: true, useVersioning: true} );
+        PaperTrails.defineModels();
+        User = sequelize.model('User');
+        User.Revisions = User.hasPaperTrail();
+        User.refreshAttributes();
+        done();
+    });
+
     describe.skip('#unversioned form', function (done) {
         it('model is revisionable', function () {
             expect(User.revisionable).to.equal(true);
