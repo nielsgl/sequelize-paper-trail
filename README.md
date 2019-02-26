@@ -54,6 +54,8 @@ npm test
 *Note: the current test suite is very limited in coverage.*
 *Although it's getting better...*
 
+When testing, if you change the ```useVersioning``` option, be sure to enable/disable the correct test suite (it's the ```describe.skip``` bit)
+
 ## Usage
 
 Sequelize Paper Trail assumes that you already set up your Sequelize connection, for example, like this:

@@ -6,13 +6,13 @@ const db = require('../models/index.js');
 const Sequelize = db.Sequelize;
 const sequelize = db.sequelize;
 
+let PaperTrails = SequelizeTrails.init(sequelize, {enableMigration: true, useVersioning: true} );
+PaperTrails.defineModels();
+let User = sequelize.model('User');
+User.Revisions = User.hasPaperTrail();
 
 describe('PaperTrails', function () {
-    describe.skip('#unversioned form', function () {
-        let PaperTrails = SequelizeTrails.init(sequelize, {enableMigration: true, useVersioning: false} );
-        PaperTrails.defineModels();
-        let User = sequelize.model('User');
-        User.Revisions = User.hasPaperTrail();
+    describe.skip('#unversioned form', function (done) {
         it('model is revisionable', function () {
             expect(User.revisionable).to.equal(true);
         });
@@ -42,15 +42,15 @@ describe('PaperTrails', function () {
                 user.set('name', 'Billy');
                 User.newVersion(user).then(() => {
                     user.reload().then(() => {
-                    // console.log(user.get({plain: true}));
-                        expect(user.get('version')).to.equal(2);
-                        expect(user.get('revision')).to.equal(0);
+                        // console.log(user.get({plain: true}));
+                        expect(user.get('version')).to.equal(1);
+                        expect(user.get('revision')).to.equal(2);
                         user.update({name: 'William'}).then(() => {
                             user.reload().then(() => {
                             // console.log(user.get({plain: true}));
                                 expect(user.get('name')).to.equal('William');
-                                expect(user.get('version')).to.equal(2);
-                                expect(user.get('revision')).to.equal(1);
+                                expect(user.get('version')).to.equal(1);
+                                expect(user.get('revision')).to.equal(3);
                                 done();
                             }).catch(function (err) { done(err); });
                         }).catch(function (err) { done(err); });
@@ -60,10 +60,6 @@ describe('PaperTrails', function () {
         });
     });
     describe('#versioned form', function (done) {
-        let PaperTrails = SequelizeTrails.init(sequelize, {useVersioning: true} );
-        PaperTrails.defineModels();
-        let User = sequelize.model('User');
-        User.Revisions = User.hasPaperTrail();
         it('model is revisionable', function () {
             expect(User.revisionable).to.equal(true);
         });
