@@ -26,11 +26,11 @@ describe('PaperTrails', function () {
         User.findOrCreate({where: {name: 'Dave'}}).spread((user, created) => {
         // console.log(user.get({plain: true}));
             expect(created).to.equal(true);
-            expect(user.get('revision')).to.equal(0);
+            expect(user.get('revision')).to.equal(1);
             user.update({name:'David'}).then(() => {
                 user.reload().then(() => {
                 // console.log(user.get({plain: true}));
-                    expect(user.get('revision')).to.equal(1);
+                    expect(user.get('revision')).to.equal(2);
                     done();
                 }).catch(function (err) { done(err); });
             }).catch(function (err) { done(err); });
