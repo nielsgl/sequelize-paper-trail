@@ -1,105 +1,105 @@
 {
-  "name": "sequelize-paper-trail",
-  "version": "2.4.2",
-  "description": "Track changes to your Sequelize models data. Perfect for auditing or versioning.",
-  "author": {
-    "name": "Niels van Galen Last",
-    "email": "nvangalenlast@gmail.com",
-    "url": "https://nielsgl.com"
-  },
-  "license": "MIT",
-  "homepage": "https://github.com/nielsgl/sequelize-paper-trail#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nielsgl/sequelize-paper-trail.git"
-  },
-  "bugs": {
-    "url": "https://github.com/nielsgl/sequelize-paper-trail/issues",
-    "email": "nvangalenlast@gmail.com"
-  },
-  "private": false,
-  "keywords": [
-    "sequelize",
-    "sequelize-plugin",
-    "audit",
-    "paper trail",
-    "audit trail",
-    "trail",
-    "revision",
-    "revisions",
-    "versioning",
-    "nodejs"
-  ],
-  "main": "lib/index.js",
-  "engines": {
-    "node": ">=5.0.0",
-    "npm": ">=3.3"
-  },
-  "scripts": {
-    "lint": "eslint --ext .js ./src",
-    "lint:fix": "npm run lint -- --fix",
-    "release": "release-it",
-    "test": "mocha test/* --require @babel/register --require ./test/helper.js --recursive"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/plugin-proposal-class-properties": "^7.3.4",
-    "@babel/plugin-proposal-decorators": "^7.0.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
-    "@babel/plugin-proposal-function-sent": "^7.0.0",
-    "@babel/plugin-proposal-json-strings": "^7.0.0",
-    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
-    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/plugin-syntax-import-meta": "^7.0.0",
-    "@babel/plugin-transform-flow-strip-types": "^7.3.4",
-    "@babel/plugin-transform-runtime": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "@babel/register": "^7.0.0",
-    "babel-eslint": "^10.0.1",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "chai": "^3.5.0",
-    "eslint": "^5.14.1",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-babel": "^3.2.0",
-    "eslint-plugin-flowtype": "^3.4.2",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
-    "mocha": "^5.2.0",
-    "pretty-error": "^2.1.1",
-    "release-it": "^10.2.0",
-    "sequelize-cli": "^5.4.0",
-    "sqlite3": "^4.0.0"
-  },
-  "dependencies": {
-    "continuation-local-storage": "^3.2.1",
-    "deep-diff": "^1.0.2",
-    "diff": "^4.0.1",
-    "lodash": "^4.17.11",
-    "sequelize": "^4.42.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ],
-    "plugins": [
-      "@babel/plugin-transform-flow-strip-types",
-      "@babel/plugin-syntax-dynamic-import",
-      "@babel/plugin-syntax-import-meta",
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-json-strings",
-      [
-        "@babel/plugin-proposal-decorators",
-        {
-          "legacy": true
-        }
-      ],
-      "@babel/plugin-proposal-function-sent",
-      "@babel/plugin-proposal-export-namespace-from",
-      "@babel/plugin-proposal-numeric-separator",
-      "@babel/plugin-proposal-throw-expressions",
-      "add-module-exports"
-    ]
-  }
+	"name": "sequelize-paper-trail",
+	"version": "2.4.2",
+	"description": "Track changes to your Sequelize models data. Perfect for auditing or versioning.",
+	"author": {
+		"name": "Niels van Galen Last",
+		"email": "nvangalenlast@gmail.com",
+		"url": "https://nielsgl.com"
+	},
+	"license": "MIT",
+	"homepage": "https://github.com/nielsgl/sequelize-paper-trail#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nielsgl/sequelize-paper-trail.git"
+	},
+	"bugs": {
+		"url": "https://github.com/nielsgl/sequelize-paper-trail/issues",
+		"email": "nvangalenlast@gmail.com"
+	},
+	"private": false,
+	"keywords": [
+		"sequelize",
+		"sequelize-plugin",
+		"audit",
+		"paper trail",
+		"audit trail",
+		"trail",
+		"revision",
+		"revisions",
+		"versioning",
+		"nodejs"
+	],
+	"main": "lib/index.js",
+	"engines": {
+		"node": ">=5.0.0",
+		"npm": ">=3.3"
+	},
+	"scripts": {
+		"lint": "eslint --ext .js ./lib ./test",
+		"lint:fix": "npm run lint -- --fix",
+		"release": "release-it",
+		"test": "mocha test/* --require @babel/register --require ./test/helper.js --recursive"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.3.4",
+		"@babel/plugin-proposal-class-properties": "^7.3.4",
+		"@babel/plugin-proposal-decorators": "^7.0.0",
+		"@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+		"@babel/plugin-proposal-function-sent": "^7.0.0",
+		"@babel/plugin-proposal-json-strings": "^7.0.0",
+		"@babel/plugin-proposal-numeric-separator": "^7.0.0",
+		"@babel/plugin-proposal-throw-expressions": "^7.0.0",
+		"@babel/plugin-syntax-dynamic-import": "^7.0.0",
+		"@babel/plugin-syntax-import-meta": "^7.0.0",
+		"@babel/plugin-transform-flow-strip-types": "^7.3.4",
+		"@babel/plugin-transform-runtime": "^7.3.4",
+		"@babel/preset-env": "^7.3.4",
+		"@babel/register": "^7.0.0",
+		"babel-eslint": "^10.0.1",
+		"babel-plugin-add-module-exports": "^0.2.1",
+		"chai": "^3.5.0",
+		"eslint": "^5.14.1",
+		"eslint-config-airbnb": "^17.1.0",
+		"eslint-plugin-babel": "^3.2.0",
+		"eslint-plugin-flowtype": "^3.4.2",
+		"eslint-plugin-import": "^2.16.0",
+		"eslint-plugin-jsx-a11y": "^6.2.1",
+		"eslint-plugin-react": "^7.12.4",
+		"mocha": "^5.2.0",
+		"pretty-error": "^2.1.1",
+		"release-it": "^10.2.0",
+		"sequelize-cli": "^5.4.0",
+		"sqlite3": "^4.0.0"
+	},
+	"dependencies": {
+		"continuation-local-storage": "^3.2.1",
+		"deep-diff": "^1.0.2",
+		"diff": "^4.0.1",
+		"lodash": "^4.17.11",
+		"sequelize": "^4.42.0"
+	},
+	"babel": {
+		"presets": [
+			"@babel/preset-env"
+		],
+		"plugins": [
+			"@babel/plugin-transform-flow-strip-types",
+			"@babel/plugin-syntax-dynamic-import",
+			"@babel/plugin-syntax-import-meta",
+			"@babel/plugin-proposal-class-properties",
+			"@babel/plugin-proposal-json-strings",
+			[
+				"@babel/plugin-proposal-decorators",
+				{
+					"legacy": true
+				}
+			],
+			"@babel/plugin-proposal-function-sent",
+			"@babel/plugin-proposal-export-namespace-from",
+			"@babel/plugin-proposal-numeric-separator",
+			"@babel/plugin-proposal-throw-expressions",
+			"add-module-exports"
+		]
+	}
 }
