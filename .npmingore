@@ -17,3 +17,6 @@ node_modules
 
 # Configurations
 .gitignore
+
+# SQLite test db
+test.db

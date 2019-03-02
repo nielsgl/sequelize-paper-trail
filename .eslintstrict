@@ -2,7 +2,6 @@
   "root": true,
   "extends": "airbnb/base",
   "plugins": [
-    "flow-vars",
     "flowtype"
   ],
   "env": {
@@ -17,8 +16,6 @@
     "quotes": [2, "single"],
     "curly": 2,
     "semi": [2, "always"],
-    "flow-vars/define-flow-type": 2,
-    "flow-vars/use-flow-type": 2,
     "flowtype/require-parameter-type": 2,
     "flowtype/require-return-type": [
       2,

@@ -42,7 +42,18 @@
 npm install --save sequelize-paper-trail
 ```
 
+## Testing
+
+The tests are designed to run on SQLite3 in-memory tables, built from Sequelize migration files. If you want to actually generate a database file, change the storage option to a filename and run the tests. 
+
+```bash
+npm test
+```
+
 *Note: the current test suite is very limited in coverage.*
+*Although it's getting better...*
+
+When testing, if you change the ```useVersioning``` option, be sure to enable/disable the correct test suite (it's the ```describe.skip``` bit)
 
 ## Usage
 
@@ -129,6 +140,25 @@ Model.update({
 To enable continuation-local-storage set `continuationNamespace` in initialization options.
 Additionally, you may also have to call `.run()` or `.bind()` on your cls namespace, as described in the [docs](https://www.npmjs.com/package/continuation-local-storage).
 
+## Versions
+
+PaperTrail also tracks versions, which are explicitly incremented, and reset the revision. Documents start at version 1, revision 0, and every update, the revision increments. But if the version is incremented, the revision is reset to 0.
+
+```javascript
+let instance = Model.findOne({where: {[criteria]}).then(() => {
+	console.log(instance.get( {plain: true} ));
+	instance.set({[many changes...]});
+	Model.newVersion(instance).then(() => { 
+		instance.reload().then(() => {
+			console.log(instance.get( {plain: true} ));
+		});
+	});
+});
+
+```
+
+In the above example, the final revision should be 0, and the version should be incremented by one from the original value
+
 ## Options
 
 Paper Trail supports various options that can be passed into the initialization. The following are the default options:
@@ -148,6 +178,7 @@ var options = {
     'deleted_at'
   ],
   revisionAttribute: 'revision',
+  versionAttribute: 'version',
   revisionModel: 'Revision',
   revisionChangeModel: 'RevisionChange',
   enableRevisionChangeModel: false,
@@ -156,12 +187,14 @@ var options = {
   underscoredAttributes: false,
   defaultAttributes: {
     documentId: 'documentId',
-    revisionId: 'revisionId'
+	revisionId: 'revisionId'
+	versionId:  'versionId'
   },
   enableCompression: false,
   enableMigration: false,
   enableStrictDiff: true,
-  continuationKey: 'userId'
+  continuationKey: 'userId',
+  useVersioning: false
 };
 ```
 
@@ -172,19 +205,21 @@ var options = {
 | [debug] | Boolean | false | Enables logging to the console. |
 | [exclude] | Array | ['id', 'createdAt', 'updatedAt', 'deletedAt', 'created_at', 'updated_at', 'deleted_at', [options.revisionAttribute]] | Array of global attributes to exclude from the paper trail. |
 | [revisionAttribute] | String | 'revision' | Name of the attribute in the table that corresponds to the current revision. |
+| [versionAttribute] | String | 'version' | Name of the attribute in the table that corresponds to the current version. |
 | [revisionModel] | String | 'Revision' | Name of the model that keeps the revision models. |
 | [revisionChangeModel] | String | 'RevisionChange' | Name of the model that tracks all the attributes that have changed during each create and update call. |
 | [enableRevisionChangeModel] | Boolean | false | Disable the revision change model to save space. |
 | [UUID] | Boolean | false | The [revisionModel] has id attribute of type UUID for postgresql. |
 | [underscored] | Boolean | false | The [revisionModel] and [revisionChangeModel] have 'createdAt' and 'updatedAt' attributes, by default, setting this option to true changes it to 'created_at' and 'updated_at'. |
 | [underscoredAttributes] | Boolean | false | The [revisionModel] has a [defaultAttribute] 'documentId', and the [revisionChangeModel] has a  [defaultAttribute] 'revisionId, by default, setting this option to true changes it to 'document_id' and 'revision_id'. |
-| [defaultAttributes] | Object | { documentId: 'documentId', revisionId: 'revisionId' } |  |
+| [defaultAttributes] | Object | { documentId: 'documentId', revisionId: 'revisionId', versionId: 'versionId' } |  |
 | [userModel] | String | | Name of the model that stores users in your. |
 | [enableCompression] | Boolean | false | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes. |
 | [enableMigration] | Boolean | false | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled. |
 | [enableStrictDiff] | Boolean | true | Reports integers and strings as different, e.g. `3.14` !== `'3.14'` |
 | [continuationNamespace] | String | | Name of the name space used with the continuation-local-storage module. |
 | [continuationKey] | String | 'userId' | The continuation-local-storage key that contains the user id. |
+| [useVersioning] | Boolean | false | Disable new Versioning functionality to maintain backwards compatibility. |
 
 ## Limitations
 

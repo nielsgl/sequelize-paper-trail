@@ -1,19 +1,40 @@
 import SequelizeTrails from '../lib/index';
-var Sequelize = require('sequelize');
 
-describe('SequelizeTrails', () => {
-  it.skip('init returns object', () => {
-    var sequelize = new Sequelize('','','',{
-        dialect: 'sqlite',
-        logging: console.log
+// const Sequelize = require('sequelize');
+// const sequelize = new Sequelize('database_test', 'root', null, {dialect: 'sqlite', storage: 'test.db'});
+const db = require('../models/index.js');
+const Sequelize = db.Sequelize;
+const sequelize = db.sequelize;
+
+let User;
+let PaperTrails;
+
+describe('PaperTrails', function () {
+
+    it('initialize PaperTrails', function (done) {
+        PaperTrails = SequelizeTrails.init(sequelize, {enableMigration: true} );
+        PaperTrails.defineModels();
+        User = sequelize.model('User');
+        User.Revisions = User.hasPaperTrail();
+        User.refreshAttributes();
+        done();
     });
-    var User = sequelize.define('User', {
-        name: Sequelize.STRING
+    it('model is revisionable', function () {
+        expect(User.revisionable).to.equal(true);
     });
-    // console.log(sequelize);
-    // console.log(SequelizeTrails);
-    // console.log(SequelizeTrails(sequelize));
-    // console.log(typeof(SequelizeTrails));
-    expect(typeof(SequelizeTrails.init(sequelize))).to.equal('object');
-   });
+    it('revision increments', function (done) {
+        User.findOrCreate({where: {name: 'Dave'}}).spread((user, created) => {
+        // console.log(user.get({plain: true}));
+            expect(created).to.equal(true);
+            expect(user.get('revision')).to.equal(1);
+            user.update({name:'David'}).then(() => {
+                user.reload().then(() => {
+                // console.log(user.get({plain: true}));
+                    expect(user.get('revision')).to.equal(2);
+                    done();
+                }).catch(function (err) { done(err); });
+            }).catch(function (err) { done(err); });
+        }).catch(function (err) { done(err); });
+    });
+
 });
