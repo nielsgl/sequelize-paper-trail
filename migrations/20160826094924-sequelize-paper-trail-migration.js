@@ -11,13 +11,12 @@ let sequelizePaperTrailOptions = {
 	underscoredAttributes: false,
 	defaultAttributes: {
 		documentId: 'documentId',
-		revisionId: 'revisionId'
+		revisionId: 'revisionId',
 	},
 	enableCompression: false,
 	enableMigration: false,
 	enableStrictDiff: true,
-	continuationKey: 'userId'
-
+	continuationKey: 'userId',
 };
 
 module.exports = {
@@ -25,7 +24,7 @@ module.exports = {
 		// Load default options.
 		sequelizePaperTrailOptions.defaultAttributes = {
 			documentId: 'documentId',
-			revisionId: 'revisionId'
+			revisionId: 'revisionId',
 		};
 
 		// Revision model
@@ -34,39 +33,41 @@ module.exports = {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
-				type: Sequelize.INTEGER
+				type: Sequelize.INTEGER,
 			},
 			model: {
 				type: Sequelize.TEXT,
-				allowNull: false
+				allowNull: false,
 			},
 			document: {
 				type: Sequelize.TEXT('MEDIUMTEXT'),
-				allowNull: false
+				allowNull: false,
 			},
 			user_id: {
 				type: Sequelize.INTEGER,
-				allowNull: true
+				allowNull: true,
 			},
 			operation: {
-				type: Sequelize.STRING(7)
+				type: Sequelize.STRING(7),
 			},
 			createdAt: {
 				allowNull: false,
-				type: Sequelize.DATE
+				type: Sequelize.DATE,
 			},
 			updatedAt: {
 				allowNull: false,
-				type: Sequelize.DATE
-			}
+				type: Sequelize.DATE,
+			},
 		};
-		modelAttributes[sequelizePaperTrailOptions.defaultAttributes.documentId] = {
+		modelAttributes[
+			sequelizePaperTrailOptions.defaultAttributes.documentId
+		] = {
 			type: Sequelize.INTEGER,
-			allowNull: false
+			allowNull: false,
 		};
 		modelAttributes[sequelizePaperTrailOptions.revisionAttribute] = {
 			type: Sequelize.INTEGER,
-			allowNull: false
+			allowNull: false,
 		};
 
 		let changeModelAttributes = {
@@ -74,45 +75,53 @@ module.exports = {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
-				type: Sequelize.INTEGER
+				type: Sequelize.INTEGER,
 			},
 			path: {
 				type: Sequelize.TEXT,
-				allowNull: false
+				allowNull: false,
 			},
 			document: {
 				type: Sequelize.TEXT('MEDIUMTEXT'),
-				allowNull: false
+				allowNull: false,
 			},
 			diff: {
 				type: Sequelize.TEXT('MEDIUMTEXT'),
-				allowNull: false
+				allowNull: false,
 			},
 			revision_id: {
 				allowNull: true,
-				type: Sequelize.INTEGER
+				type: Sequelize.INTEGER,
 			},
 			createdAt: {
 				allowNull: false,
-				type: Sequelize.DATE
+				type: Sequelize.DATE,
 			},
 			updatedAt: {
 				allowNull: false,
-				type: Sequelize.DATE
-			}
+				type: Sequelize.DATE,
+			},
 		};
 
 		// RevisionChange model
 		return Promise.all([
-			queryInterface.createTable(sequelizePaperTrailOptions.revisionModel, modelAttributes),
-			queryInterface.createTable(sequelizePaperTrailOptions.revisionChangeModel, changeModelAttributes)
+			queryInterface.createTable(
+				sequelizePaperTrailOptions.revisionModel,
+				modelAttributes,
+			),
+			queryInterface.createTable(
+				sequelizePaperTrailOptions.revisionChangeModel,
+				changeModelAttributes,
+			),
 		]);
 	},
 
 	down(queryInterface, Sequelize) {
 		return Promise.all([
 			queryInterface.dropTable(sequelizePaperTrailOptions.revisionModel),
-			queryInterface.dropTable(sequelizePaperTrailOptions.revisionChangeModel)
+			queryInterface.dropTable(
+				sequelizePaperTrailOptions.revisionChangeModel,
+			),
 		]);
-	}
+	},
 };
