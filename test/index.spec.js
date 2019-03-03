@@ -9,32 +9,48 @@ const sequelize = db.sequelize;
 let User;
 let PaperTrails;
 
-describe('PaperTrails', function () {
-
-	it('initialize PaperTrails', function (done) {
-		PaperTrails = SequelizeTrails.init(sequelize, {enableMigration: true});
+describe('PaperTrails', function() {
+	it('initialize PaperTrails', function(done) {
+		PaperTrails = SequelizeTrails.init(sequelize, {
+			enableMigration: true,
+		});
 		PaperTrails.defineModels();
 		User = sequelize.model('User');
 		User.Revisions = User.hasPaperTrail();
 		User.refreshAttributes();
 		done();
 	});
-	it('model is revisionable', function () {
+
+	it('model is revisionable', function() {
 		expect(User.revisionable).to.equal(true);
 	});
-	it('revision increments', function (done) {
-		User.findOrCreate({where: {name: 'Dave'}}).spread((user, created) => {
-			// console.log(user.get({plain: true}));
-			expect(created).to.equal(true);
-			expect(user.get('revision')).to.equal(1);
-			user.update({name: 'David'}).then(() => {
-				user.reload().then(() => {
-					// console.log(user.get({plain: true}));
-					expect(user.get('revision')).to.equal(2);
-					done();
-				}).catch(function (err) { done(err); });
-			}).catch(function (err) { done(err); });
-		}).catch(function (err) { done(err); });
-	});
 
+	it('revision increments', function(done) {
+		User.findOrCreate({ where: { name: 'Dave' } })
+			.spread((user, created) => {
+				// console.log(user.get({plain: true}));
+
+				expect(created).to.equal(true);
+				expect(user.get('revision')).to.equal(1);
+
+				user.update({ name: 'David' })
+					.then(() => {
+						user.reload()
+							.then(() => {
+								// console.log(user.get({plain: true}));
+								expect(user.get('revision')).to.equal(2);
+								done();
+							})
+							.catch(function(err) {
+								done(err);
+							});
+					})
+					.catch(function(err) {
+						done(err);
+					});
+			})
+			.catch(function(err) {
+				done(err);
+			});
+	});
 });
