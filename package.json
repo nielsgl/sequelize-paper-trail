@@ -36,10 +36,11 @@
 		"npm": ">=3.3"
 	},
 	"scripts": {
-		"lint": "eslint --ext .js ./lib ./test",
+		"build": "babel lib --out-dir dist",
+		"lint": "eslint --ext .js lib test",
 		"lint:fix": "npm run lint -- --fix",
 		"release": "release-it",
-		"test": "mocha test/* --require @babel/register --require ./test/helper.js --recursive"
+		"test": "mocha test/* --require @babel/register --require test/helper.js --recursive"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.2.3",
