@@ -10,9 +10,3 @@ node_modules
 
 # IDE directory
 .idea
-
-# SQLite test db
-test.db
-
-# build output
-dist
