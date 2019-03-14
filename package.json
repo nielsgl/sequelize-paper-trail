@@ -30,7 +30,7 @@
 		"versioning",
 		"nodejs"
 	],
-	"main": "dist/index.js",
+	"main": "lib/index.js",
 	"engines": {
 		"node": ">=5.0.0",
 		"npm": ">=3.3"
@@ -38,7 +38,7 @@
 	"scripts": {
 		"prepare": "npm run build",
 		"build": "./node_modules/.bin/babel lib/ --out-dir dist/",
-		"lint": "eslint --ext .js ./src",
+		"lint": "eslint --ext .js ./lib",
 		"lint:fix": "npm run lint -- --fix",
 		"release": "release-it",
 		"test": "mocha test/* --reporter dot --require @babel/register --require ./test/helper.js --recursive"
