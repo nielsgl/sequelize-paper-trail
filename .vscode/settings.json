@@ -1,0 +1,7 @@
+{
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"eslint.autoFixOnSave": true,
+	"eslint.packageManager": "yarn",
+	"eslint.enable": true
+}
