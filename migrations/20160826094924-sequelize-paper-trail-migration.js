@@ -1,6 +1,4 @@
-'use strict';
-/* eslint "flowtype/require-return-type": "off", "flowtype/require-parameter-type": "off" */
-let sequelizePaperTrailOptions = {
+const sequelizePaperTrailOptions = {
 	versionAttribute: 'version',
 	revisionAttribute: 'revision',
 	revisionModel: 'Revisions',
@@ -28,7 +26,7 @@ module.exports = {
 		};
 
 		// Revision model
-		let modelAttributes = {
+		const modelAttributes = {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
@@ -70,7 +68,7 @@ module.exports = {
 			allowNull: false,
 		};
 
-		let changeModelAttributes = {
+		const changeModelAttributes = {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
