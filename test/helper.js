@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import { addPath } from 'app-module-path';
-import path from 'path';
+// import { addPath } from 'app-module-path';
+// import path from 'path';
 
 global.expect = expect;
 
-addPath(path.resolve(__dirname, '../src'));
+// addPath(path.resolve(__dirname, '../src'));
