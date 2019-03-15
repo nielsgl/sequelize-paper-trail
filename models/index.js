@@ -22,24 +22,24 @@ if (config.use_env_variable) {
 
 fs.readdirSync(__dirname)
 	.filter(
-		(file: string) =>
+		file =>
 			file.indexOf('.') !== 0 &&
 			file !== basename &&
 			file.slice(-3) === '.js',
 	)
-	.forEach((file: string) => {
+	.forEach(file => {
 		const model = sequelize.import(path.join(__dirname, file));
 		db[model.name] = model;
 	});
 
 fs.readdirSync(`${__dirname}/../migrations/`)
 	.filter(
-		(file: string) =>
+		file =>
 			file.indexOf('.') !== 0 &&
 			file !== basename &&
 			file.slice(-3) === '.js',
 	)
-	.forEach((file: string) => {
+	.forEach(file => {
 		// eslint-disable-next-line global-require, import/no-dynamic-require
 		const migration = require(path.join(
 			`${__dirname}/../migrations/`,
