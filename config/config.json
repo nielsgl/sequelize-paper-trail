@@ -5,6 +5,7 @@
 		"database": "database_test",
 		"storage": ":memory:",
 		"dialect": "sqlite",
-		"logging": false
+		"logging": false,
+		"operatorsAliases": "Sequelize.Op"
 	}
 }
