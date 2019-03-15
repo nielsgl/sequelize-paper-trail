@@ -40,7 +40,7 @@
 		"build": "babel lib/ --out-dir dist/",
 		"lint": "eslint --ext .js ./lib",
 		"lint:fix": "npm run lint -- --fix",
-		"release": "release-it",
+		"release-it": "release-it",
 		"test": "mocha test/* --reporter dot --require @babel/register --require ./test/helper.js --recursive"
 	},
 	"devDependencies": {
