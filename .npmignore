@@ -25,3 +25,6 @@ node_modules
 # docs
 CHANGELOG
 CONTRIBUTING.md
+
+# SQLite test db
+test.db
