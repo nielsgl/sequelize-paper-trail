@@ -30,13 +30,13 @@
 		"versioning",
 		"nodejs"
 	],
-	"main": "lib/index.js",
+	"main": "dist/index.js",
 	"engines": {
 		"node": ">=5.0.0",
 		"npm": ">=3.3"
 	},
 	"scripts": {
-		"prepublish": "npm run build",
+		"prepare": "npm run build",
 		"build": "babel lib/ --out-dir dist/",
 		"lint": "eslint --ext .js ./lib",
 		"lint:fix": "npm run lint -- --fix",
