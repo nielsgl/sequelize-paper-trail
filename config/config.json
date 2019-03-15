@@ -1,10 +1,10 @@
 {
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-	"storage": ":memory:",
-    "dialect": "sqlite",
-	"logging": false
-  }
+	"test": {
+		"username": "root",
+		"password": null,
+		"database": "database_test",
+		"storage": ":memory:",
+		"dialect": "sqlite",
+		"logging": false
+	}
 }
