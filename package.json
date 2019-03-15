@@ -41,7 +41,7 @@
 		"lint": "eslint --ext .js ./lib",
 		"lint:fix": "npm run lint -- --fix",
 		"release-it": "release-it",
-		"test": "mocha test/* --reporter dot --require @babel/register --require ./test/helper.js --recursive"
+		"test": "mocha test/* --require @babel/register --require ./test/helper.js --recursive"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.2.3",
