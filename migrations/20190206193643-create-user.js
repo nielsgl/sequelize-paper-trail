@@ -1,4 +1,3 @@
-'use strict';
 /* eslint "flowtype/require-return-type": "off", "flowtype/require-parameter-type": "off" */
 module.exports = {
 	up: (queryInterface, Sequelize) => {
