@@ -2,7 +2,6 @@ import SequelizeTrails from '../lib/index';
 
 const db = require('../models/index.js');
 
-// const { Sequelize } = db;
 const { sequelize } = db;
 
 let User;
@@ -21,21 +20,23 @@ describe('PaperTrails', () => {
 	});
 
 	it('model is revisionable', () => {
-		expect(User.revisionable).to.equal(true);
+		expect(User.revisionable).toEqual(true);
 	});
 
 	it('revision increments', done => {
 		User.findOrCreate({ where: { name: 'Dave' } })
 			.spread((user, created) => {
 				// console.log(user.get({plain: true}));
-				expect(created).to.equal(true);
-				expect(user.get('revision')).to.equal(1);
+
+				expect(created).toEqual(true);
+				expect(user.get('revision')).toEqual(1);
+
 				user.update({ name: 'David' })
 					.then(() => {
 						user.reload()
 							.then(() => {
 								// console.log(user.get({plain: true}));
-								expect(user.get('revision')).to.equal(2);
+								expect(user.get('revision')).toEqual(2);
 								done();
 							})
 							.catch(err => {

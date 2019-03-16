@@ -38,10 +38,10 @@
 	"scripts": {
 		"prepare": "npm run build",
 		"build": "babel lib/ --out-dir dist/",
-		"lint": "eslint --ext .js ./lib",
+		"lint": "eslint --ext .js lib test",
 		"lint:fix": "npm run lint -- --fix",
 		"release-it": "release-it",
-		"test": "mocha test/* --require @babel/register --require ./test/helper.js --recursive"
+		"test": "jest"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.2.3",
@@ -52,7 +52,6 @@
 		"babel-plugin-add-module-exports": "^1.0.0",
 		"babel-plugin-transform-flow-strip-types": "^6.22.0",
 		"babel-register": "^6.26.0",
-		"chai": "^4.2.0",
 		"eslint": "^5.15.1",
 		"eslint-config-airbnb": "^17.1.0",
 		"eslint-config-prettier": "^4.1.0",
@@ -63,8 +62,6 @@
 		"eslint-plugin-prettier": "^3.0.1",
 		"eslint-plugin-react": "^7.12.4",
 		"jest": "^24.5.0",
-		"jest-codemods": "^0.19.1",
-		"mocha": "^6.0.2",
 		"prettier": "^1.16.4",
 		"pretty-error": "^2.1.1",
 		"release-it": "^10.3.1",

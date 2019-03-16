@@ -26,8 +26,8 @@ describe('calcDelta', () => {
 
 		const res = helpers.calcDelta(user1, user2, exclude, true);
 
-		expect(res[0].lhs).to.equal('test@user.com');
-		expect(res[0].rhs).to.equal('test2@user.com');
+		expect(res[0].lhs).toEqual('test@user.com');
+		expect(res[0].rhs).toEqual('test2@user.com');
 	});
 
 	it('returns a difference in null value', () => {
@@ -55,8 +55,8 @@ describe('calcDelta', () => {
 
 		const res = helpers.calcDelta(user1, user2, exclude, true);
 
-		expect(res[0].lhs).to.equal(null);
-		expect(res[0].rhs).to.equal(true);
+		expect(res[0].lhs).toEqual(null);
+		expect(res[0].rhs).toEqual(true);
 	});
 
 	it('returns a difference in a boolean', () => {
@@ -84,8 +84,8 @@ describe('calcDelta', () => {
 
 		const res = helpers.calcDelta(user1, user2, exclude, true);
 
-		expect(res[0].lhs).to.equal(false);
-		expect(res[0].rhs).to.equal(true);
+		expect(res[0].lhs).toEqual(false);
+		expect(res[0].rhs).toEqual(true);
 	});
 
 	it('returns no difference in strings and numbers when strict is false', () => {
@@ -101,7 +101,7 @@ describe('calcDelta', () => {
 
 		const res = helpers.calcDelta(obj1, obj2, [], false);
 
-		expect(res).to.equal(null);
+		expect(res).toEqual(null);
 	});
 
 	it('returns a difference in strings and numbers when strict is true', () => {
@@ -117,8 +117,8 @@ describe('calcDelta', () => {
 
 		const res = helpers.calcDelta(obj1, obj2, [], true);
 
-		expect(typeof res[0].lhs).to.equal('string');
-		expect(typeof res[0].rhs).to.equal('number');
+		expect(typeof res[0].lhs).toEqual('string');
+		expect(typeof res[0].rhs).toEqual('number');
 	});
 
 	it('returns a difference in strings and decimals when strict is true', () => {
@@ -134,8 +134,8 @@ describe('calcDelta', () => {
 
 		const res = helpers.calcDelta(obj1, obj2, [], true);
 
-		expect(typeof res[0].lhs).to.equal('string');
-		expect(typeof res[0].rhs).to.equal('number');
+		expect(typeof res[0].lhs).toEqual('string');
+		expect(typeof res[0].rhs).toEqual('number');
 	});
 
 	it('returns no difference in strings and decimals when strict is false', () => {
@@ -151,6 +151,6 @@ describe('calcDelta', () => {
 
 		const res = helpers.calcDelta(obj1, obj2, [], false);
 
-		expect(res).to.equal(null);
+		expect(res).toEqual(null);
 	});
 });
