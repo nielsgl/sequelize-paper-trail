@@ -25,7 +25,7 @@ var sequelizePaperTrailOptions = {
   // true/false shows whether the key is required or not
   extraDataFields: {
   },
-  extraDataContinuationKey: 'extraData',
+  extraDataContinuationKey: null,
 };
 
 module.exports = {
