@@ -38,31 +38,6 @@ describe('PaperTrails', () => {
 				where: { name: 'Dave' },
 			});
 			expect(created).toEqual(true);
-
-			// .spread((user, created) => {
-			// 	// console.log(user.get({plain: true}));
-
-			// 	expect(user.get('revision')).toEqual(1);
-
-			// 	user.update({ name: 'David' })
-			// 		.then(() => {
-			// 			user.reload()
-			// 				.then(() => {
-			// 					// console.log(user.get({plain: true}));
-			// 					expect(user.get('revision')).toEqual(2);
-			// 					done();
-			// 				})
-			// 				.catch(err => {
-			// 					done(err);
-			// 				});
-			// 		})
-			// 		.catch(err => {
-			// 			done(err);
-			// 		});
-			// })
-			// .catch(err => {
-			// 	done(err);
-			// });
 		});
 
 		it('is the first revision', async () => {
@@ -73,31 +48,6 @@ describe('PaperTrails', () => {
 			});
 
 			expect(res[0].get('revision')).toEqual(1);
-
-			// .spread((user, created) => {
-			// 	// console.log(user.get({plain: true}));
-
-			// 	// expect(created).toEqual(true);
-
-			// 	user.update({ name: 'David' })
-			// 		.then(() => {
-			// 			user.reload()
-			// 				.then(() => {
-			// 					// console.log(user.get({plain: true}));
-			// 					expect(user.get('revision')).toEqual(2);
-			// 					done();
-			// 				})
-			// 				.catch(err => {
-			// 					done(err);
-			// 				});
-			// 		})
-			// 		.catch(err => {
-			// 			done(err);
-			// 		});
-			// })
-			// .catch(err => {
-			// 	done(err);
-			// });
 		});
 		it('increments the revision', async () => {
 			expect.assertions(1);
