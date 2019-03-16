@@ -2,6 +2,8 @@ import helpers from '../lib/helpers';
 
 describe('calcDelta', () => {
 	it('returns a difference in email addresses', () => {
+		expect.assertions(2);
+
 		const user1 = {
 			id: 1,
 			email: 'test@user.com',
@@ -31,6 +33,8 @@ describe('calcDelta', () => {
 	});
 
 	it('returns a difference in null value', () => {
+		expect.assertions(2);
+
 		const user1 = {
 			id: 1,
 			email: 'test@user.com',
@@ -60,6 +64,8 @@ describe('calcDelta', () => {
 	});
 
 	it('returns a difference in a boolean', () => {
+		expect.assertions(2);
+
 		const user1 = {
 			id: 1,
 			email: 'test@user.com',
@@ -89,6 +95,8 @@ describe('calcDelta', () => {
 	});
 
 	it('returns no difference in strings and numbers when strict is false', () => {
+		expect.assertions(1);
+
 		const obj1 = {
 			name: 'User',
 			age: '18',
@@ -105,6 +113,8 @@ describe('calcDelta', () => {
 	});
 
 	it('returns a difference in strings and numbers when strict is true', () => {
+		expect.assertions(2);
+
 		const obj1 = {
 			name: 'User',
 			age: '18',
@@ -122,6 +132,8 @@ describe('calcDelta', () => {
 	});
 
 	it('returns a difference in strings and decimals when strict is true', () => {
+		expect.assertions(2);
+
 		const obj1 = {
 			name: 'User',
 			age: '18.1',
@@ -139,6 +151,8 @@ describe('calcDelta', () => {
 	});
 
 	it('returns no difference in strings and decimals when strict is false', () => {
+		expect.assertions(1);
+
 		const obj1 = {
 			name: 'User',
 			age: '18.1',

@@ -19,10 +19,14 @@ describe('PaperTrails', () => {
 	});
 
 	it('model is revisionable', () => {
+		expect.assertions(1);
+
 		expect(User.revisionable).toEqual(true);
 	});
 
 	it('revision increments', done => {
+		expect.assertions(3);
+
 		User.findOrCreate({ where: { name: 'Dave' } })
 			.spread((user, created) => {
 				// console.log(user.get({plain: true}));
