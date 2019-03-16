@@ -1,17 +1,13 @@
 {
 	"root": true,
 	"parser": "babel-eslint",
-	"plugins": ["prettier", "flowtype"],
+	"plugins": ["prettier", "flowtype", "jest"],
 	"env": {
 		"es6": true,
 		"node": true,
-		"mocha": true
+		"jest/globals": true
 	},
-	"globals": {
-		"expect": false
-	},
-	// "extends": ["eslint:recommended", "prettier", "airbnb"],
-	"extends": ["airbnb", "prettier"],
+	"extends": ["airbnb", "prettier", "plugin:jest/recommended"],
 	"rules": {
 		"prettier/prettier": "error",
 		"no-console": "off",
