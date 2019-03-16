@@ -17,6 +17,7 @@ const sequelizePaperTrailOptions = {
 	continuationKey: 'userId',
 };
 
+/* eslint no-unused-vars: off */
 module.exports = {
 	up(queryInterface, Sequelize) {
 		// Load default options.

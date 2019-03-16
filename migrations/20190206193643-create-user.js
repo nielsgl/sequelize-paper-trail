@@ -1,4 +1,9 @@
-/* eslint "flowtype/require-return-type": "off", "flowtype/require-parameter-type": "off" */
+/*
+	eslint
+	flowtype/require-return-type: off,
+	flowtype/require-parameter-type": off,
+	no-unused-vars: off
+*/
 module.exports = {
 	up: (queryInterface, Sequelize) => {
 		return queryInterface.createTable('Users', {
