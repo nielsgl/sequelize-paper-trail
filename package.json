@@ -40,7 +40,7 @@
 		"build": "babel lib/ --out-dir dist/",
 		"lint": "eslint --ext .js lib test",
 		"lint:fix": "npm run lint -- --fix",
-		"release-it": "release-it",
+		"release": "release-it",
 		"test": "jest"
 	},
 	"devDependencies": {
