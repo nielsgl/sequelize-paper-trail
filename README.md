@@ -1,6 +1,12 @@
 # Sequelize Paper Trail
 
-> **Help wanted:** *Please try out `sequelize-paper-trail@3.0.0-rc.5` and give a 👍/👎 [here](https://github.com/nielsgl/sequelize-paper-trail/pull/74) if it works as expected.*
+
+---
+
+> **Help wanted:** *Please try out `sequelize-paper-trail@3.0.0-rc.6` and give a 👍/👎 [here](https://github.com/nielsgl/sequelize-paper-trail/pull/74) if it works as expected.*
+
+---
+
 
 > Track changes to your models, for auditing or versioning. See how a model looked at any stage in its lifecycle, revert it to any version, or restore it after it has been destroyed. Record the user who created the version.
 
