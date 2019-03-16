@@ -17,3 +17,14 @@ node_modules
 
 # Configurations
 .gitignore
+.circleci
+.vscode
+
+.python-version
+
+# docs
+CHANGELOG
+CONTRIBUTING.md
+
+# SQLite test db
+test.db

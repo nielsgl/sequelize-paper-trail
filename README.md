@@ -3,7 +3,7 @@
 
 ---
 
-> **Help wanted:** *Please try out `sequelize-paper-trail@3.0.0-rc.5` and give a 👍/👎 [here](https://github.com/nielsgl/sequelize-paper-trail/pull/74) if it works as expected.*
+> **Help wanted:** *Please try out `sequelize-paper-trail@3.0.0-rc.6` and give a 👍/👎 [here](https://github.com/nielsgl/sequelize-paper-trail/pull/74) if it works as expected.*
 
 ---
 
@@ -30,18 +30,21 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Example](#example)
-- [User Tracking](#user-tracking)
-- [Options](#options)
-  - [Default options](#default-options)
-  - [Options documentation](#options-documentation)
-- [Support](#support)
-- [Contributing](#contributing)
-- [Author](#author)
-- [Thanks](#thanks)
-- [Links](#links)
+- [Sequelize Paper Trail](#sequelize-paper-trail)
+	- [Table of Contents](#table-of-contents)
+	- [Installation](#installation)
+	- [Usage](#usage)
+		- [Example](#example)
+	- [User Tracking](#user-tracking)
+	- [Options](#options)
+		- [Default options](#default-options)
+		- [Options documentation](#options-documentation)
+	- [Limitations](#limitations)
+	- [Support](#support)
+	- [Contributing](#contributing)
+	- [Author](#author)
+	- [Thanks](#thanks)
+	- [Links](#links)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -176,24 +179,24 @@ var options = {
 
 ### Options documentation
 
-| Option | Type | Default Value | Description |
-|-------------------------|---------|-----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [debug] | Boolean | false | Enables logging to the console. |
-| [exclude] | Array | ['id', 'createdAt', 'updatedAt', 'deletedAt', 'created_at', 'updated_at', 'deleted_at', [options.revisionAttribute]] | Array of global attributes to exclude from the paper trail. |
-| [revisionAttribute] | String | 'revision' | Name of the attribute in the table that corresponds to the current revision. |
-| [revisionModel] | String | 'Revision' | Name of the model that keeps the revision models. |
-| [revisionChangeModel] | String | 'RevisionChange' | Name of the model that tracks all the attributes that have changed during each create and update call. |
-| [enableRevisionChangeModel] | Boolean | false | Disable the revision change model to save space. |
-| [UUID] | Boolean | false | The [revisionModel] has id attribute of type UUID for postgresql. |
-| [underscored] | Boolean | false | The [revisionModel] and [revisionChangeModel] have 'createdAt' and 'updatedAt' attributes, by default, setting this option to true changes it to 'created_at' and 'updated_at'. |
-| [underscoredAttributes] | Boolean | false | The [revisionModel] has a [defaultAttribute] 'documentId', and the [revisionChangeModel] has a  [defaultAttribute] 'revisionId, by default, setting this option to true changes it to 'document_id' and 'revision_id'. |
-| [defaultAttributes] | Object | { documentId: 'documentId', revisionId: 'revisionId' } |  |
-| [userModel] | String | | Name of the model that stores users in your. |
-| [enableCompression] | Boolean | false | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes. |
-| [enableMigration] | Boolean | false | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled. |
-| [enableStrictDiff] | Boolean | true | Reports integers and strings as different, e.g. `3.14` !== `'3.14'` |
-| [continuationNamespace] | String | | Name of the name space used with the continuation-local-storage module. |
-| [continuationKey] | String | 'userId' | The continuation-local-storage key that contains the user id. |
+| Option                      | Type    | Default Value                                                                                                        | Description                                                                                                                                                                                                            |
+| --------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [debug]                     | Boolean | false                                                                                                                | Enables logging to the console.                                                                                                                                                                                        |
+| [exclude]                   | Array   | ['id', 'createdAt', 'updatedAt', 'deletedAt', 'created_at', 'updated_at', 'deleted_at', [options.revisionAttribute]] | Array of global attributes to exclude from the paper trail.                                                                                                                                                            |
+| [revisionAttribute]         | String  | 'revision'                                                                                                           | Name of the attribute in the table that corresponds to the current revision.                                                                                                                                           |
+| [revisionModel]             | String  | 'Revision'                                                                                                           | Name of the model that keeps the revision models.                                                                                                                                                                      |
+| [revisionChangeModel]       | String  | 'RevisionChange'                                                                                                     | Name of the model that tracks all the attributes that have changed during each create and update call.                                                                                                                 |
+| [enableRevisionChangeModel] | Boolean | false                                                                                                                | Disable the revision change model to save space.                                                                                                                                                                       |
+| [UUID]                      | Boolean | false                                                                                                                | The [revisionModel] has id attribute of type UUID for postgresql.                                                                                                                                                      |
+| [underscored]               | Boolean | false                                                                                                                | The [revisionModel] and [revisionChangeModel] have 'createdAt' and 'updatedAt' attributes, by default, setting this option to true changes it to 'created_at' and 'updated_at'.                                        |
+| [underscoredAttributes]     | Boolean | false                                                                                                                | The [revisionModel] has a [defaultAttribute] 'documentId', and the [revisionChangeModel] has a  [defaultAttribute] 'revisionId, by default, setting this option to true changes it to 'document_id' and 'revision_id'. |
+| [defaultAttributes]         | Object  | { documentId: 'documentId', revisionId: 'revisionId' }                                                               |                                                                                                                                                                                                                        |
+| [userModel]                 | String  |                                                                                                                      | Name of the model that stores users in your.                                                                                                                                                                           |
+| [enableCompression]         | Boolean | false                                                                                                                | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes.                                                                                                             |
+| [enableMigration]           | Boolean | false                                                                                                                | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled.                                                                                                               |
+| [enableStrictDiff]          | Boolean | true                                                                                                                 | Reports integers and strings as different, e.g. `3.14` !== `'3.14'`                                                                                                                                                    |
+| [continuationNamespace]     | String  |                                                                                                                      | Name of the name space used with the continuation-local-storage module.                                                                                                                                                |
+| [continuationKey]           | String  | 'userId'                                                                                                             | The continuation-local-storage key that contains the user id.                                                                                                                                                          |
 
 ## Limitations
 
