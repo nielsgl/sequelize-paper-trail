@@ -8,7 +8,7 @@ let User;
 let PaperTrails;
 
 describe('PaperTrails', () => {
-	it('initialize PaperTrails', done => {
+	beforeAll(() => {
 		PaperTrails = SequelizeTrails.init(sequelize, {
 			enableMigration: true,
 		});
@@ -16,7 +16,6 @@ describe('PaperTrails', () => {
 		User = sequelize.model('User');
 		User.Revisions = User.hasPaperTrail();
 		User.refreshAttributes();
-		done();
 	});
 
 	it('model is revisionable', () => {
