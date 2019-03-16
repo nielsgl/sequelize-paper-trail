@@ -38,7 +38,8 @@ module.exports = {
 				allowNull: false,
 			},
 			document: {
-				type: Sequelize.TEXT('MEDIUMTEXT'),
+				// type: Sequelize.TEXT('MEDIUMTEXT'),
+				type: Sequelize.TEXT,
 				allowNull: false,
 			},
 			user_id: {
@@ -80,11 +81,13 @@ module.exports = {
 				allowNull: false,
 			},
 			document: {
-				type: Sequelize.TEXT('MEDIUMTEXT'),
+				// type: Sequelize.TEXT('MEDIUMTEXT'),
+				type: Sequelize.TEXT,
 				allowNull: false,
 			},
 			diff: {
-				type: Sequelize.TEXT('MEDIUMTEXT'),
+				// type: Sequelize.TEXT('MEDIUMTEXT'),
+				type: Sequelize.TEXT,
 				allowNull: false,
 			},
 			revision_id: {
