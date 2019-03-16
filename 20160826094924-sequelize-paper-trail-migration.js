@@ -24,7 +24,6 @@ var sequelizePaperTrailOptions = {
   // CLS 'extraData' as object - keys will be looped over, and checked that they don't overwrite any existing ones in the revision model
   // true/false shows whether the key is required or not
   extraDataFields: {
-    companyId: true,
   },
   extraDataContinuationKey: 'extraData',
 };
