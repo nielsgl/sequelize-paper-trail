@@ -17,6 +17,7 @@
 		"no-underscore-dangle": "off",
 		"no-param-reassign": "off",
 		"react/no-this-in-sfc": "off",
+		"no-shadow": "warn",
 		"no-tabs": "off",
 		"eol-last": "warn",
 		"no-var": "warn",
