@@ -21,12 +21,8 @@ trim_trailing_whitespace = false
 indent_size = 2
 indent_style = spaces
 
-[*.hbs]
-indent_size = 2
-indent_style = spaces
-
 [*.js]
 curly_bracket_next_line = false
 spaces_around_operators = true
 indent_brace_style = 1TBS
-spaces_around_brackets = boths
+# spaces_around_brackets = boths
