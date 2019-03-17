@@ -1,12 +1,19 @@
 /* eslint-disable no-unused-vars */
 import SequelizeTrails from '../lib/index';
 
-const db = require('../models/index.js');
+const db = require('./models/index.js');
 
 const { sequelize } = db;
 
 let User;
 let PaperTrails;
+
+describe('import', () => {
+	it('loads the library', () => {
+		// console.log(helpers);
+		expect(true).toEqual(true);
+	});
+});
 
 describe('PaperTrails', () => {
 	beforeAll(() => {
@@ -23,11 +30,6 @@ describe('PaperTrails', () => {
 		expect.assertions(1);
 
 		expect(User.revisionable).toEqual(true);
-	});
-
-	it('can do something cool', async () => {
-		const [foo, bar] = await Promise.resolve(['foo', true]);
-		expect(bar).toEqual(true);
 	});
 
 	describe('sets the revision for a model', () => {
