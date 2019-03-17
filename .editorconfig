@@ -21,10 +21,6 @@ trim_trailing_whitespace = false
 indent_size = 2
 indent_style = spaces
 
-[*.hbs]
-indent_size = 2
-indent_style = spaces
-
 [*.js]
 curly_bracket_next_line = false
 spaces_around_operators = true

@@ -40,6 +40,7 @@
 		- [Default options](#default-options)
 		- [Options documentation](#options-documentation)
 	- [Limitations](#limitations)
+	- [Testing](#testing)
 	- [Support](#support)
 	- [Contributing](#contributing)
 	- [Author](#author)
@@ -52,6 +53,8 @@
 
 ```bash
 npm install --save sequelize-paper-trail
+# or with yarn:
+# yarn add sequelize-paper-trail
 ```
 
 *Note: the current test suite is very limited in coverage.*
@@ -60,14 +63,14 @@ npm install --save sequelize-paper-trail
 
 Sequelize Paper Trail assumes that you already set up your Sequelize connection, for example, like this:
 ```javascript
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('database', 'username', 'password');
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password');
 ```
 
 then adding Sequelize Paper Trail is as easy as:
 
 ```javascript
-var PaperTrail = require('sequelize-paper-trail').init(sequelize, options);
+const PaperTrail = require('sequelize-paper-trail').init(sequelize, options);
 PaperTrail.defineModels();
 ```
 
@@ -86,13 +89,13 @@ Model.hasPaperTrail();
 ### Example
 
 ```javascript
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('database', 'username', 'password');
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password');
 
-var PaperTrail = require('sequelize-paper-trail').init(sequelize, options || {});
+const PaperTrail = require('sequelize-paper-trail').init(sequelize, options || {});
 PaperTrail.defineModels();
 
-var User = sequelize.define('User', {
+const User = sequelize.define('User', {
   username: Sequelize.STRING,
   birthday: Sequelize.DATE
 });
@@ -106,7 +109,7 @@ There are 2 steps to enable user tracking, ie, recording the user who created a 
 1. Enable user tracking by passing `userModel` option to `init`, with the name of the model which stores users in your application as the value.
 
 ```javascript
-var options = {
+const options = {
   /* ... */
   userModel: 'user',
 };
@@ -125,8 +128,8 @@ Model.update({
 OR
 
 ```javascript
-var createNamespace = require('continuation-local-storage').createNamespace;
-var session = createNamespace('my session');
+const createNamespace = require('continuation-local-storage').createNamespace;
+const session = createNamespace('my session');
 
 session.set('userId', user.id);
 
@@ -149,7 +152,7 @@ Paper Trail supports various options that can be passed into the initialization.
 
 ```javascript
 // Default options
-var options = {
+const options = {
   exclude: [
     'id',
     'createdAt',
@@ -201,6 +204,16 @@ var options = {
 ## Limitations
 
 * This project does not support models with composite primary keys. You can work around using a unique index with multiple fields.
+
+## Testing
+
+The tests are designed to run on SQLite3 in-memory tables, built from Sequelize migration files. If you want to actually generate a database file, change the storage option to a filename and run the tests. 
+
+```bash
+npm test
+# or with yarn:
+# yarn test
+```
 
 ## Support
 
