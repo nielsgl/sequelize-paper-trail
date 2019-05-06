@@ -67,14 +67,14 @@
 		"prettier": "^1.16.4",
 		"pretty-error": "^2.1.1",
 		"release-it": "^10.3.1",
+		"sequelize": "^5.8.5",
 		"sqlite3": "^4.0.6"
 	},
 	"dependencies": {
 		"continuation-local-storage": "^3.2.1",
 		"deep-diff": "^1.0.2",
 		"diff": "^4.0.1",
-		"lodash": "^4.17.11",
-		"sequelize": "^4.43.0"
+		"lodash": "^4.17.11"
 	},
 	"babel": {
 		"presets": [
