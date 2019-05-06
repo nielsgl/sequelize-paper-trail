@@ -19,6 +19,7 @@
 		"react/no-this-in-sfc": "off",
 		"no-shadow": "warn",
 		"no-tabs": "off",
+		"import/no-extraneous-dependencies": "off",
 		"eol-last": "warn",
 		"no-var": "warn",
 		"dot-notation": "warn",
