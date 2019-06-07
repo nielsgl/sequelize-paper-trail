@@ -1,57 +1,48 @@
 {
-  "root": true,
-//  "extends": "airbnb/base",
-  "plugins": [
-    "flow-vars",
-    "flowtype"
-  ],
-  "env": {
-    "es6": true,
-    "node": true,
-    "mocha": true
-  },
-  "globals": {
-    "expect": false
-  },
-  "rules": {
-    "comma-dangle": "warn",
-    "eol-last": "warn",
-    "indent": "warn",
-    "no-var": "warn",
-    "dot-notation": "warn",
-    "no-unused-vars": "warn",
-    "object-shorthand": "warn",
-    "object-curly-spacing": "warn",
-    "no-trailing-spaces": "warn",
-    "vars-on-top": "warn",
-    "space-before-function-paren": "warn",
-    "quotes": [1, "single"],
-    "curly": 2,
-    "semi": [1, "always"],
-    "flow-vars/define-flow-type": 2,
-    "flow-vars/use-flow-type": 2,
-    "flowtype/require-parameter-type": 2,
-    "flowtype/require-return-type": [
-      "warn",
-      "always",
-      { "annotateUndefined": "always" }
-    ],
-    "flowtype/space-after-type-colon": [
-      "warn",
-      "always"
-    ],
-    "flowtype/space-before-type-colon": [
-      "warn",
-      "never"
-    ],
-    "flowtype/type-id-match": [
-      2,
-      "^([A-Z][a-z0-9]+)+Type$"
-    ]
-  },
-  "settings": {
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": false
-    }
-  }
+	"root": true,
+	"parser": "babel-eslint",
+	"plugins": ["prettier", "flowtype", "jest"],
+	"env": {
+		"es6": true,
+		"node": true,
+		"jest/globals": true
+	},
+	"extends": ["airbnb", "prettier", "plugin:jest/recommended"],
+	"rules": {
+		"prettier/prettier": "error",
+		"no-console": "off",
+		"indent": ["error", "tab"],
+		"operator-linebreak": "off",
+		"arrow-parens": ["warn", "as-needed"],
+		"no-underscore-dangle": "off",
+		"no-param-reassign": "off",
+		"react/no-this-in-sfc": "off",
+		"no-shadow": "warn",
+		"no-tabs": "off",
+		"import/no-extraneous-dependencies": "off",
+		"eol-last": "warn",
+		"no-var": "warn",
+		"dot-notation": "warn",
+		"no-unused-vars": "warn",
+		"object-shorthand": "warn",
+		"no-trailing-spaces": "warn",
+		"vars-on-top": "warn",
+		"space-before-function-paren": "warn",
+		"quotes": [1, "single"],
+		"semi": [1, "always"],
+		"flowtype/require-parameter-type": 2,
+		"flowtype/require-return-type": [
+			"warn",
+			"always",
+			{ "annotateUndefined": "always" }
+		],
+		"flowtype/space-after-type-colon": ["warn", "always"],
+		"flowtype/space-before-type-colon": ["warn", "never"],
+		"flowtype/type-id-match": [2, "^([A-Z][a-z0-9]+)+Type$"]
+	},
+	"settings": {
+		"flowtype": {
+			"onlyFilesWithFlowAnnotation": true
+		}
+	}
 }

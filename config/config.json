@@ -1,0 +1,11 @@
+{
+	"test": {
+		"username": "root",
+		"password": null,
+		"database": "database_test",
+		"storage": "db.test.sqlite",
+		"dialect": "sqlite",
+		"logging": false,
+		"operatorsAliases": "Sequelize.Op"
+	}
+}

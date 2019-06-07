@@ -10,3 +10,10 @@ node_modules
 
 # IDE directory
 .idea
+
+# Build directory
+dist
+
+# SQLite test db
+test.db
+*.sqlite
