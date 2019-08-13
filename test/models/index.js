@@ -20,6 +20,10 @@ if (config.use_env_variable) {
 	);
 }
 
+// eslint-disable-next-line import/no-dynamic-require
+const PaperTrail = require(`${__dirname}/../../lib/index.js`).init(sequelize);
+PaperTrail.defineModels();
+
 fs.readdirSync(__dirname)
 	.filter(
 		file =>
