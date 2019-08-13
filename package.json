@@ -67,8 +67,7 @@
 		"prettier": "^1.16.4",
 		"pretty-error": "^2.1.1",
 		"release-it": "^10.3.1",
-		"sequelize": "^5.8.5",
-		"sqlite3": "^4.0.9"
+		"sequelize": "^5.8.5"
 	},
 	"dependencies": {
 		"continuation-local-storage": "^3.2.1",
