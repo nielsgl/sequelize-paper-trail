@@ -15,5 +15,5 @@ node_modules
 dist
 
 # SQLite test db
-test.db
-*.sqlite
+# test.db
+# *.sqlite
