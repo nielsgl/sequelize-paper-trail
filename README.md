@@ -144,6 +144,17 @@ Model.update({
 To enable continuation-local-storage set `continuationNamespace` in initialization options.
 Additionally, you may also have to call `.run()` or `.bind()` on your cls namespace, as described in the [docs](https://www.npmjs.com/package/continuation-local-storage).
 
+## Disable logging for a single call
+
+To not log a specific change to a revisioned object, just pass a `noPaperTrail` with a truthy (true, 1, ' ') value.
+
+```javascript
+const instance = await Model.findOne();
+instance.update({ noPaperTrail: true }).then(() {
+  /* ... */
+});
+```
+
 ## Options
 
 Paper Trail supports various options that can be passed into the initialization. The following are the default options:
@@ -176,7 +187,10 @@ const options = {
   enableCompression: false,
   enableMigration: false,
   enableStrictDiff: true,
-  continuationKey: 'userId'
+  continuationKey: 'userId',
+  belongsToUserOptions: undefined,
+  metaDataFields: undefined,
+  metaDataContinuationKey: 'metaData'
 };
 ```
 
@@ -200,6 +214,9 @@ const options = {
 | [enableStrictDiff]          | Boolean | true                                                                                                                 | Reports integers and strings as different, e.g. `3.14` !== `'3.14'`                                                                                                                                                    |
 | [continuationNamespace]     | String  |                                                                                                                      | Name of the name space used with the continuation-local-storage module.                                                                                                                                                |
 | [continuationKey]           | String  | 'userId'                                                                                                             | The continuation-local-storage key that contains the user id.                                                                                                                                                          |
+| [belongsToUserOptions]      | Object  | undefined                                                                                                            | The options used for belongsTo between userModel and Revision model                                                                                                                                                    |
+| [metaDataFields]            | Object  | undefined                                                                                                            | The keys that will be provided in the meta data object. { key: isRequired (boolean)} format. Can be used to privovide additional fields - other associations, dates, etc to the Revision model                         |
+| [metaDataContinuationKey]   | String  | 'metaData'                                                                                                           | The continuation-local-storage key that contains the meta data object, from where the metaDataFields are extracted.                                                                                                    |
 
 ## Limitations
 
