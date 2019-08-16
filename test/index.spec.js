@@ -26,7 +26,7 @@ describe('PaperTrails', () => {
 		User.refreshAttributes();
 	});
 
-	it('model is revisionable', () => {
+	it.only('model is revisionable', () => {
 		expect.assertions(1);
 
 		expect(User.revisionable).toEqual(true);
