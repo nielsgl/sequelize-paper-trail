@@ -24,6 +24,9 @@ module.exports = {
 				allowNull: false,
 				type: Sequelize.DATE,
 			},
+			revision: {
+				type: Sequelize.INTEGER,
+			},
 		});
 	},
 	down: (queryInterface, Sequelize) => {

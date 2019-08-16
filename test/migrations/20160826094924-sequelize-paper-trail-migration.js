@@ -12,7 +12,7 @@ const sequelizePaperTrailOptions = {
 		revisionId: 'revisionId',
 	},
 	enableCompression: false,
-	enableMigration: false,
+	enableMigration: true,
 	enableStrictDiff: true,
 	continuationKey: 'userId',
 };
