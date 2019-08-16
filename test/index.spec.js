@@ -32,7 +32,7 @@ describe('PaperTrails', () => {
 		expect(User.revisionable).toEqual(true);
 	});
 
-	describe('sets the revision for a model', () => {
+	describe.only('sets the revision for a model', () => {
 		it('creates the user', async () => {
 			expect.assertions(1);
 
@@ -44,7 +44,7 @@ describe('PaperTrails', () => {
 			expect(created).toEqual(true);
 		});
 
-		it('is the first revision', async () => {
+		it.only('is the first revision', async () => {
 			expect.assertions(1);
 
 			const res = await User.findOrCreate({
