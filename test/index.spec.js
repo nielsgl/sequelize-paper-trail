@@ -39,6 +39,8 @@ describe('PaperTrails', () => {
 			const [user, created] = await User.findOrCreate({
 				where: { name: 'Dave' },
 			});
+			console.log('user', created);
+
 			expect(created).toEqual(true);
 		});
 
