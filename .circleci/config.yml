@@ -27,9 +27,9 @@ jobs:
                       - v1-dependencies-
 
             - run: npm install
-            - run: npm install --save-dev sqlite3
+            # - run: npm install --save-dev sqlite3
 
-            - run: npm rebuild
+            # - run: npm rebuild
 
             - save_cache:
                   paths:
