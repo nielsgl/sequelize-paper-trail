@@ -36,21 +36,21 @@ fs.readdirSync(__dirname)
 		db[model.name] = model;
 	});
 
-fs.readdirSync(`${__dirname}/../migrations/`)
-	.filter(
-		file =>
-			file.indexOf('.') !== 0 &&
-			file !== basename &&
-			file.slice(-3) === '.js',
-	)
-	.forEach(file => {
-		// eslint-disable-next-line global-require, import/no-dynamic-require
-		const migration = require(path.join(
-			`${__dirname}/../migrations/`,
-			file,
-		));
-		migration.up(sequelize.getQueryInterface(), Sequelize);
-	});
+// fs.readdirSync(`${__dirname}/../migrations/`)
+// 	.filter(
+// 		file =>
+// 			file.indexOf('.') !== 0 &&
+// 			file !== basename &&
+// 			file.slice(-3) === '.js',
+// 	)
+// 	.forEach(file => {
+// 		// eslint-disable-next-line global-require, import/no-dynamic-require
+// 		const migration = require(path.join(
+// 			`${__dirname}/../migrations/`,
+// 			file,
+// 		));
+// 		migration.up(sequelize.getQueryInterface(), Sequelize);
+// 	});
 
 Object.keys(db).forEach(modelName => {
 	if (db[modelName].associate) {
