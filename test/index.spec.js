@@ -71,3 +71,52 @@ describe('PaperTrails', () => {
 		});
 	});
 });
+
+describe('PaperTrails with User Tracking', () => {
+	let Revision;
+	let Todo;
+	let User;
+	let PaperTrails;
+
+	beforeAll(async () => {
+		Revision = sequelize.model('Revision');
+		Todo = sequelize.model('Todo');
+		User = sequelize.model('User');
+		PaperTrails = SequelizeTrails.init(sequelize, {
+			enableMigration: true,
+			userModel: 'User',
+			// userModelAttribute: 'user_id',
+		});
+		PaperTrails.defineModels();
+		Todo.Revisions = Todo.hasPaperTrail();
+		Todo.refreshAttributes();
+
+		await sequelize.sync({ force: true });
+	});
+
+	it('model is revisionable', () => {
+		expect.assertions(1);
+
+		expect(Todo.revisionable).toEqual(true);
+	});
+
+	describe('tracks the user that made the revision', () => {
+		it('sets the user that made the change', async () => {
+			const user = await User.create({ name: 'Dave' });
+			const todo = await Todo.create({ title: 'My Todo' }, { userId: user.id });
+			const revision = await Revision.findOne({
+				where: {
+					model: 'Todo',
+					documentId: todo.get('id'),
+					revision: todo.get('revision'),
+					UserId: user.get('id'),
+				}
+			});
+
+			expect(revision).not.toBeNull();
+		})
+	});
+});
+
+
+
