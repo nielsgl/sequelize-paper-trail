@@ -5,9 +5,6 @@ const db = require('./models/index.js');
 
 const { sequelize } = db;
 
-let User;
-let PaperTrails;
-
 describe('import', () => {
 	it('loads the library', () => {
 		// console.log(helpers);
@@ -16,7 +13,10 @@ describe('import', () => {
 });
 
 describe('PaperTrails', () => {
-	beforeAll(() => {
+	let User;
+	let PaperTrails;
+
+	beforeAll(async () => {
 		PaperTrails = SequelizeTrails.init(sequelize, {
 			enableMigration: true,
 		});
@@ -24,6 +24,8 @@ describe('PaperTrails', () => {
 		User = sequelize.model('User');
 		User.Revisions = User.hasPaperTrail();
 		User.refreshAttributes();
+
+		await sequelize.sync({ force: true });
 	});
 
 	it('model is revisionable', () => {
