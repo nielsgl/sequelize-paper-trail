@@ -31,21 +31,22 @@
 ## Table of Contents
 
 - [Sequelize Paper Trail](#sequelize-paper-trail)
-	- [Table of Contents](#table-of-contents)
-	- [Installation](#installation)
-	- [Usage](#usage)
-		- [Example](#example)
-	- [User Tracking](#user-tracking)
-	- [Options](#options)
-		- [Default options](#default-options)
-		- [Options documentation](#options-documentation)
-	- [Limitations](#limitations)
-	- [Testing](#testing)
-	- [Support](#support)
-	- [Contributing](#contributing)
-	- [Author](#author)
-	- [Thanks](#thanks)
-	- [Links](#links)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Example](#example)
+  - [User Tracking](#user-tracking)
+  - [Disable audit logging](#disable-audit-logging)
+  - [Options](#options)
+    - [Default options](#default-options)
+    - [Options documentation](#options-documentation)
+  - [Limitations](#limitations)
+  - [Testing](#testing)
+  - [Support](#support)
+  - [Contributing](#contributing)
+  - [Author](#author)
+  - [Thanks](#thanks)
+  - [Links](#links)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -105,7 +106,7 @@ User.Revisions = User.hasPaperTrail();
 
 ## User Tracking
 
-There are 2 steps to enable user tracking, ie, recording the user who created a particular revision.
+There are 2 ways to enable user tracking, ie, recording the user who created a particular revision.
 1. Enable user tracking by passing `userModel` option to `init`, with the name of the model which stores users in your application as the value.
 
 ```javascript
@@ -144,13 +145,26 @@ Model.update({
 To enable continuation-local-storage set `continuationNamespace` in initialization options.
 Additionally, you may also have to call `.run()` or `.bind()` on your cls namespace, as described in the [docs](https://www.npmjs.com/package/continuation-local-storage).
 
-## Disable logging for a single call
+## Disable audit logging
 
-To not log a specific change to a revisioned object, just pass a `noPaperTrail` with a truthy (true, 1, ' ') value.
+There are two approaches which allow you disable audit logging.
+1. To not log a specific change to a revisioned object, just pass a `noPaperTrail` option with a truthy (true, 1, ' ') value.
 
 ```javascript
 const instance = await Model.findOne();
 instance.update({ noPaperTrail: true }).then(() {
+  /* ... */
+});
+```
+2. You may also set the `noPaperTrail` attribute to a truthy value (true, 1, ' ') using [continuation-local-storage](https://www.npmjs.com/package/continuation-local-storage) to disable audit logging.
+```javascript
+const createNamespace = require('continuation-local-storage').createNamespace;
+const session = createNamespace('my session');
+
+session.set('noPaperTrail', true);
+
+const instance = await Model.findOne();
+instance.update().then(() {
   /* ... */
 });
 ```
@@ -190,34 +204,36 @@ const options = {
   continuationKey: 'userId',
   belongsToUserOptions: undefined,
   metaDataFields: undefined,
-  metaDataContinuationKey: 'metaData'
+  metaDataContinuationKey: 'metaData',
+  noPaperTrailContinuationKey: 'noPaperTrail'
 };
 ```
 
 ### Options documentation
 
-| Option                      | Type    | Default Value                                                                                                        | Description                                                                                                                                                                                                            |
-| --------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [debug]                     | Boolean | false                                                                                                                | Enables logging to the console.                                                                                                                                                                                        |
-| [exclude]                   | Array   | ['id', 'createdAt', 'updatedAt', 'deletedAt', 'created_at', 'updated_at', 'deleted_at', [options.revisionAttribute]] | Array of global attributes to exclude from the paper trail.                                                                                                                                                            |
-| [revisionAttribute]         | String  | 'revision'                                                                                                           | Name of the attribute in the table that corresponds to the current revision.                                                                                                                                           |
-| [revisionModel]             | String  | 'Revision'                                                                                                           | Name of the model that keeps the revision models.                                                                                                                                                                      |
-| [tableName]                 | String  | undefined                                                                                                            | Name of the table that keeps the revision models. Passed to Sequelize. Necessary in Sequelize 5+ when underscored is true and the table is camelCase or PascalCase.                                                    |
-| [revisionChangeModel]       | String  | 'RevisionChange'                                                                                                     | Name of the model that tracks all the attributes that have changed during each create and update call.                                                                                                                 |
-| [enableRevisionChangeModel] | Boolean | false                                                                                                                | Disable the revision change model to save space.                                                                                                                                                                       |
-| [UUID]                      | Boolean | false                                                                                                                | The [revisionModel] has id attribute of type UUID for postgresql.                                                                                                                                                      |
-| [underscored]               | Boolean | false                                                                                                                | The [revisionModel] and [revisionChangeModel] have 'createdAt' and 'updatedAt' attributes, by default, setting this option to true changes it to 'created_at' and 'updated_at'.                                        |
-| [underscoredAttributes]     | Boolean | false                                                                                                                | The [revisionModel] has a [defaultAttribute] 'documentId', and the [revisionChangeModel] has a  [defaultAttribute] 'revisionId, by default, setting this option to true changes it to 'document_id' and 'revision_id'. |
-| [defaultAttributes]         | Object  | { documentId: 'documentId', revisionId: 'revisionId' }                                                               |                                                                                                                                                                                                                        |
-| [userModel]                 | String  |                                                                                                                      | Name of the model that stores users in your.                                                                                                                                                                           |
-| [enableCompression]         | Boolean | false                                                                                                                | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes.                                                                                                             |
-| [enableMigration]           | Boolean | false                                                                                                                | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled.                                                                                                               |
-| [enableStrictDiff]          | Boolean | true                                                                                                                 | Reports integers and strings as different, e.g. `3.14` !== `'3.14'`                                                                                                                                                    |
-| [continuationNamespace]     | String  |                                                                                                                      | Name of the name space used with the continuation-local-storage module.                                                                                                                                                |
-| [continuationKey]           | String  | 'userId'                                                                                                             | The continuation-local-storage key that contains the user id.                                                                                                                                                          |
-| [belongsToUserOptions]      | Object  | undefined                                                                                                            | The options used for belongsTo between userModel and Revision model                                                                                                                                                    |
-| [metaDataFields]            | Object  | undefined                                                                                                            | The keys that will be provided in the meta data object. { key: isRequired (boolean)} format. Can be used to privovide additional fields - other associations, dates, etc to the Revision model                         |
-| [metaDataContinuationKey]   | String  | 'metaData'                                                                                                           | The continuation-local-storage key that contains the meta data object, from where the metaDataFields are extracted.                                                                                                    |
+| Option                        | Type    | Default Value                                                                                                        | Description                                                                                                                                                                                                            |
+| ----------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [debug]                       | Boolean | false                                                                                                                | Enables logging to the console.                                                                                                                                                                                        |
+| [exclude]                     | Array   | ['id', 'createdAt', 'updatedAt', 'deletedAt', 'created_at', 'updated_at', 'deleted_at', [options.revisionAttribute]] | Array of global attributes to exclude from the paper trail.                                                                                                                                                            |
+| [revisionAttribute]           | String  | 'revision'                                                                                                           | Name of the attribute in the table that corresponds to the current revision.                                                                                                                                           |
+| [revisionModel]               | String  | 'Revision'                                                                                                           | Name of the model that keeps the revision models.                                                                                                                                                                      |
+| [tableName]                   | String  | undefined                                                                                                            | Name of the table that keeps the revision models. Passed to Sequelize. Necessary in Sequelize 5+ when underscored is true and the table is camelCase or PascalCase.                                                    |
+| [revisionChangeModel]         | String  | 'RevisionChange'                                                                                                     | Name of the model that tracks all the attributes that have changed during each create and update call.                                                                                                                 |
+| [enableRevisionChangeModel]   | Boolean | false                                                                                                                | Disable the revision change model to save space.                                                                                                                                                                       |
+| [UUID]                        | Boolean | false                                                                                                                | The [revisionModel] has id attribute of type UUID for postgresql.                                                                                                                                                      |
+| [underscored]                 | Boolean | false                                                                                                                | The [revisionModel] and [revisionChangeModel] have 'createdAt' and 'updatedAt' attributes, by default, setting this option to true changes it to 'created_at' and 'updated_at'.                                        |
+| [underscoredAttributes]       | Boolean | false                                                                                                                | The [revisionModel] has a [defaultAttribute] 'documentId', and the [revisionChangeModel] has a  [defaultAttribute] 'revisionId, by default, setting this option to true changes it to 'document_id' and 'revision_id'. |
+| [defaultAttributes]           | Object  | { documentId: 'documentId', revisionId: 'revisionId' }                                                               |                                                                                                                                                                                                                        |
+| [userModel]                   | String  |                                                                                                                      | Name of the model that stores users in your.                                                                                                                                                                           |
+| [enableCompression]           | Boolean | false                                                                                                                | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes.                                                                                                             |
+| [enableMigration]             | Boolean | false                                                                                                                | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled.                                                                                                               |
+| [enableStrictDiff]            | Boolean | true                                                                                                                 | Reports integers and strings as different, e.g. `3.14` !== `'3.14'`                                                                                                                                                    |
+| [continuationNamespace]       | String  |                                                                                                                      | Name of the name space used with the continuation-local-storage module.                                                                                                                                                |
+| [continuationKey]             | String  | 'userId'                                                                                                             | The continuation-local-storage key that contains the user id.                                                                                                                                                          |
+| [belongsToUserOptions]        | Object  | undefined                                                                                                            | The options used for belongsTo between userModel and Revision model                                                                                                                                                    |
+| [metaDataFields]              | Object  | undefined                                                                                                            | The keys that will be provided in the meta data object. { key: isRequired (boolean)} format. Can be used to privovide additional fields - other associations, dates, etc to the Revision model                         |
+| [metaDataContinuationKey]     | String  | 'metaData'                                                                                                           | The continuation-local-storage key that contains the meta data object, from where the metaDataFields are extracted.                                                                                                    |
+| [noPaperTrailContinuationKey] | String  | 'noPaperTrail'                                                                                                       | The continuation-local-storage key that provides a truthy value which indicates audit logging should be disabled.  Setting this to `undefined` or `null` will disable this feature.                                    |
 
 ## Limitations
 

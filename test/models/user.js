@@ -6,7 +6,5 @@ module.exports = (sequelize, DataTypes) => {
 		// associations can be defined here
 	};
 
-	User.Revision = User.hasPaperTrail();
-
 	return User;
 };
