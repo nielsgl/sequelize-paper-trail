@@ -1,4 +1,5 @@
 {
+	"workbench.colorTheme": "Monokai",
 	"editor.formatOnPaste": true,
 	"editor.formatOnSave": true,
 	"eslint.packageManager": "yarn",
