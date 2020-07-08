@@ -1,7 +1,10 @@
 {
+	"workbench.colorTheme": "Monokai",
 	"editor.formatOnPaste": true,
 	"editor.formatOnSave": true,
-	"eslint.autoFixOnSave": true,
 	"eslint.packageManager": "yarn",
-	"eslint.enable": true
+	"eslint.enable": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	}
 }

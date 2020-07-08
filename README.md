@@ -190,7 +190,8 @@ const options = {
   continuationKey: 'userId',
   belongsToUserOptions: undefined,
   metaDataFields: undefined,
-  metaDataContinuationKey: 'metaData'
+  metaDataContinuationKey: 'metaData',
+  mysql: false
 };
 ```
 
@@ -217,7 +218,8 @@ const options = {
 | [continuationKey]           | String  | 'userId'                                                                                                             | The continuation-local-storage key that contains the user id.                                                                                                                                                          |
 | [belongsToUserOptions]      | Object  | undefined                                                                                                            | The options used for belongsTo between userModel and Revision model                                                                                                                                                    |
 | [metaDataFields]            | Object  | undefined                                                                                                            | The keys that will be provided in the meta data object. { key: isRequired (boolean)} format. Can be used to privovide additional fields - other associations, dates, etc to the Revision model                         |
-| [metaDataContinuationKey]   | String  | 'metaData'                                                                                                           | The continuation-local-storage key that contains the meta data object, from where the metaDataFields are extracted.                                                                                                    |
+| [metaDataContinuationKey]   | String  | 'metaData'                                                                                                           | The continuation-local-storage key that contains the meta data object, from where the metaDataFields are extracted.       
+| [mysql]   | Boolean  | false                                                                                                           | option to use MEDIUMTEXT column instead of JSONB for mysql and mariadb instances                                                                                                   |
 
 ## Limitations
 
