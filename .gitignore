@@ -17,3 +17,6 @@ dist
 # SQLite test db
 # test.db
 # *.sqlite
+
+docs/prd_*.md
+coverage/
