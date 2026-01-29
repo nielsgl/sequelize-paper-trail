@@ -46,6 +46,24 @@
 	"jest": {
 		"setupFilesAfterEnv": [
 			"<rootDir>/test/setupTests.js"
+		],
+		"collectCoverageFrom": [
+			"lib/index.js",
+			"lib/helpers.js"
+		],
+		"coverageThreshold": {
+			"lib/index.js": {
+				"branches": 100,
+				"functions": 100,
+				"lines": 100,
+				"statements": 100
+			},
+			"lib/helpers.js": {
+				"branches": 100,
+				"functions": 100,
+				"lines": 100,
+				"statements": 100
+			}
 		]
 	},
 	"devDependencies": {
