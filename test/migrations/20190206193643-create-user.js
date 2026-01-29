@@ -1,12 +1,12 @@
 /*
 	eslint
 	flowtype/require-return-type: off,
-	flowtype/require-parameter-type": off,
+	flowtype/require-parameter-type: off,
 	no-unused-vars: off
 */
 module.exports = {
-	up: (queryInterface, Sequelize) => {
-		return queryInterface.createTable('Users', {
+	up: (queryInterface, Sequelize) =>
+		queryInterface.createTable('Users', {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
@@ -27,9 +27,6 @@ module.exports = {
 			revision: {
 				type: Sequelize.INTEGER,
 			},
-		});
-	},
-	down: (queryInterface, Sequelize) => {
-		return queryInterface.dropTable('Users');
-	},
+		}),
+	down: (queryInterface, Sequelize) => queryInterface.dropTable('Users'),
 };

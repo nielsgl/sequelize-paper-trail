@@ -21,9 +21,9 @@ describe('sequelize-paper-trail failHard behavior (v5 baseline)', () => {
 				modelAttributes: { name: Sequelize.STRING },
 			});
 
-			await expect(
-				ctx.Model.create({ name: 'Fail' }),
-			).rejects.toThrow(/continuationKey/);
+			await expect(ctx.Model.create({ name: 'Fail' })).rejects.toThrow(
+				/continuationKey/,
+			);
 
 			await ctx.sequelize.close();
 		});

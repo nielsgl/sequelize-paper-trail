@@ -23,6 +23,7 @@ if (config.use_env_variable) {
 describe('Upgrade test', () => {
 	it('should figure something out', () => {
 		// console.log('sequelize.Model', sequelize.Model);
+		expect(sequelize).toBeTruthy();
 		expect(true).toBe(true);
 	});
 });

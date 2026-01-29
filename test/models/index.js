@@ -49,10 +49,9 @@ fs.readdirSync(`${__dirname}/../migrations/`)
 	)
 	.forEach(file => {
 		// eslint-disable-next-line global-require, import/no-dynamic-require
-		const migration = require(path.join(
-			`${__dirname}/../migrations/`,
-			file,
-		));
+		const migration = require(
+			path.join(`${__dirname}/../migrations/`, file),
+		);
 		migration.up(sequelize.getQueryInterface(), Sequelize);
 	});
 

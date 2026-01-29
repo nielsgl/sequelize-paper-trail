@@ -58,10 +58,9 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 		it('creates revisions for bulkCreate with individualHooks', async () => {
 			const { Model, Revision } = ctx;
 
-			await Model.bulkCreate(
-				[{ name: 'A' }, { name: 'B' }],
-				{ individualHooks: true },
-			);
+			await Model.bulkCreate([{ name: 'A' }, { name: 'B' }], {
+				individualHooks: true,
+			});
 
 			const revisions = await getModelRevisions(Revision, 'User');
 			expect(revisions).toHaveLength(2);
@@ -70,10 +69,9 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 		it('creates revisions for bulkUpdate with individualHooks', async () => {
 			const { Model, Revision } = ctx;
 
-			await Model.bulkCreate(
-				[{ name: 'A' }, { name: 'B' }],
-				{ individualHooks: true },
-			);
+			await Model.bulkCreate([{ name: 'A' }, { name: 'B' }], {
+				individualHooks: true,
+			});
 
 			await Model.update(
 				{ name: 'Updated' },
@@ -87,10 +85,9 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 		it('creates revisions for bulkDestroy with individualHooks', async () => {
 			const { Model, Revision } = ctx;
 
-			await Model.bulkCreate(
-				[{ name: 'A' }, { name: 'B' }],
-				{ individualHooks: true },
-			);
+			await Model.bulkCreate([{ name: 'A' }, { name: 'B' }], {
+				individualHooks: true,
+			});
 
 			await Model.destroy({ where: {}, individualHooks: true });
 
@@ -113,10 +110,9 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 		it('creates revisions for bulkDestroy with individualHooks', async () => {
 			const { Model, Revision } = ctx;
 
-			await Model.bulkCreate(
-				[{ name: 'A' }, { name: 'B' }],
-				{ individualHooks: true },
-			);
+			await Model.bulkCreate([{ name: 'A' }, { name: 'B' }], {
+				individualHooks: true,
+			});
 
 			await Model.destroy({ where: {}, individualHooks: true });
 

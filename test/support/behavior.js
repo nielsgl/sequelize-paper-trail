@@ -13,7 +13,9 @@ const waitForColumn = async (queryInterface, tableName, columnName) => {
 			return true;
 		}
 		// eslint-disable-next-line no-await-in-loop
-		await new Promise(resolve => setTimeout(resolve, 50));
+		await new Promise(resolve => {
+			setTimeout(resolve, 50);
+		});
 	}
 	return false;
 };

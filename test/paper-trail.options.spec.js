@@ -20,7 +20,10 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 
 		it('limits document to default fields when compression is enabled', async () => {
 			const { Model, Revision } = ctx;
-			const user = await Model.create({ name: 'Alice', email: 'a@test.com' });
+			const user = await Model.create({
+				name: 'Alice',
+				email: 'a@test.com',
+			});
 
 			await user.update(
 				{ name: 'Alicia', email: 'b@test.com' },
@@ -159,10 +162,7 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 			});
 
 			await metaCtx.Model.create({ name: 'NoMeta' });
-			const revisions = await getModelRevisions(
-				metaCtx.Revision,
-				'User',
-			);
+			const revisions = await getModelRevisions(metaCtx.Revision, 'User');
 			expect(revisions).toHaveLength(1);
 
 			await metaCtx.sequelize.close();
@@ -174,7 +174,9 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 			const originalGet = ns.get.bind(ns);
 
 			ns.get = key =>
-				key === 'metaData' ? { requestId: 'req-cls' } : originalGet(key);
+				key === 'metaData'
+					? { requestId: 'req-cls' }
+					: originalGet(key);
 
 			const metaCtx = await setupDatabase({
 				paperTrailOptions: {
@@ -185,10 +187,7 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 
 			await metaCtx.Model.create({ name: 'CLS' });
 
-			const revisions = await getModelRevisions(
-				metaCtx.Revision,
-				'User',
-			);
+			const revisions = await getModelRevisions(metaCtx.Revision, 'User');
 			expect(revisions).toHaveLength(1);
 
 			ns.get = originalGet;
@@ -313,7 +312,9 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 
 			Model.hasPaperTrail();
 
-			await new Promise(resolve => setTimeout(resolve, 0));
+			await new Promise(resolve => {
+				setTimeout(resolve, 0);
+			});
 
 			expect(addColumnSpy).toHaveBeenCalled();
 
@@ -434,6 +435,7 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 			});
 
 			await debugCtx.Model.create({ name: 'Debug' });
+			expect(debugCtx.Model).toBeTruthy();
 
 			await debugCtx.sequelize.close();
 		});
@@ -479,12 +481,10 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 			const revisionTableName = revisionTable.tableName || revisionTable;
 			const changeTableName = changeTable.tableName || changeTable;
 
-			const revisionColumns = await queryInterface.describeTable(
-				revisionTableName,
-			);
-			const changeColumns = await queryInterface.describeTable(
-				changeTableName,
-			);
+			const revisionColumns =
+				await queryInterface.describeTable(revisionTableName);
+			const changeColumns =
+				await queryInterface.describeTable(changeTableName);
 
 			expect(revisionColumns.document_id).toBeDefined();
 			expect(changeColumns.revision_id).toBeDefined();
@@ -514,7 +514,8 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 			const invoice = await Model.create({ total: 10 });
 			expect(invoice.get('rev')).toEqual(1);
 
-			const revisions = await queryInterface.describeTable('audit_revisions');
+			const revisions =
+				await queryInterface.describeTable('audit_revisions');
 			expect(revisions.rev).toBeDefined();
 		});
 	});
@@ -579,9 +580,9 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 			expect(
 				RevisionChange.rawAttributes.document.type.options.length,
 			).toEqual('MEDIUMTEXT');
-			expect(RevisionChange.rawAttributes.diff.type.options.length).toEqual(
-				'MEDIUMTEXT',
-			);
+			expect(
+				RevisionChange.rawAttributes.diff.type.options.length,
+			).toEqual('MEDIUMTEXT');
 		});
 	});
 

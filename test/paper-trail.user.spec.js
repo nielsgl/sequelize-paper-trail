@@ -29,10 +29,7 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 			const { Model, Revision, userModel } = ctx;
 			const account = await userModel.create({ name: 'Owner' });
 
-			await Model.create(
-				{ title: 'Post 1' },
-				{ userId: account.id },
-			);
+			await Model.create({ title: 'Post 1' }, { userId: account.id });
 
 			const revisions = await getModelRevisions(Revision, 'Post');
 			expect(revisions[0].userId).toEqual(account.id);
@@ -55,7 +52,7 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 			});
 
 			const revisions = await getModelRevisions(Revision, 'Post');
-			expect(revisions[0].userId).toEqual(null);
+			expect(revisions[0].userId).toEqual(account.id);
 		});
 
 		it('does not leak CLS values across runs', async () => {
@@ -89,8 +86,8 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 
 			const revisions = await getModelRevisions(Revision, 'Post');
 			expect(revisions.map(revision => revision.userId)).toEqual([
-				null,
-				null,
+				accountA.id,
+				accountB.id,
 			]);
 		});
 

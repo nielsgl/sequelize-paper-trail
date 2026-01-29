@@ -100,9 +100,7 @@ const serializeRevision = revision => {
 	const { id, createdAt, updatedAt, ...rest } = plain;
 	return {
 		...rest,
-		documentId: isUuid(plain.documentId)
-			? '<uuid>'
-			: plain.documentId,
+		documentId: isUuid(plain.documentId) ? '<uuid>' : plain.documentId,
 		document: sortKeysDeep(normalizeDocument(plain.document)),
 	};
 };

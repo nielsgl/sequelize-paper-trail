@@ -6,6 +6,22 @@ const {
 } = require('./support/setup');
 const { getModelRevisions } = require('./support/behavior');
 
+const waitForRevisionChangeIds = async (RevisionChange, attempts = 5) => {
+	const changes = await RevisionChange.findAll({
+		order: [['createdAt', 'ASC']],
+	});
+	const hasNullRevisionId = changes.some(
+		change => change.get('RevisionId') == null,
+	);
+	if (!hasNullRevisionId || attempts <= 1) {
+		return changes;
+	}
+	await new Promise(resolve => {
+		setTimeout(resolve, 0);
+	});
+	return waitForRevisionChangeIds(RevisionChange, attempts - 1);
+};
+
 describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 	describe('golden snapshots', () => {
 		let ctx;
@@ -98,9 +114,7 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 			const user = await Model.create({ name: 'Diff' });
 			await user.update({ name: 'Diff-2' });
 
-			const changes = await RevisionChange.findAll({
-				order: [['createdAt', 'ASC']],
-			});
+			const changes = await waitForRevisionChangeIds(RevisionChange);
 			const serialized = changes.map(serializeRevisionChange);
 			expect(serialized).toMatchSnapshot();
 			await diffCtx.sequelize.close();

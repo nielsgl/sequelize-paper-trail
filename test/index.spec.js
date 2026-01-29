@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import SequelizeTrails from '../lib/index';
 
-const db = require('./models/index.js');
+const db = require('./models');
 
 const { sequelize } = db;
 

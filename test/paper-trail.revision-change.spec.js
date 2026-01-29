@@ -34,9 +34,7 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 			const diff = normalizeDocument(changes[0].diff);
 			expect(diff).not.toEqual(null);
 			expect(
-				diff.some(entry =>
-					String(entry.value || '').includes('Alice'),
-				),
+				diff.some(entry => String(entry.value || '').includes('Alice')),
 			).toEqual(true);
 
 			const revisions = await Revision.findAll({
