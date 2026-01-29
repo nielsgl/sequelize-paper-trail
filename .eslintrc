@@ -1,6 +1,12 @@
 {
 	"root": true,
-	"parser": "babel-eslint",
+	"parser": "@babel/eslint-parser",
+	"parserOptions": {
+		"requireConfigFile": false,
+		"babelOptions": {
+			"presets": ["@babel/preset-env"]
+		}
+	},
 	"plugins": ["prettier", "flowtype", "jest"],
 	"env": {
 		"es6": true,
@@ -41,8 +47,21 @@
 		"flowtype/type-id-match": [2, "^([A-Z][a-z0-9]+)+Type$"]
 	},
 	"settings": {
+		"react": {
+			"version": "18.2"
+		},
 		"flowtype": {
 			"onlyFilesWithFlowAnnotation": true
 		}
-	}
+	},
+	"overrides": [
+		{
+			"files": ["test/**/*.js"],
+			"rules": {
+				"global-require": "off",
+				"import/extensions": "off",
+				"import/no-dynamic-require": "off"
+			}
+		}
+	]
 }
