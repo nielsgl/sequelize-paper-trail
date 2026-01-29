@@ -4,7 +4,7 @@
 - `lib/` holds the source code (`index.js`, `helpers.js`). Build output goes to `dist/` via Babel.
 - `test/` contains Jest tests (e.g., `*.spec.js`) plus fixtures under `test/models/` and `test/migrations/`.
 - `config/config.json` supplies test database config (SQLite in-memory).
-- `docs/PLAN.md`, `docs/PROJECT.md`, and `docs/TESTS.md` capture the modernization roadmap, project reference, and test strategy.
+- `docs/PLAN.md`, `docs/PROJECT.md`, `docs/TESTS.md`, and `docs/CI.md` capture the roadmap, project reference, test strategy, and CI intent.
 - Root config files include `.eslintrc`, `.prettierrc`, and `.editorconfig` for shared tooling rules.
 
 ## Build, Test, and Development Commands
@@ -35,6 +35,7 @@
 - Do not commit PRD files (they are ignored in `.gitignore`).
 
 ## Configuration Tips
-- Node version is pinned in `.node-version` (12.7.0). Align your local environment for reproducible builds.
+- Node version is pinned in `.node-version` (22.22.0). Align your local environment for reproducible builds.
 - Test DB is SQLite in-memory via `config/config.json`; no external services required.
-- On modern macOS, Node 16.19.1 with Python 3.9.19 may be required for sqlite3 native builds.
+- On modern macOS, Node 22.22.0 with Python 3.9.19 may be required for sqlite3 native builds.
+- npm is the canonical package manager (lockfile: `package-lock.json`).

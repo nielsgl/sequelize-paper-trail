@@ -70,6 +70,11 @@
 - Provide deprecation warnings and safe fallbacks.
 - Document any unavoidable breaking changes.
 
+### Phase 6: Tooling Major Upgrade Review
+- Evaluate upgrading dev tooling to latest majors (Jest 30, ESLint 9, Prettier latest).
+- Document required config migrations and risk assessment.
+- Decide go/no-go and schedule if approved.
+
 ## Options and Recommendations
 
 ### Language and Typing

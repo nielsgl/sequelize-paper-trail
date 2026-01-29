@@ -4,10 +4,11 @@
 Sequelize Paper Trail tracks model changes for auditing and versioning. It records revisions on create/update/destroy and can optionally track users via CLS.
 
 ## Current Runtime and Tooling
-- Runtime: Node.js (engine in package.json is `>=5.0.0`), CommonJS output in `dist/`.
+- Runtime: Node.js (engine in package.json is `>=20`), CommonJS output in `dist/`.
 - Build: Babel (`npm run build` transpiles `lib/` to `dist/`).
 - Tests: Jest (`npm test`) using sqlite in-memory.
 - Linting: ESLint (Airbnb + Prettier + Flowtype rules).
+- Package manager: npm (canonical lockfile is `package-lock.json`).
 
 ## Repository Structure
 - `lib/`: source code (`index.js`, `helpers.js`).
@@ -46,7 +47,7 @@ Sequelize Paper Trail tracks model changes for auditing and versioning. It recor
 - enableMigration: best-effort `addColumn` if revisionAttribute is missing; errors are logged and ignored.
 - noPaperTrail: passing `{ noPaperTrail: true }` in update options does not prevent revision creation in current behavior.
 - Exclude list: if exclusions remove all deltas, no revisions are created (including create).
-- CLS propagation: CLS user attribution may not propagate across async/promise boundaries without explicit binding.
+- CLS propagation: CLS user attribution requires explicit namespace.run/bind; without it userId may be null.
 - Meta data fields: missing metaData object can throw a TypeError before the intended error message.
 - Object-only updates: updating only object/JSON fields still creates a revision, but the revision attribute does not increment.
 - Bulk operations: revisions are created only when `individualHooks: true` is passed.
@@ -56,7 +57,7 @@ Sequelize Paper Trail tracks model changes for auditing and versioning. It recor
 
 ## Known Deviations / Quirks (Baseline Behaviors to Preserve Unless Intentional)
 - `noPaperTrail: true` on update options does not suppress revision creation.
-- CLS user attribution is not captured in v5 baseline tests (userId remains null) even when CLS values are set.
+- CLS user attribution depends on proper namespace.run/bind; missing binding yields null userId.
 - `metaDataFields` enforcement can throw a TypeError when the metaData object is missing (before the intended error).
 - `metaDataFields` values are not persisted unless the Revision schema defines those columns.
 - Exclude lists can remove all deltas and suppress revisions even on create.
@@ -88,11 +89,12 @@ Creates tables for:
 
 ## Current Dependencies (Highlights)
 - Runtime: `continuation-local-storage`, `deep-diff`, `diff`, `lodash`.
-- Dev: `sequelize@^5`, `sqlite3@^4`, `jest`, `eslint`, `prettier`, Babel toolchain.
+- Dev: `sequelize@^5`, `sqlite3@^5`, `jest`, `eslint`, `prettier`, Babel toolchain.
 
 ## Environment Notes
-- `.node-version` pins 12.7.0, but modern macOS builds can require newer Node and a Python with `distutils`.
+- `.node-version` pins Node 22.22.0 (active LTS). Align your local environment for reproducible builds.
 - For sqlite3 native builds on newer systems, setting `PYTHON` to a 3.9.x interpreter with `distutils` may be needed.
+- Tooling major upgrades are deferred until after Phase 5; see `docs/prd_phase6.md`.
 
 ## Testing Notes
 - Tests run against sqlite in-memory tables and use migrations under `test/migrations/`.

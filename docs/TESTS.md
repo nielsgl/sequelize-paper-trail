@@ -9,6 +9,7 @@
 - Every public feature must have at least one end-to-end test.
 - Golden outputs for revision payloads to detect regressions.
 - Tests should be deterministic and avoid time-based flakiness.
+- Jest coverage thresholds enforce full non-debug branch coverage for `lib/index.js` and `lib/helpers.js`.
 
 ## Snapshot Stability Rules
 - Strip volatile fields (e.g., `id`, `createdAt`, `updatedAt`) before snapshotting.
@@ -30,7 +31,7 @@
 - Bulk destroy with paranoid models; verify revision behavior.
 
 ### 3) User Attribution
-- CLS-based user ID is currently not recorded (assert null to lock baseline).
+- CLS-based user ID is recorded when a continuation namespace is configured and run/bind is used.
 - Missing user ID does not break revision creation.
 - Concurrent requests with different CLS values do not leak context.
 

@@ -225,13 +225,16 @@ const options = {
 
 ## Testing
 
-The tests are designed to run on SQLite3 in-memory tables, built from Sequelize migration files. If you want to actually generate a database file, change the storage option to a filename and run the tests. 
+The tests are designed to run on SQLite3 in-memory tables, built from Sequelize migration files. If you want to actually generate a database file, change the storage option to a filename and run the tests.
 
 ```bash
+npm install
 npm test
-# or with yarn:
-# yarn test
 ```
+
+Notes:
+- Node.js **>=20** (active LTS) is required for development.
+- npm is the canonical package manager for this repo.
 
 ## Support
 
@@ -242,9 +245,10 @@ Please use:
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+3. Install dependencies with `npm install`
+4. Commit your changes (`git commit -am 'Added some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create new Pull Request
 
 ## Author
 
