@@ -43,6 +43,11 @@
 		"release": "release-it",
 		"test": "jest"
 	},
+	"jest": {
+		"setupFilesAfterEnv": [
+			"<rootDir>/test/setupTests.js"
+		]
+	},
 	"devDependencies": {
 		"@babel/cli": "^7.5.5",
 		"@babel/core": "^7.5.5",
