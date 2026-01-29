@@ -4,6 +4,7 @@ logs
 
 # Dependency directory
 node_modules
+yarn.lock
 
 # Temporal files
 .DS_Store
