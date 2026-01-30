@@ -122,6 +122,12 @@ Creates tables for:
 - No performance/stress tests for large audit tables or high write rates.
 - No CLS/ALS adapter tests beyond the v5 baseline behavior.
 
+## v6 Adapter Verification Notes
+- Hooks: v6 still supports before/after create/update/destroy with `(instance, options)`.
+- Metadata: `Model.getAttributes()` exists; `rawAttributes` still present on defined models.
+- Table name: `getTableName()` returns a string for sqlite; schema-aware dialects may return an object.
+- `refreshAttributes` remains available on models in v6.
+
 ## Current Issues/Risks
 - Tooling and dependencies are outdated (Jest 24, ESLint 6, sqlite3 4).
 - CLS dependency is unmaintained; may need AsyncLocalStorage adapter.
