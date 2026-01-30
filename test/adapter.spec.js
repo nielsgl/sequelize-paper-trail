@@ -93,4 +93,28 @@ describe('sequelize adapter (v6)', () => {
 
 		await sequelize.close();
 	});
+
+	it('uses cls-hooked when requesting a namespace', async () => {
+		jest.resetModules();
+		const getNamespace = jest.fn(() => null);
+		const createNamespace = jest.fn(() => ({ get: jest.fn() }));
+
+		jest.doMock('cls-hooked', () => ({
+			getNamespace,
+			createNamespace,
+		}));
+
+		const createAdapter = require('../lib/adapters/sequelize-v6').default;
+		const Sequelize = require('sequelize-v6');
+		const sequelize = new Sequelize('sqlite::memory:', { logging: false });
+		const adapter = createAdapter(sequelize);
+
+		adapter.getNamespace('paperTrail');
+
+		expect(getNamespace).toHaveBeenCalledWith('paperTrail');
+		expect(createNamespace).toHaveBeenCalledWith('paperTrail');
+
+		await sequelize.close();
+		jest.dontMock('cls-hooked');
+	});
 });
