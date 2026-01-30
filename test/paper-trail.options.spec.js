@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const Sequelize = require('./support/sequelize');
 const { setupDatabase, normalizeDocument } = require('./support/setup');
 const { getModelRevisions, waitForColumn } = require('./support/behavior');
 
@@ -169,7 +169,7 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 		});
 
 		it('reads metadata from CLS when configured', async () => {
-			const cls = require('continuation-local-storage');
+			const cls = require('./support/cls');
 			const ns = cls.createNamespace('metaDataNS');
 			const originalGet = ns.get.bind(ns);
 

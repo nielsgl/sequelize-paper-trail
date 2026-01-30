@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const Sequelize = require('./support/sequelize');
 
 const runIsolated = async fn =>
 	new Promise((resolve, reject) => {

@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const Sequelize = require('./support/sequelize');
 const { setupDatabase, normalizeDocument } = require('./support/setup');
 
 describe('sequelize-paper-trail user journeys (v5 baseline)', () => {

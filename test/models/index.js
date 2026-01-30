@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const Sequelize = require('sequelize');
+const Sequelize = require('../support/sequelize');
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'test';
@@ -36,7 +36,9 @@ fs.readdirSync(__dirname)
 			file.slice(-3) === '.js',
 	)
 	.forEach(file => {
-		const model = sequelize.import(path.join(__dirname, file));
+		// eslint-disable-next-line global-require, import/no-dynamic-require
+		const modelFactory = require(path.join(__dirname, file));
+		const model = modelFactory(sequelize, Sequelize);
 		db[model.name] = model;
 	});
 

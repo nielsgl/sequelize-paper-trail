@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const Sequelize = require('./sequelize');
 const PaperTrailLib = require('../../lib/index');
 
 const defaultSequelizeOptions = {

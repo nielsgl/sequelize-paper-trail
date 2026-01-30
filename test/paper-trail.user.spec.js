@@ -1,5 +1,5 @@
-const cls = require('continuation-local-storage');
-const Sequelize = require('sequelize');
+const cls = require('./support/cls');
+const Sequelize = require('./support/sequelize');
 const { setupDatabase } = require('./support/setup');
 const { getModelRevisions } = require('./support/behavior');
 

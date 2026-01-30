@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const Sequelize = require('./support/sequelize');
 const { setupDatabase, normalizeDocument } = require('./support/setup');
 const { getModelRevisions } = require('./support/behavior');
 
