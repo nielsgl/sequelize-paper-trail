@@ -12,6 +12,7 @@ Define the target CI matrix and checks for future GitHub Actions setup. This is 
 - Install: `npm install`
 - Tests: `npm test -- --coverage`
 - Lint: `npm run lint`
+- Sequelize v6 tests: `npm run test:v6` (required once Phase 4 is active)
 
 ## Notes
 - Coverage thresholds should enforce full non-debug branch coverage for `lib/index.js` and `lib/helpers.js`.

@@ -24,6 +24,7 @@
 - Framework: Jest (`npm test`).
 - Prefer adding or updating tests alongside code changes; locate integration-style fixtures in `test/models/` and `test/migrations/`.
 - The README notes limited coverage; use `docs/TESTS.md` to guide comprehensive, user‑journey coverage.
+- Use `npm run test:v6` for Sequelize v6 compatibility checks.
 
 ## Commit & Pull Request Guidelines
 - Git history favors short, imperative summaries and release-style commits (e.g., “Release 3.0.1”, “Fix indent”).

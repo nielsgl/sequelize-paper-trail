@@ -64,6 +64,7 @@
 - Lock v6 behavior with tests before declaring support.
 - Decide release strategy (same major vs new major).
 - Perform a formal v5→v6+ API diff review and sign-off checklist before release.
+- Keep CLS support by using `cls-hooked` behind the adapter; defer ALS evaluation until after Phase 5.
 
 ### Phase 5: Release and Migration
 - Publish versioned release notes and a migration guide.
@@ -74,6 +75,12 @@
 - Evaluate upgrading dev tooling to latest majors (Jest 30, ESLint 9, Prettier latest).
 - Document required config migrations and risk assessment.
 - Decide go/no-go and schedule if approved.
+
+### Phase 7: TypeScript Adoption
+- Choose approach: full TS conversion vs incremental TS vs JSDoc + .d.ts.
+- If full TS: define build pipeline (tsc + Babel vs tsup) and module format strategy.
+- If incremental: migrate adapters/helpers first and keep runtime stable.
+- Publish typed API surface and migration notes for contributors.
 
 ## Options and Recommendations
 

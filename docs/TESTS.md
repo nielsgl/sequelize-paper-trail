@@ -87,6 +87,9 @@
 - Dialects: sqlite (required), postgres/mysql (optional when available).
 - Node LTS: all active LTS versions.
 
+## v6 Test Run
+- Use `npm run test:v6` to execute the suite against the pinned `sequelize-v6` alias.
+
 ## Acceptance Criteria
 - All user-journey tests pass on Sequelize v5.
 - v6 tests pass (or are explicitly tracked as expected failures).

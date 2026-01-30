@@ -89,7 +89,9 @@ Creates tables for:
 
 ## Current Dependencies (Highlights)
 - Runtime: `continuation-local-storage`, `deep-diff`, `diff`, `lodash`.
-- Dev: `sequelize@^5`, `sqlite3@^5`, `jest`, `eslint`, `prettier`, Babel toolchain.
+- Dev: `sequelize@^5`, `sequelize-v6` (alias pinned for tests), `sqlite3@^5`, `jest`, `eslint`, `prettier`, Babel toolchain.
+- Optional: `cls-hooked` for Sequelize v6 CLS support (lazy required).
+- Peer: `sequelize@^5 || ^6` (declared compatibility range).
 
 ## Environment Notes
 - `.node-version` pins Node 22.22.0 (active LTS). Align your local environment for reproducible builds.
@@ -99,6 +101,7 @@ Creates tables for:
 ## Testing Notes
 - Tests run against sqlite in-memory tables and use migrations under `test/migrations/`.
 - README notes limited coverage; regression tests should be expanded before refactors.
+- Sequelize v6 tests run via `npm run test:v6` using the pinned `sequelize-v6` alias.
 
 ## Test Strategy (Target)
 - Focus on user-facing behaviors rather than internal code paths.
