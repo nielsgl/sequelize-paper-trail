@@ -1,0 +1,41 @@
+name: Release Quality Gate
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      skip-v6:
+        description: 'Skip the Sequelize v6 suite while experimenting'
+        required: false
+        default: 'false'
+
+jobs:
+  test:
+    name: Run test matrix
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: '--max-old-space-size=4096'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Sequelize v5 suite
+        run: npm test -- --coverage
+
+      - name: Run Sequelize v6 suite
+        if: ${{ github.event.inputs.skip-v6 != 'true' }}
+        run: npm run test:v6

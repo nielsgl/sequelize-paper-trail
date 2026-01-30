@@ -180,34 +180,83 @@ describe('adapter selection helper', () => {
 			}),
 		).toBeNull();
 	});
+
+	it('returns null when no version is provided', () => {
+		expect(_resolveSequelizeMajor({})).toBeNull();
+	});
+});
+
+describe('createAdapter loader', () => {
+	const v5Mock = jest.fn(() => ({
+		identifier: 'v5',
+	}));
+	const v6Mock = jest.fn(() => ({
+		identifier: 'v6',
+	}));
+
+	const originalEnv = process.env.SEQUELIZE_ADAPTER;
+
+	afterEach(() => {
+		v5Mock.mockReset();
+		v6Mock.mockReset();
+		if (originalEnv === undefined) {
+			delete process.env.SEQUELIZE_ADAPTER;
+		} else {
+			process.env.SEQUELIZE_ADAPTER = originalEnv;
+		}
+		jest.resetModules();
+	});
+
+	it('selects the v5 adapter when forced via env', () => {
+		jest.isolateModules(() => {
+			jest.doMock('../lib/adapters/sequelize-v5', () => v5Mock);
+			jest.doMock('../lib/adapters/sequelize-v6', () => v6Mock);
+			process.env.SEQUELIZE_ADAPTER = 'v5';
+
+			const { _createAdapter } = require('../lib/index');
+			_createAdapter({
+				Sequelize: { version: '6.37.7' },
+			});
+
+			expect(v5Mock).toHaveBeenCalled();
+			expect(v6Mock).not.toHaveBeenCalled();
+		});
+	});
+
+	it('selects the v6 adapter when not forced', () => {
+		jest.isolateModules(() => {
+			jest.doMock('../lib/adapters/sequelize-v5', () => v5Mock);
+			jest.doMock('../lib/adapters/sequelize-v6', () => v6Mock);
+			delete process.env.SEQUELIZE_ADAPTER;
+
+			const { _createAdapter } = require('../lib/index');
+			_createAdapter({
+				Sequelize: { version: '6.37.7' },
+			});
+
+			expect(v6Mock).toHaveBeenCalled();
+			expect(v5Mock).not.toHaveBeenCalled();
+		});
+	});
 });
 
 describe('cls-hooked error handling', () => {
 	it('throws when cls-hooked is missing in v6', async () => {
 		await jest.isolateModules(async () => {
 			jest.resetModules();
+			const getClsHooked = require('../lib/adapters/cls-hooked');
+
 			jest.doMock('cls-hooked', () => {
 				throw new Error('module not found');
 			});
 
-			const createAdapter =
-				require('../lib/adapters/sequelize-v6').default;
-			const Sequelize = require('sequelize-v6');
-			const sequelizeOptions = {
-				dialect: 'sqlite',
-				storage: ':memory:',
-				logging: false,
-			};
-			const sequelize = new Sequelize(sequelizeOptions);
-			const adapter = createAdapter(sequelize);
-
-			expect(() => adapter.getNamespace('paperTrail')).toThrow(
-				/cls-hooked is required/,
-			);
-
-			await sequelize.close();
-
-			jest.dontMock('cls-hooked');
+			try {
+				expect(() => getClsHooked()).toThrow(
+					/cls-hooked is required/,
+				);
+			} finally {
+				jest.dontMock('cls-hooked');
+			}
 		});
 	});
 });

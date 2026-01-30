@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import SequelizeTrails from '../lib/index';
+import { createSequelize } from './support/setup';
 
 const db = require('./models');
 
@@ -67,5 +68,24 @@ describe('PaperTrails', () => {
 
 			expect(user.get('revision')).toEqual(2);
 		});
+	});
+});
+
+describe('legacy sequelize dialect handling', () => {
+	it('initializes even when getDialect is missing', async () => {
+		const customSequelize = createSequelize({
+			dialect: 'sqlite',
+			storage: ':memory:',
+			logging: false,
+		});
+		const originalGetDialect = customSequelize.getDialect;
+		customSequelize.getDialect = undefined;
+
+		const LegacyPaperTrail = SequelizeTrails.init(customSequelize, {});
+		LegacyPaperTrail.defineModels();
+
+		await customSequelize.close();
+
+		customSequelize.getDialect = originalGetDialect;
 	});
 });

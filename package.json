@@ -42,7 +42,7 @@
 		"lint:fix": "npm run lint -- --fix",
 		"release": "release-it",
 		"test": "jest",
-		"test:v6": "SEQUELIZE_PACKAGE=sequelize-v6 npm test"
+		"test:v6": "SEQUELIZE_PACKAGE=sequelize-v6 jest --coverage"
 	},
 	"jest": {
 		"setupFilesAfterEnv": [

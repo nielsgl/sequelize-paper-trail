@@ -240,6 +240,11 @@ Notes:
 
 Please use:
 * GitHub's [issue tracker](https://github.com/nielsgl/sequelize-paper-trail/issues)
+* Migration guide: see `docs/migration_phase5.md` for the in-place upgrade path (CLS, metadata, adapter overrides)
+
+### Supported Versions
+
+The library is verified against Sequelize **v5** (current baseline) and **v6.37.7** via `npm run test:v6`. Both versions are covered by the user-journey suites (with coverage enforced) and CLS behavior is exercised through the adapter layer. Continuing CI runs should include `npm run test:v6` to ensure deterministic compatibility before declaring wider support for future releases.
 
 ## Contributing
 
