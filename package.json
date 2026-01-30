@@ -41,7 +41,8 @@
 		"lint": "eslint --ext .js lib test",
 		"lint:fix": "npm run lint -- --fix",
 		"release": "release-it",
-		"test": "jest"
+		"test": "jest",
+		"test:v6": "SEQUELIZE_PACKAGE=sequelize-v6 npm test"
 	},
 	"jest": {
 		"setupFilesAfterEnv": [
@@ -64,7 +65,7 @@
 				"lines": 100,
 				"statements": 100
 			}
-		]
+		}
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.25.7",
@@ -91,7 +92,14 @@
 		"pretty-error": "^2.1.1",
 		"release-it": "^12.3.5",
 		"sequelize": "^5.14.0",
+		"sequelize-v6": "npm:sequelize@6.37.7",
 		"sqlite3": "^5.1.7"
+	},
+	"optionalDependencies": {
+		"cls-hooked": "^4.2.2"
+	},
+	"peerDependencies": {
+		"sequelize": "^5 || ^6"
 	},
 	"dependencies": {
 		"continuation-local-storage": "^3.2.1",
