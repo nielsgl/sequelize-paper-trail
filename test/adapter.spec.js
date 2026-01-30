@@ -49,7 +49,9 @@ describe('sequelize adapter (v5)', () => {
 describe('sequelize adapter (v6)', () => {
 	it('exposes the adapter surface needed by core', async () => {
 		const Sequelize = require('sequelize-v6');
-		const sequelize = new Sequelize('sqlite::memory:', { logging: false });
+		const sequelize = new Sequelize('sqlite::memory:', {
+			logging: false,
+		});
 		const adapter = createV6Adapter(sequelize);
 
 		expect(adapter.types).toBeDefined();
@@ -116,5 +118,80 @@ describe('sequelize adapter (v6)', () => {
 
 		await sequelize.close();
 		jest.dontMock('cls-hooked');
+	});
+});
+
+describe('adapter selection helper', () => {
+	const { _resolveSequelizeMajor } = require('../lib/index');
+	let originalEnv;
+
+	beforeAll(() => {
+		originalEnv = process.env.SEQUELIZE_ADAPTER;
+	});
+
+	afterEach(() => {
+		if (originalEnv === undefined) {
+			delete process.env.SEQUELIZE_ADAPTER;
+		} else {
+			process.env.SEQUELIZE_ADAPTER = originalEnv;
+		}
+	});
+
+	it('returns major from the Sequelize version string', () => {
+		expect(
+			_resolveSequelizeMajor({
+				Sequelize: { version: '6.12.0' },
+			}),
+		).toEqual(6);
+	});
+
+	it('falls back to constructor version when necessary', () => {
+		expect(
+			_resolveSequelizeMajor({
+				constructor: { version: '5.20.0' },
+			}),
+		).toEqual(5);
+	});
+
+	it('supports forced adapter selection via env', () => {
+		process.env.SEQUELIZE_ADAPTER = 'v6';
+		expect(_resolveSequelizeMajor({})).toEqual(6);
+		process.env.SEQUELIZE_ADAPTER = 'v5';
+		expect(_resolveSequelizeMajor({})).toEqual(5);
+	});
+
+	it('returns null for malformed versions', () => {
+		expect(
+			_resolveSequelizeMajor({
+				Sequelize: { version: 'foo' },
+			}),
+		).toBeNull();
+	});
+});
+
+describe('cls-hooked error handling', () => {
+	it('throws when cls-hooked is missing in v6', async () => {
+		await jest.isolateModules(async () => {
+			jest.resetModules();
+			jest.doMock('cls-hooked', () => {
+				throw new Error('module not found');
+			});
+
+			const createAdapter =
+				require('../lib/adapters/sequelize-v6').default;
+			const Sequelize = require('sequelize-v6');
+			const sequelize = new Sequelize('sqlite::memory:', {
+				logging: false,
+			});
+			const adapter = createAdapter(sequelize);
+
+			expect(() => adapter.getNamespace('paperTrail')).toThrow(
+				/cls-hooked is required/,
+			);
+
+			await sequelize.close();
+
+			jest.dontMock('cls-hooked');
+		});
 	});
 });
