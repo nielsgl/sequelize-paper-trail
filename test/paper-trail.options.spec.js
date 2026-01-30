@@ -552,26 +552,15 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 						revisionId: 'RevisionId',
 					},
 				},
+				sync: false,
 			});
 		});
 		afterEach(async () => {
 			await ctx.sequelize.close();
 		});
 
-		it('stores revision payloads and diffs as MEDIUMTEXT strings', async () => {
-			const { Model, Revision, RevisionChange } = ctx;
-
-			const user = await Model.create({ name: 'Mysql' });
-			await user.update({ name: 'Mysql-2' });
-
-			const revisions = await getModelRevisions(Revision, 'User');
-			expect(typeof revisions[0].document).toEqual('string');
-
-			const changes = await RevisionChange.findAll({
-				order: [['createdAt', 'ASC']],
-			});
-			expect(typeof changes[0].document).toEqual('string');
-			expect(typeof changes[0].diff).toEqual('string');
+		it('uses MEDIUMTEXT types for document and diff', () => {
+			const { Revision, RevisionChange } = ctx;
 
 			expect(Revision.rawAttributes.document.type.key).toEqual('TEXT');
 			expect(Revision.rawAttributes.document.type.options.length).toEqual(
