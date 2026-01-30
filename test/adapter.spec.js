@@ -49,9 +49,12 @@ describe('sequelize adapter (v5)', () => {
 describe('sequelize adapter (v6)', () => {
 	it('exposes the adapter surface needed by core', async () => {
 		const Sequelize = require('sequelize-v6');
-		const sequelize = new Sequelize('sqlite::memory:', {
+		const sequelizeOptions = {
+			dialect: 'sqlite',
+			storage: ':memory:',
 			logging: false,
-		});
+		};
+		const sequelize = new Sequelize(sequelizeOptions);
 		const adapter = createV6Adapter(sequelize);
 
 		expect(adapter.types).toBeDefined();
@@ -77,7 +80,12 @@ describe('sequelize adapter (v6)', () => {
 
 	it('passes schema options when describing tables', async () => {
 		const Sequelize = require('sequelize-v6');
-		const sequelize = new Sequelize('sqlite::memory:', { logging: false });
+		const sequelizeOptions = {
+			dialect: 'sqlite',
+			storage: ':memory:',
+			logging: false,
+		};
+		const sequelize = new Sequelize(sequelizeOptions);
 		const adapter = createV6Adapter(sequelize);
 		const queryInterface = { describeTable: jest.fn() };
 		const tableName = {
@@ -108,7 +116,12 @@ describe('sequelize adapter (v6)', () => {
 
 		const createAdapter = require('../lib/adapters/sequelize-v6').default;
 		const Sequelize = require('sequelize-v6');
-		const sequelize = new Sequelize('sqlite::memory:', { logging: false });
+		const sequelizeOptions = {
+			dialect: 'sqlite',
+			storage: ':memory:',
+			logging: false,
+		};
+		const sequelize = new Sequelize(sequelizeOptions);
 		const adapter = createAdapter(sequelize);
 
 		adapter.getNamespace('paperTrail');
@@ -180,9 +193,12 @@ describe('cls-hooked error handling', () => {
 			const createAdapter =
 				require('../lib/adapters/sequelize-v6').default;
 			const Sequelize = require('sequelize-v6');
-			const sequelize = new Sequelize('sqlite::memory:', {
+			const sequelizeOptions = {
+				dialect: 'sqlite',
+				storage: ':memory:',
 				logging: false,
-			});
+			};
+			const sequelize = new Sequelize(sequelizeOptions);
 			const adapter = createAdapter(sequelize);
 
 			expect(() => adapter.getNamespace('paperTrail')).toThrow(
