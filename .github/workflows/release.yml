@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_OPTIONS: '--max-old-space-size=4096'
+      SEQUELIZE_CLS: cls-hooked
     steps:
       - name: Checkout
         uses: actions/checkout@v4

@@ -44,6 +44,32 @@ describe('sequelize adapter (v5)', () => {
 			schemaDelimiter: '.',
 		});
 	});
+
+	it('uses cls-hooked when SEQUELIZE_CLS is set', async () => {
+		jest.isolateModules(() => {
+			process.env.SEQUELIZE_CLS = 'cls-hooked';
+			const getNamespace = jest.fn(() => null);
+			const createNamespace = jest.fn(() => ({ get: jest.fn() }));
+
+			jest.doMock('../lib/adapters/cls-hooked', () => () => ({
+				getNamespace,
+				createNamespace,
+			}));
+
+			const createAdapter = require('../lib/adapters/sequelize-v5').default;
+			const sequelize = createSequelize();
+			const adapter = createAdapter(sequelize);
+
+			adapter.getNamespace('paperTrail');
+
+			expect(getNamespace).toHaveBeenCalledWith('paperTrail');
+			expect(createNamespace).toHaveBeenCalledWith('paperTrail');
+
+			sequelize.close();
+			delete process.env.SEQUELIZE_CLS;
+			jest.dontMock('../lib/adapters/cls-hooked');
+		});
+	});
 });
 
 describe('sequelize adapter (v6)', () => {
