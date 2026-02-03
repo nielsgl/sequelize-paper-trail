@@ -48,6 +48,10 @@
 		"setupFilesAfterEnv": [
 			"<rootDir>/test/setupTests.js"
 		],
+		"testPathIgnorePatterns": [
+			"/node_modules/",
+			"/demos/"
+		],
 		"collectCoverageFrom": [
 			"lib/index.js",
 			"lib/helpers.js"
