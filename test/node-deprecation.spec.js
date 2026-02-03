@@ -1,9 +1,9 @@
 const { createSequelize } = require('./support/setup');
 
-const setNodeVersion = (version, fn) => {
+const setProcessVersions = (value, fn) => {
 	const original = process.versions;
 	Object.defineProperty(process, 'versions', {
-		value: { ...original, node: version },
+		value,
 		configurable: true,
 	});
 	try {
@@ -15,6 +15,9 @@ const setNodeVersion = (version, fn) => {
 		});
 	}
 };
+
+const setNodeVersion = (version, fn) =>
+	setProcessVersions({ ...process.versions, node: version }, fn);
 
 describe('node version deprecation warning', () => {
 	let originalEnv;
@@ -59,6 +62,42 @@ describe('node version deprecation warning', () => {
 			.mockImplementation(() => undefined);
 
 		setNodeVersion('22.22.0', () => {
+			jest.isolateModules(() => {
+				const { init } = require('../lib/index');
+				const sequelize = createSequelize();
+				init(sequelize, {});
+				return sequelize.close();
+			});
+		});
+
+		expect(warnSpy).not.toHaveBeenCalled();
+		warnSpy.mockRestore();
+	});
+
+	it('does not warn when Node version is unavailable', () => {
+		const warnSpy = jest
+			.spyOn(console, 'warn')
+			.mockImplementation(() => undefined);
+
+		setProcessVersions({}, () => {
+			jest.isolateModules(() => {
+				const { init } = require('../lib/index');
+				const sequelize = createSequelize();
+				init(sequelize, {});
+				return sequelize.close();
+			});
+		});
+
+		expect(warnSpy).not.toHaveBeenCalled();
+		warnSpy.mockRestore();
+	});
+
+	it('does not warn when Node version is malformed', () => {
+		const warnSpy = jest
+			.spyOn(console, 'warn')
+			.mockImplementation(() => undefined);
+
+		setProcessVersions({ node: 'not-a-version' }, () => {
 			jest.isolateModules(() => {
 				const { init } = require('../lib/index');
 				const sequelize = createSequelize();
