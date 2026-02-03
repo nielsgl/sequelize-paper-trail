@@ -68,7 +68,8 @@
 
 ### Phase 5: Release and Migration
 - Publish versioned release notes and a migration guide.
-- Provide deprecation warnings and safe fallbacks.
+- Ship a minor release that warns on Node <20 (init-time warning; opt-out via env).
+- Ship a major release that enforces Node >=20 and declares Sequelize v6 support.
 - Document any unavoidable breaking changes.
 
 ### Phase 6: Tooling Major Upgrade Review

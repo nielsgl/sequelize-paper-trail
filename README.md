@@ -246,6 +246,8 @@ Please use:
 
 The library is verified against Sequelize **v5** (current baseline) and **v6.37.7** via `npm run test:v6`. Both versions are covered by the user-journey suites (with coverage enforced) and CLS behavior is exercised through the adapter layer. Continuing CI runs should include `npm run test:v6` to ensure deterministic compatibility before declaring wider support for future releases.
 
+Node versions **<20** are deprecated and will be unsupported in the next major release. A runtime warning is emitted on `init()` unless `SUPPRESS_NODE_DEPRECATION=1` is set.
+
 ## Contributing
 
 1. Fork it
