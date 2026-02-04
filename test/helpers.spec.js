@@ -168,3 +168,49 @@ describe('calcDelta', () => {
 		expect(res).toEqual(null);
 	});
 });
+
+describe('diffToString', () => {
+	it('returns empty string for undefined and null', () => {
+		expect(helpers.diffToString(undefined)).toEqual('');
+		expect(helpers.diffToString(null)).toEqual('');
+	});
+
+	it('stringifies booleans and numbers', () => {
+		expect(helpers.diffToString(true)).toEqual('1');
+		expect(helpers.diffToString(false)).toEqual('0');
+		expect(helpers.diffToString(42)).toEqual('42');
+	});
+
+	it('returns strings unchanged', () => {
+		expect(helpers.diffToString('hello')).toEqual('hello');
+	});
+
+	it('stringifies objects and arrays', () => {
+		expect(helpers.diffToString({ a: 1 })).toEqual('{"a":1}');
+		expect(helpers.diffToString(['a', 'b'])).toEqual('["a","b"]');
+	});
+
+	it('returns empty string for unsupported types', () => {
+		expect(helpers.diffToString(() => {})).toEqual('');
+	});
+});
+
+describe('toUnderscored', () => {
+	it('converts camelCase values to underscored values in-place', () => {
+		const attrs = {
+			documentId: 'documentId',
+			revisionId: 'revisionId',
+		};
+
+		const result = helpers.toUnderscored(attrs);
+
+		expect(result.documentId).toEqual('document_id');
+		expect(result.revisionId).toEqual('revision_id');
+	});
+});
+
+describe('capitalizeFirstLetter', () => {
+	it('capitalizes the first letter of a string', () => {
+		expect(helpers.capitalizeFirstLetter('revision')).toEqual('Revision');
+	});
+});

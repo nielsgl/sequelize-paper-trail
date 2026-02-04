@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sequelize-paper-trail user journeys (v5 baseline) golden snapshots captures UUID revision payloads 1`] = `
+[
+  {
+    "document": {
+      "name": "Device",
+    },
+    "documentId": 1,
+    "model": "Asset",
+    "operation": "create",
+    "revision": 1,
+  },
+  {
+    "document": {
+      "name": "Device-2",
+    },
+    "documentId": 1,
+    "model": "Asset",
+    "operation": "update",
+    "revision": 2,
+  },
+]
+`;
+
+exports[`sequelize-paper-trail user journeys (v5 baseline) golden snapshots captures metadata fields on revisions 1`] = `
+[
+  {
+    "document": {
+      "name": "Meta",
+    },
+    "documentId": 1,
+    "model": "User",
+    "operation": "create",
+    "revision": 1,
+  },
+]
+`;
+
+exports[`sequelize-paper-trail user journeys (v5 baseline) golden snapshots captures revision change diffs 1`] = `
+[
+  {
+    "RevisionId": 1,
+    "diff": [
+      {
+        "added": true,
+        "count": 4,
+        "value": "Diff",
+      },
+    ],
+    "document": {
+      "kind": "E",
+      "path": [
+        "name",
+      ],
+      "rhs": "Diff",
+    },
+    "path": "name",
+  },
+  {
+    "RevisionId": 2,
+    "diff": [
+      {
+        "count": 4,
+        "value": "Diff",
+      },
+      {
+        "added": true,
+        "count": 2,
+        "value": "-2",
+      },
+    ],
+    "document": {
+      "kind": "E",
+      "lhs": "Diff",
+      "path": [
+        "name",
+      ],
+      "rhs": "Diff-2",
+    },
+    "path": "name",
+  },
+]
+`;
+
+exports[`sequelize-paper-trail user journeys (v5 baseline) golden snapshots captures stable revision payloads for create/update/destroy 1`] = `
+[
+  {
+    "document": {
+      "name": "Alice",
+    },
+    "documentId": 1,
+    "model": "User",
+    "operation": "create",
+    "revision": 1,
+  },
+  {
+    "document": {
+      "name": "Alicia",
+    },
+    "documentId": 1,
+    "model": "User",
+    "operation": "update",
+    "revision": 2,
+  },
+  {
+    "document": {
+      "name": "Alicia",
+    },
+    "documentId": 1,
+    "model": "User",
+    "operation": "destroy",
+    "revision": 3,
+  },
+]
+`;
+
+exports[`sequelize-paper-trail user journeys (v5 baseline) golden snapshots captures underscored revision payloads 1`] = `
+[
+  {
+    "document": {
+      "total": 10,
+    },
+    "documentId": undefined,
+    "document_id": 1,
+    "model": "Order",
+    "operation": "create",
+    "revision": 1,
+  },
+  {
+    "document": {
+      "total": 20,
+    },
+    "documentId": undefined,
+    "document_id": 1,
+    "model": "Order",
+    "operation": "update",
+    "revision": 2,
+  },
+]
+`;

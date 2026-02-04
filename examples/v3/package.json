@@ -1,0 +1,15 @@
+{
+  "name": "sequelize-paper-trail-example-v3",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Example app targeting the v3 line (legacy).",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cls-hooked": "^4.2.2",
+    "sequelize": "5.14.0",
+    "sequelize-paper-trail": "file:../_artifacts/sequelize-paper-trail-local.tgz",
+    "sqlite3": "^4.0.9"
+  }
+}

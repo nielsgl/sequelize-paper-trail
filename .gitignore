@@ -4,6 +4,7 @@ logs
 
 # Dependency directory
 node_modules
+yarn.lock
 
 # Temporal files
 .DS_Store
@@ -17,3 +18,11 @@ dist
 # SQLite test db
 # test.db
 # *.sqlite
+
+docs/prd_*.md
+coverage/
+examples/_artifacts/
+examples/**/node_modules/
+examples/**/package-lock.json
+demos/_artifacts/
+demos/**/node_modules/

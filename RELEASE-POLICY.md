@@ -1,0 +1,79 @@
+# Release Policy
+
+## Purpose
+Define how we maintain, release, and deprecate versions of sequelize-paper-trail. This file is the long-term reference; `docs/PLAN.md` is temporary and can be removed once this policy is stable.
+
+## Supported Release Lines
+- **v3.x (legacy):** hotfix-only line for critical fixes. No new features.
+- **v4.x (bridge):** bugfix-only line supporting **Sequelize v5 + v6** and **Node >= 20**.
+- **v5.x (feature line):** primary development line, **Sequelize v6** (v7 experimental later), **Node >= 20**.
+
+## Deprecation & Warnings
+- **Install-time deprecation:** After a new major ships, deprecate the prior major with `npm deprecate` and a clear migration message.
+- **Runtime warnings:** v3.x warns on install/usage that the line is hotfix-only and recommends upgrading.
+- **Policy messaging:** README + CHANGELOG + migration notes must call out support levels and upgrade paths.
+
+## Versioning Strategy
+- **Minor releases:** new warnings, documentation, safe tooling changes, and additive behavior that does not break API/behavior.
+- **Major releases:** Node/Sequelize support changes or any breaking behavior.
+- **Patch releases:** urgent hotfixes only for v3.x; bugfix-only for v4.x; regular fixes for v5.x.
+
+## Quality Gates (Required)
+- `npm test -- --coverage` (coverage must pass)
+- `npm run test:v6`
+- **Demo snapshot parity** across baseline/v5/v6
+- CI workflow success on the release branch
+
+## Release Flow
+All publishing is manual via the Release workflow; no branch push should auto-publish.
+
+### v3.x (legacy)
+- Only critical fixes.
+- Publish patch releases (e.g., 3.1.1) with explicit deprecation warning.
+- Keep deprecation language consistent in README/CHANGELOG.
+
+### v4.x (bridge)
+- Bugfix-only. No new features.
+- Maintain Sequelize v5 + v6 compatibility.
+- Publish major (4.0.0), then patch releases as needed.
+
+### v5.x (feature)
+- Primary development line.
+- Drop Sequelize v5 support; v6 is default; evaluate v7 experimentally.
+- Publish major (5.0.0), then standard minor/patch cadence.
+
+## Branching & Backports
+### Branch Roles (Authoritative)
+- `main`: current stable major (latest released).
+- `master`: current stable major (latest released) until renamed to `main`.
+- `feature/next`: integration branch for the next major.
+- `release/v3`: maintenance for v3.x hotfixes (critical only).
+- `release/v4`: maintenance for v4.x bugfix-only bridge.
+
+### Branch Protection (Required)
+- Protect `main`, `release/v3`, and `release/v4`.
+- Require the `CI` workflow to pass before merge.
+- Require PR reviews for changes to release branches.
+
+### How Releases Flow
+1. **Normal work** lands on `feature/next` (future major) or `master`/`main` (current major).
+2. **Release branches** are cut from the appropriate major line when needed:
+   - v3 hotfixes: `release/v3` (cut from the last v3 tag).
+   - v4 bugfixes: `release/v4` (cut from the last v4 tag).
+3. **Tags** are always created from the release branch or `main` for that major.
+4. **Backports**: land fixes on the highest supported major first, then cherry-pick down to older maintenance branches when relevant.
+
+### Backport Rules
+- If a fix applies to multiple supported majors, **land it in the highest supported major first** and cherry-pick to older maintenance branches.
+- Do **not** merge older maintenance branches upward; always cherry-pick.
+- Hotfixes for v3 should not introduce new dependencies or behavior changes.
+
+## Worktrees & PRD Workflow
+- Each phase starts with a local PRD: `docs/prd_{phase}.md` (kept local, not committed).
+- Use worktrees to isolate phases and keep changes scoped.
+
+## Required Documentation Updates per Release
+- README support policy section
+- CHANGELOG entry
+- Migration guide (if behavior or support changes)
+- CI status and gate results recorded
