@@ -1,5 +1,5 @@
-const diffObjects = require('../lib/adapters/diff').default ||
-	require('../lib/adapters/diff');
+const diffObjects =
+	require('../lib/adapters/diff').default || require('../lib/adapters/diff');
 
 const pickShape = diffEntry => ({
 	kind: diffEntry.kind,

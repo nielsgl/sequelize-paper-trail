@@ -83,6 +83,7 @@ describe('legacy sequelize dialect handling', () => {
 
 		const LegacyPaperTrail = SequelizeTrails.init(customSequelize, {});
 		LegacyPaperTrail.defineModels();
+		expect(LegacyPaperTrail).toBeDefined();
 
 		await customSequelize.close();
 

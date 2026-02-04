@@ -56,7 +56,8 @@ describe('sequelize adapter (v5)', () => {
 				createNamespace,
 			}));
 
-			const createAdapter = require('../lib/adapters/sequelize-v5').default;
+			const createAdapter =
+				require('../lib/adapters/sequelize-v5').default;
 			const sequelize = createSequelize();
 			const adapter = createAdapter(sequelize);
 
@@ -277,9 +278,7 @@ describe('cls-hooked error handling', () => {
 			});
 
 			try {
-				expect(() => getClsHooked()).toThrow(
-					/cls-hooked is required/,
-				);
+				expect(() => getClsHooked()).toThrow(/cls-hooked is required/);
 			} finally {
 				jest.dontMock('cls-hooked');
 			}
