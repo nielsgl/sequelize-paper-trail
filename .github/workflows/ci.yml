@@ -28,10 +28,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Select Node version
+        id: node
+        run: |
+          if [[ "${GITHUB_REF}" == "refs/heads/master" || "${GITHUB_REF}" == "refs/heads/release/v3" || "${GITHUB_BASE_REF}" == "master" || "${GITHUB_BASE_REF}" == "release/v3" ]]; then
+            echo "version=16.19.1" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=20.20.0" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20.20.0'
+          node-version: ${{ steps.node.outputs.version }}
           cache: npm
 
       - name: Install dependencies
