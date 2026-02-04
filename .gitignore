@@ -21,3 +21,8 @@ dist
 
 docs/prd_*.md
 coverage/
+examples/_artifacts/
+examples/**/node_modules/
+examples/**/package-lock.json
+demos/_artifacts/
+demos/**/node_modules/
