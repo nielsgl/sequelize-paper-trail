@@ -1,21 +1,63 @@
 # Modernization Plan (v5-first, v6-ready)
 
-## Goals
-- Preserve backward compatibility for existing Sequelize v5 users.
-- Modernize tooling, dependencies, and tests without changing runtime behavior.
-- Establish a clear path to Sequelize v6+ support with minimal risk.
+## Immediate Next Steps (Do These First)
+### 3.1.0 Minor (Node deprecation warning)
+- [ ] Update README/CHANGELOG/migration guide with policy statements and Node <20 warning.
+- [ ] Run gates: `npm test -- --coverage`, `npm run test:v6`, demo snapshot parity (baseline/v5/v6).
+- [ ] Version bump to 3.1.0, tag, publish, and verify CI workflow success.
+
+## Near-Term Milestone
+### 4.0.0 Major (Node >=20 + Sequelize v6 bridge)
+- [ ] Update docs to declare Sequelize v5+v6 support and Node >=20 enforcement.
+- [ ] Run gates: `npm test -- --coverage`, `npm run test:v6`, demo snapshot parity.
+- [ ] Version bump to 4.0.0, tag, publish, verify CI, then deprecate v3 on npm.
+
+## Later Milestone
+### 5.0.0 Feature Line
+- [ ] Draft PRD/scope for dropping Sequelize v5, keep v6, evaluate v7 experimental.
+- [ ] Decide on support policy for v4 (bugfix-only) and deprecate v4 after 5.0.0.
+- [ ] Schedule refactor work and add non-blocking v7 test job when ready.
+
+## Deferred / Later Considerations
+- Tooling major upgrades (Jest 30, ESLint 9, Prettier latest) after 4.0.0.
+- TypeScript adoption (full vs incremental) after adapter stability.
+- Multi-dialect testing (postgres/mysql) when bandwidth allows.
+- Review and modernize v4/v5 example apps once those lines ship.
+
+## Status Summary (Snapshot)
+- Completed: Phases 0–4 (inventory, tests, adapter layer, v6 compatibility), demo parity suite, and v3 examples (full scenario coverage + README).
+- Partial: Phase 5 (release/migration/checklist docs and CI are done; publish/tag/deprecate pending).
+- Deferred: Phase 6 (tooling major upgrades) and Phase 7 (TypeScript adoption).
+- Source of truth: `docs/STATUS.md`.
+
+## Done (Evidence)
+- `docs/STATUS.md`
+- `docs/CI.md`
+- `docs/TESTS.md`
+- `docs/MIGRATION.md`
+- `docs/RELEASE-CHECKLIST.md`
+- `examples/v3/README.md`
 
 ## Principles
 - Compatibility first: behavior is a contract, verified by tests.
 - Small, reversible steps with explicit release notes and migration guides.
 - Separate adapter layer for ORM-specific differences.
 - Each phase starts with a PRD captured in `docs/prd_{phase}.md` (kept local, not committed).
+- Keep this plan temporary; once the release policy is complete and stable, retain only `RELEASE-POLICY.md`.
+
+## Working Conventions (Branching + Worktrees)
+- **Authoritative policy:** `RELEASE-POLICY.md`.
+- `main`: current stable major (latest released).
+- `feature/next`: integration branch for the next major (v4 now, v5 later).
+- Maintenance branches: `release/v3` (hotfix-only), `release/v4` (bugfix-only bridge).
+- Backports: land fixes on the highest supported major first, then cherry-pick down to older maintenance branches.
+- Use worktrees for PRDs/phases to keep changes isolated and scoped.
 
 ## Scope
 - In: library code, dependencies, build tooling, tests/CI, documentation, release process.
 - Out: new features unrelated to stability/compatibility, ORM support beyond Sequelize.
 
-## Phases and Deliverables
+## Phase Reference (Detailed)
 
 ### Phase 0: Inventory and Baseline (v5)
 - Document public API and implicit behaviors (hooks, schema, diffing, user tracking).
@@ -25,7 +67,7 @@
 - Define transactional semantics (same-transaction vs out-of-band revisions) and expected ordering.
 - Define data retention/indexing guidance and PII redaction expectations.
 - Publish a support policy (Node LTS + Sequelize versions) and deprecation rules.
-- Perform an initial v5→v6 diff scan to inform adapter boundaries and test design.
+- Perform an initial v5->v6 diff scan to inform adapter boundaries and test design.
 
 ### Phase 1: Stabilize v5 and Expand Tests
 - Add a user-centric test suite that validates behavior from the public API:
@@ -57,13 +99,14 @@
 - Harden build output (CJS or dual CJS/ESM) without changing exports.
 - Publish modernization guide for contributors.
 - Add release governance (deprecation windows, semver rules, support policy).
+- Introduce a diff adapter layer to isolate `deep-diff` (no behavior change) and prepare for a future swap to a maintained library.
 
 ### Phase 4: Sequelize v6+ Compatibility
 - Enable v6 tests as non-blocking CI initially.
 - Implement adapter changes for v6 differences.
 - Lock v6 behavior with tests before declaring support.
 - Decide release strategy (same major vs new major).
-- Perform a formal v5→v6+ API diff review and sign-off checklist before release.
+- Perform a formal v5->v6+ API diff review and sign-off checklist before release.
 - Keep CLS support by using `cls-hooked` behind the adapter; defer ALS evaluation until after Phase 5.
 
 ### Phase 5: Release and Migration
@@ -83,7 +126,7 @@
 - If incremental: migrate adapters/helpers first and keep runtime stable.
 - Publish typed API surface and migration notes for contributors.
 
-## Options and Recommendations
+## Options and Recommendations (Reference)
 
 ### Language and Typing
 - Option A: Full TypeScript

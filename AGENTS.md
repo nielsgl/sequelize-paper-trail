@@ -10,7 +10,7 @@
 ## Build, Test, and Development Commands
 - `npm run build` — transpile `lib/` to `dist/` with Babel (also runs on `npm prepare`).
 - `npm test` — run the Jest test suite.
-- `npm run lint` — lint `lib/` and `test/` with ESLint + Prettier rules.
+- `npm run lint` — lint `lib/`, `test/`, and `examples/` with ESLint + Prettier rules.
 - `npm run lint:fix` — auto-fix lint issues where possible.
 - `npm run release` — publish via `release-it` (maintainers only).
 
@@ -36,7 +36,7 @@
 - Do not commit PRD files (they are ignored in `.gitignore`).
 
 ## Configuration Tips
-- Node version is pinned in `.node-version` (22.22.0). Align your local environment for reproducible builds.
+- Node version is pinned in `.node-version` (20.20.0). Align your local environment for reproducible builds.
 - Test DB is SQLite in-memory via `config/config.json`; no external services required.
-- On modern macOS, Node 22.22.0 with Python 3.9.19 may be required for sqlite3 native builds.
+- On modern macOS, Node 20.20.0 with Python 3.9.19 may be required for sqlite3 native builds.
 - npm is the canonical package manager (lockfile: `package-lock.json`).

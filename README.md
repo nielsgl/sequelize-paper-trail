@@ -14,38 +14,38 @@
 
 <!-- [![NPM](https://nodei.co/npm/sequelize-paper-trail.png?downloads=true)](https://nodei.co/npm/sequelize-paper-trail/) -->
 
-[![node-version](https://img.shields.io/node/v/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+![Release Quality Gate](https://github.com/nielsgl/sequelize-paper-trail/actions/workflows/release.yml/badge.svg)
 [![npm-version](https://img.shields.io/npm/v/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
-[![David](https://img.shields.io/david/nielsgl/sequelize-paper-trail.svg?maxAge=3600)]()
-[![David](https://img.shields.io/david/dev/nielsgl/sequelize-paper-trail.svg?maxAge=3600)]()
-
+[![node-version](https://img.shields.io/node/v/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![npm-downloads-monthly](https://img.shields.io/npm/dm/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![npm-downloads-total](https://img.shields.io/npm/dt/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
+[![license](https://img.shields.io/npm/l/sequelize-paper-trail.svg)](https://github.com/nielsgl/sequelize-paper-trail/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 [![GitHub tag](https://img.shields.io/github/tag/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 [![GitHub commits](https://img.shields.io/github/commits-since/nielsgl/sequelize-paper-trail/1.2.0.svg)]()
-[![npm-downloads](https://img.shields.io/npm/dt/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
-
-[![license](https://img.shields.io/github/license/nielsgl/sequelize-paper-trail.svg)](https://github.com/nielsgl/sequelize-paper-trail/blob/master/LICENSE)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
-- [Sequelize Paper Trail](#sequelize-paper-trail)
-	- [Table of Contents](#table-of-contents)
-	- [Installation](#installation)
-	- [Usage](#usage)
-		- [Example](#example)
-	- [User Tracking](#user-tracking)
-	- [Options](#options)
-		- [Default options](#default-options)
-		- [Options documentation](#options-documentation)
-	- [Limitations](#limitations)
-	- [Testing](#testing)
-	- [Support](#support)
-	- [Contributing](#contributing)
-	- [Author](#author)
-	- [Thanks](#thanks)
-	- [Links](#links)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Examples (Current Version)](#examples-current-version)
+  - [Example](#example)
+- [User Tracking](#user-tracking)
+- [Disable logging for a single call](#disable-logging-for-a-single-call)
+- [Options](#options)
+  - [Default options](#default-options)
+  - [Options documentation](#options-documentation)
+- [Limitations](#limitations)
+- [Testing](#testing)
+- [Documentation Map](#documentation-map)
+- [Support](#support)
+  - [Supported Versions](#supported-versions)
+- [Contributing](#contributing)
+- [Author](#author)
+- [Thanks](#thanks)
+- [Links](#links)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -56,8 +56,6 @@ npm install --save sequelize-paper-trail
 # or with yarn:
 # yarn add sequelize-paper-trail
 ```
-
-*Note: the current test suite is very limited in coverage.*
 
 ## Usage
 
@@ -85,6 +83,18 @@ Model.hasPaperTrail();
 ```
 
 `hasPaperTrail` returns the `hasMany` association to the `revisionModel` so you can keep track of the association for reference later.
+
+## Examples (Current Version)
+
+The current example for this line lives in `examples/v3`. The folder contains a runnable SQLite app that prints revisions and revision changes.
+
+```bash
+cd examples/v3
+npm install
+npm run start
+```
+
+For the full archive (v3/v4/v5), see `examples/README.md`.
 
 ### Example
 
@@ -233,18 +243,41 @@ npm test
 ```
 
 Notes:
-- Node.js **>=20** (active LTS) is required for development.
+- Node.js **20.20.0** (recommended dev baseline) or any active LTS **>=20** is required for development.
 - npm is the canonical package manager for this repo.
+
+## Documentation Map
+
+Core references:
+- `RELEASE-POLICY.md`: authoritative release/support policy (branches, deprecations, gates).
+- `docs/PROJECT.md`: product and runtime reference (behavior, structure, scripts).
+- `docs/PLAN.md`: temporary modernization plan (remove after policy is stable).
+- `docs/STATUS.md`: working status tracker (what’s done vs remaining).
+- `docs/TESTS.md`: test strategy + coverage expectations.
+- `docs/CI.md`: CI workflows and required gates.
+- `docs/MIGRATION.md`: living migration guide for maintainers and users.
+- `docs/RELEASE-CHECKLIST.md`: reusable checklist for releases.
+- `examples/README.md`: index of runnable example apps for each support line.
+
+Local-only working docs (not committed):
+- `docs/prd_*.md`: phase PRDs and demos (local planning artifacts).
+- `docs/release_checklist_phase5.md`: legacy pointer to the release checklist.
+- `docs/migration_phase5.md`: legacy pointer to the migration guide.
 
 ## Support
 
 Please use:
 * GitHub's [issue tracker](https://github.com/nielsgl/sequelize-paper-trail/issues)
-* Migration guide: see `docs/migration_phase5.md` for the in-place upgrade path (CLS, metadata, adapter overrides)
+* Migration guide: see `docs/MIGRATION.md` for the in-place upgrade path (CLS, metadata, adapter overrides)
 
 ### Supported Versions
 
 The library is verified against Sequelize **v5** (current baseline) and **v6.37.7** via `npm run test:v6`. Both versions are covered by the user-journey suites (with coverage enforced) and CLS behavior is exercised through the adapter layer. Continuing CI runs should include `npm run test:v6` to ensure deterministic compatibility before declaring wider support for future releases.
+
+Support lines:
+- **v3.x**: hotfix-only line (critical fixes only).
+- **v4.x**: bugfix-only bridge supporting Sequelize v5 + v6, Node >=20.
+- **v5.x**: feature line; Sequelize v6 primary, v7 experimental later.
 
 Node versions **<20** are deprecated and will be unsupported in the next major release. A runtime warning is emitted on `init()` unless `SUPPRESS_NODE_DEPRECATION=1` is set.
 
