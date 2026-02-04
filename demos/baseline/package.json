@@ -1,0 +1,21 @@
+{
+	"name": "sequelize-paper-trail-demo-baseline",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Baseline demo for sequelize-paper-trail (npm latest or master pack).",
+	"scripts": {
+		"test": "jest --config ./jest.config.js",
+		"test:export": "DEMO_NAME=baseline EXPORT_DB_SNAPSHOT=1 jest --config ./jest.config.js",
+		"test:coverage": "jest --config ./jest.config.js --coverage"
+	},
+	"dependencies": {
+		"cls-hooked": "^4.2.2",
+		"sequelize": "^5.14.0",
+		"sequelize-paper-trail": "latest",
+		"sqlite3": "^4.0.9"
+	},
+	"devDependencies": {
+		"jest": "^29.7.0",
+		"sequelize-v6": "npm:sequelize@6.37.7"
+	}
+}

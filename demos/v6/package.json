@@ -1,0 +1,20 @@
+{
+	"name": "sequelize-paper-trail-demo-v6",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Sequelize v6 demo for sequelize-paper-trail (local pack).",
+	"scripts": {
+		"test": "SEQUELIZE_PACKAGE=sequelize-v6 SEQUELIZE_CLS=cls-hooked jest --config ./jest.config.js",
+		"test:export": "DEMO_NAME=v6 EXPORT_DB_SNAPSHOT=1 SEQUELIZE_PACKAGE=sequelize-v6 SEQUELIZE_CLS=cls-hooked jest --config ./jest.config.js",
+		"test:coverage": "SEQUELIZE_PACKAGE=sequelize-v6 SEQUELIZE_CLS=cls-hooked jest --config ./jest.config.js --coverage"
+	},
+	"dependencies": {
+		"cls-hooked": "^4.2.2",
+		"sequelize-paper-trail": "file:../_artifacts/sequelize-paper-trail-local.tgz",
+		"sequelize-v6": "npm:sequelize@6.37.7",
+		"sqlite3": "^5.1.7"
+	},
+	"devDependencies": {
+		"jest": "^29.7.0"
+	}
+}

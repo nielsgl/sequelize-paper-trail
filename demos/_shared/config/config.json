@@ -1,0 +1,6 @@
+{
+	"test": {
+		"storage": ":memory:",
+		"dialect": "sqlite"
+	}
+}
