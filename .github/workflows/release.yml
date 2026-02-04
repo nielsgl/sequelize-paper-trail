@@ -1,25 +1,32 @@
-name: Release Quality Gate
+name: Release (npm)
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
+      version:
+        description: 'Version to publish (must match package.json)'
+        required: true
+      dist-tag:
+        description: 'npm dist-tag (e.g., latest, next)'
+        required: true
+        default: 'latest'
+      dry-run:
+        description: 'Publish with --dry-run'
+        required: false
+        default: 'false'
       skip-v6:
-        description: 'Skip the Sequelize v6 suite while experimenting'
+        description: 'Skip Sequelize v6 suite (legacy release/v3 only)'
         required: false
         default: 'false'
 
 jobs:
-  test:
-    name: Run test matrix
+  release:
     runs-on: ubuntu-latest
+    environment: release
     env:
       NODE_OPTIONS: '--max-old-space-size=4096'
+      SEQUELIZE_CLS: cls-hooked
+      RELEASE_VERSION: ${{ inputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,15 +34,30 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20.20.0'
           cache: npm
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Verify package version matches input
+        run: |
+          node -e "const pkg=require('./package.json'); if (pkg.version !== process.env.RELEASE_VERSION) { console.error('package.json version does not match input'); process.exit(1); }"
 
       - name: Run Sequelize v5 suite
         run: npm test -- --coverage
 
       - name: Run Sequelize v6 suite
-        if: ${{ github.event.inputs.skip-v6 != 'true' }}
+        if: ${{ inputs.skip-v6 != 'true' && !(github.ref == 'refs/heads/release/v3' || github.base_ref == 'release/v3') }}
         run: npm run test:v6
+
+      - name: Publish (dry run)
+        if: ${{ inputs.dry-run == 'true' }}
+        run: npm publish --tag ${{ inputs.dist-tag }} --dry-run
+
+      - name: Publish
+        if: ${{ inputs.dry-run != 'true' && github.repository == 'nielsgl/sequelize-paper-trail' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --tag ${{ inputs.dist-tag }}
