@@ -28,18 +28,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Select Node version
+        id: node
+        run: |
+          if [[ "${GITHUB_REF}" == "refs/heads/master" || "${GITHUB_REF}" == "refs/heads/release/v3" || "${GITHUB_BASE_REF}" == "master" || "${GITHUB_BASE_REF}" == "release/v3" ]]; then
+            echo "version=16.19.1" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=20.20.0" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20.20.0'
+          node-version: ${{ steps.node.outputs.version }}
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Detect test:v6 script
+        id: v6
+        run: |
+          node -e "const scripts=require('./package.json').scripts||{}; process.stdout.write('enabled=' + String(!!scripts['test:v6']));" >> "$GITHUB_OUTPUT"
 
       - name: Run Sequelize v5 suite
         run: npm test -- --coverage
 
       - name: Run Sequelize v6 suite
-        if: ${{ !(github.ref == 'refs/heads/release/v3' || github.base_ref == 'release/v3') }}
+        if: ${{ steps.v6.outputs.enabled == 'true' && !(github.ref == 'refs/heads/release/v3' || github.base_ref == 'release/v3') }}
         run: npm run test:v6
