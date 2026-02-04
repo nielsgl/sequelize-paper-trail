@@ -3,12 +3,14 @@ name: CI
 on:
   pull_request:
     branches:
+      - master
       - main
       - feature/next
       - release/v3
       - release/v4
   push:
     branches:
+      - master
       - main
       - feature/next
       - release/v3

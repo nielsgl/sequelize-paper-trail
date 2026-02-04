@@ -47,7 +47,7 @@
 
 ## Working Conventions (Branching + Worktrees)
 - **Authoritative policy:** `RELEASE-POLICY.md`.
-- `main`: current stable major (latest released).
+- `master`/`main`: current stable major (latest released).
 - `feature/next`: integration branch for the next major (v4 now, v5 later).
 - Maintenance branches: `release/v3` (hotfix-only), `release/v4` (bugfix-only bridge).
 - Backports: land fixes on the highest supported major first, then cherry-pick down to older maintenance branches.

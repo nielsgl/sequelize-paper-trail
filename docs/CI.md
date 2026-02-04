@@ -5,7 +5,7 @@ Capture the CI matrix and quality gates for the Phase 5 release workflow that no
 
 ## Workflows
 - **CI:** `.github/workflows/ci.yml`
-  - Triggers: push + pull_request on `main`, `feature/next`, `release/v3`, `release/v4`.
+  - Triggers: push + pull_request on `master` (current default), `main` (if renamed), `feature/next`, `release/v3`, `release/v4`.
   - Runs: `npm ci`, `npm test -- --coverage`.
   - Runs `npm run test:v6` for all branches **except** `release/v3`.
 - **Release (npm):** `.github/workflows/release.yml`
@@ -30,4 +30,4 @@ Capture the CI matrix and quality gates for the Phase 5 release workflow that no
 ## Notes
 - Coverage thresholds enforce 100% branches/functions/lines/statements for `lib/index.js` and `lib/helpers.js`.
 - Demo parity is a manual gate (run it before tagging or publishing).
-- Branch protection should require the `CI` workflow for `main`, `release/v3`, and `release/v4`.
+- Branch protection should require the `CI` workflow for `master` (or `main`), `release/v3`, and `release/v4`.
