@@ -51,9 +51,14 @@ jobs:
             npm install
           fi
 
+      - name: Detect test:v6 script
+        id: v6
+        run: |
+          node -e "const scripts=require('./package.json').scripts||{}; process.stdout.write('enabled=' + String(!!scripts['test:v6']));" >> "$GITHUB_OUTPUT"
+
       - name: Run Sequelize v5 suite
         run: npm test -- --coverage
 
       - name: Run Sequelize v6 suite
-        if: ${{ !(github.ref == 'refs/heads/release/v3' || github.base_ref == 'release/v3') }}
+        if: ${{ steps.v6.outputs.enabled == 'true' && !(github.ref == 'refs/heads/release/v3' || github.base_ref == 'release/v3') }}
         run: npm run test:v6
