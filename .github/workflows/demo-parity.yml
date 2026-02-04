@@ -1,0 +1,95 @@
+name: Demo Snapshot Parity
+
+on:
+  workflow_dispatch:
+    inputs:
+      snapshot-dir:
+        description: 'Snapshot export directory (default: /tmp/demo-parity)'
+        required: false
+        default: '/tmp/demo-parity'
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: '--max-old-space-size=4096'
+      SEQUELIZE_CLS: cls-hooked
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.20.0'
+          cache: npm
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Build local tarball for demos
+        run: |
+          npm pack --pack-destination demos/_artifacts
+          cp demos/_artifacts/sequelize-paper-trail-*.tgz demos/_artifacts/sequelize-paper-trail-local.tgz
+
+      - name: Install demo dependencies
+        run: |
+          (cd demos/baseline && npm install)
+          (cd demos/v5 && npm install)
+          (cd demos/v6 && npm install)
+
+      - name: Export baseline snapshots
+        run: DB_SNAPSHOT_DIR=${{ inputs.snapshot-dir }} npm run test:export
+        working-directory: demos/baseline
+
+      - name: Export v5 snapshots
+        run: DB_SNAPSHOT_DIR=${{ inputs.snapshot-dir }} npm run test:export
+        working-directory: demos/v5
+
+      - name: Export v6 snapshots
+        run: DB_SNAPSHOT_DIR=${{ inputs.snapshot-dir }} npm run test:export
+        working-directory: demos/v6
+
+      - name: Compare snapshots
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+
+          root = pathlib.Path('${{ inputs.snapshot-dir }}')
+          if not root.exists():
+              raise SystemExit('snapshot root missing')
+
+          dirs = {p.name: p for p in root.iterdir() if p.is_dir()}
+          files_by_dir = {}
+          for name, d in dirs.items():
+              files = {p.name: p for p in d.glob('*.json')}
+              files_by_dir[name] = files
+
+          common = None
+          for files in files_by_dir.values():
+              names = set(files)
+              common = names if common is None else common & names
+          common = common or set()
+
+          mismatches = []
+          for fname in sorted(common):
+              base = None
+              for name, files in files_by_dir.items():
+                  path = files[fname]
+                  data = json.loads(path.read_text())
+                  if base is None:
+                      base = data
+                  elif data != base:
+                      mismatches.append((fname, name))
+                      break
+
+          if mismatches:
+              raise SystemExit(f'mismatches found: {mismatches[:5]}')
+
+          for name, files in files_by_dir.items():
+              extras = set(files) - common
+              print(f'extras in {name}: {len(extras)}')
+
+          print(f'common files: {len(common)}; mismatches: {len(mismatches)}')
+          PY
