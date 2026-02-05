@@ -9,6 +9,8 @@ This summarizes what has been implemented so far, what has been validated, and w
 - Node <20 runtime deprecation warning on `init()` with opt‑out via `SUPPRESS_NODE_DEPRECATION=1`.
 - Node baseline aligned to 20.20.0 (dev + CI) to keep sqlite3@4 demo parity reliable.
 - GitHub Actions split: `ci.yml` for PR/push gates; `release.yml` manual-only npm publish; `demo-parity.yml` manual-only parity gate.
+- CircleCI disabled (removed `.circleci/config.yml`); GitHub Actions is the sole CI gate.
+- Branch protection enabled on `master` and `release/v3` with **Test (v5 + optional v6)** required and 1 review.
 - Demo harnesses (baseline/v5/v6) with shared tests and exportable snapshot parity.
 - DB snapshot parity verified across baseline/v5/v6 (no diffs in common snapshots).
 - Diff adapter shim added (wraps `deep-diff` without changing behavior) and adapter tests.
@@ -17,6 +19,7 @@ This summarizes what has been implemented so far, what has been validated, and w
 - v3 npm package sanity check confirmed parity with local behavior (3.0.1 after sqlite3 rebuild).
 - Lint now includes `examples/`; lint/test runs are green.
 - v3 example pinned to Node 20.20.0 via `examples/v3/.node-version`.
+- `release/v3` branch created and kept in sync with CI workflows.
 
 ## Validation Evidence
 - Local: `npm test -- --coverage`, `npm run test:v6`, `npm test`, and `npm run lint` pass.
