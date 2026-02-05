@@ -35,9 +35,10 @@ jobs:
 
       - name: Install demo dependencies
         run: |
-          (cd demos/baseline && npm install)
-          (cd demos/v5 && npm install)
-          (cd demos/v6 && npm install)
+          for demo in baseline v5 v6; do
+            rm -f "demos/${demo}/package-lock.json"
+            (cd "demos/${demo}" && npm install --no-package-lock)
+          done
 
       - name: Export baseline snapshots
         run: DB_SNAPSHOT_DIR=${{ inputs.snapshot-dir }} npm run test:export
