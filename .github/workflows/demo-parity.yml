@@ -29,6 +29,7 @@ jobs:
 
       - name: Build local tarball for demos
         run: |
+          mkdir -p demos/_artifacts
           npm pack --pack-destination demos/_artifacts
           cp demos/_artifacts/sequelize-paper-trail-*.tgz demos/_artifacts/sequelize-paper-trail-local.tgz
 
