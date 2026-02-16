@@ -259,10 +259,17 @@ Core references:
 - `docs/RELEASE-CHECKLIST.md`: reusable checklist for releases.
 - `examples/README.md`: index of runnable example apps for each support line.
 
-Local-only working docs (not committed):
-- `docs/prd_*.md`: phase PRDs and demos (local planning artifacts).
-- `docs/release_checklist_phase5.md`: legacy pointer to the release checklist.
-- `docs/migration_phase5.md`: legacy pointer to the migration guide.
+Active PRDs (current work):
+- `docs/prd/PRD-001-release-v3-1-0.md`: v3.1.0 release PRD (legacy line + Node<20 deprecation).
+- `docs/prd/PRD-002-release-v4-0-0.md`: v4.0.0 release PRD (bridge line).
+- `docs/prd/PRD-003-deep-diff-replacement.md`: deep-diff removal plan (no behavior drift).
+
+Archived PRDs (historical context):
+- `docs/archive/`: completed phase PRDs and demo PRDs preserved for reference.
+
+Legacy pointers (safe to ignore; kept for continuity):
+- `docs/release_checklist_phase5.md`: pointer to `docs/RELEASE-CHECKLIST.md`.
+- `docs/migration_phase5.md`: pointer to `docs/MIGRATION.md`.
 
 ## Support
 

@@ -94,9 +94,9 @@ Creates tables for:
 - Peer: `sequelize@^5 || ^6` (declared compatibility range).
 
 ## Environment Notes
-- `.node-version` pins Node 22.22.0 (active LTS). Align your local environment for reproducible builds.
+- `.node-version` pins Node 20.20.0 (recommended baseline). Align your local environment for reproducible builds.
 - For sqlite3 native builds on newer systems, setting `PYTHON` to a 3.9.x interpreter with `distutils` may be needed.
-- Tooling major upgrades are deferred until after Phase 5; see `docs/prd_phase6.md`.
+- Tooling major upgrades are deferred until after the v3/v4 releases; see `docs/archive/prd_phase6.md` for the historical notes.
 
 ## Testing Notes
 - Tests run against sqlite in-memory tables and use migrations under `test/migrations/`.
@@ -166,7 +166,7 @@ Creates tables for:
 - Define a Node LTS and Sequelize support policy.
 - Define deprecation windows and semantic versioning rules for behavior changes.
 - Require a compatibility review and migration notes for breaking changes.
-- For each phase, produce a local PRD in `docs/prd_{phase}.md` (do not commit).
+- Active PRDs live in `docs/prd/` and are committed; historical phase PRDs are archived under `docs/archive/`.
 
 ## Sequelize v5 → v6+ Diff Review (Required Before Support Claim)
 Track and explicitly verify:

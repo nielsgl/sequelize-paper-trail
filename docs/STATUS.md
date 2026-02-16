@@ -37,6 +37,11 @@ This summarizes what has been implemented so far, what has been validated, and w
 - Multi-dialect testing (postgres/mysql) still optional and unimplemented.
 - Expand v4/v5 examples to match v3 depth once those lines ship.
 
+Active PRDs (next work):
+- `docs/prd/PRD-001-release-v3-1-0.md`
+- `docs/prd/PRD-002-release-v4-0-0.md`
+- `docs/prd/PRD-003-deep-diff-replacement.md`
+
 ## Key Decisions in Effect
 - Keep v5 behavior unchanged; v6 support gated by tests.
 - Node deprecation path: warn in minor, enforce Node >=20 in next major.
@@ -44,15 +49,15 @@ This summarizes what has been implemented so far, what has been validated, and w
 - Use npm as canonical package manager; lockfile is `package-lock.json`.
 
 ## Local-Only Artifacts (Not for Commit)
-- PRDs in `docs/prd_*.md` (local working docs).
 - `docs/release_checklist_phase5.md` and `docs/migration_phase5.md` (legacy pointer stubs).
 - Demo artifacts and snapshot exports under `demos/` and `/tmp`.
 - Example tarballs under `examples/_artifacts`.
 
 ## PRD Reconciliation (Done / Deferred)
+Historical PRDs for phases and demos are archived under `docs/archive/` for reference.
 ### Phase 0 — Inventory and Baseline (v5)
 - Status: **Done**
-- Evidence: `docs/PROJECT.md` (behavior + schema inventory), `docs/TESTS.md` (gap list → test matrix), `docs/prd_phase4.md` includes v6 API verification notes.
+- Evidence: `docs/PROJECT.md` (behavior + schema inventory), `docs/TESTS.md` (gap list → test matrix), `docs/archive/prd_phase4.md` includes the original v6 API verification notes.
 - Deferred: none.
 
 ### Phase 1 — User‑Centric Test Suite (v5 Baseline)

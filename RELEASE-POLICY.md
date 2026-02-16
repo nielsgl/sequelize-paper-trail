@@ -69,7 +69,8 @@ All publishing is manual via the Release workflow; no branch push should auto-pu
 - Hotfixes for v3 should not introduce new dependencies or behavior changes.
 
 ## Worktrees & PRD Workflow
-- Each phase starts with a local PRD: `docs/prd_{phase}.md` (kept local, not committed).
+- Active PRDs live in `docs/prd/` and use `PRD-<NNN>-slug.md` (committed).
+- Historical PRDs are archived under `docs/archive/`.
 - Use worktrees to isolate phases and keep changes scoped.
 
 ## Required Documentation Updates per Release

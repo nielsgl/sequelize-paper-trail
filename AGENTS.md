@@ -32,8 +32,8 @@
 - PRs should include a clear description, steps to validate, and any linked issues. Include migration notes or README updates when behavior changes.
 
 ## PRD Workflow
-- Each phase of the modernization plan should start with a local PRD at `docs/prd_{phase}.md`.
-- Do not commit PRD files (they are ignored in `.gitignore`).
+- Current “active” PRDs live in `docs/prd/` and use the naming pattern `PRD-<NNN>-slug.md` (e.g., `docs/prd/PRD-001-release-v3-1-0.md`).
+- Historical PRDs are archived under `docs/archive/`.
 
 ## Configuration Tips
 - Node version is pinned in `.node-version` (20.20.0). Align your local environment for reproducible builds.

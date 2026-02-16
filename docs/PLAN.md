@@ -2,15 +2,17 @@
 
 ## Immediate Next Steps (Do These First)
 ### 3.1.0 Minor (Node deprecation warning)
-- [ ] Update README/CHANGELOG/migration guide with policy statements and Node <20 warning.
+- Source of truth: `docs/prd/PRD-001-release-v3-1-0.md`
+- [ ] Confirm docs + messaging are consistent (README/CHANGELOG/MIGRATION/RELEASE-POLICY).
 - [ ] Run gates: `npm test -- --coverage`, `npm run test:v6`, demo snapshot parity (baseline/v5/v6).
-- [ ] Version bump to 3.1.0, tag, publish, and verify CI workflow success.
+- [ ] Tag + publish 3.1.0 via the manual Release workflow and align `release/v3` to the tag.
 
 ## Near-Term Milestone
 ### 4.0.0 Major (Node >=20 + Sequelize v6 bridge)
-- [ ] Update docs to declare Sequelize v5+v6 support and Node >=20 enforcement.
+- Source of truth: `docs/prd/PRD-002-release-v4-0-0.md`
+- [ ] Enforce Node >=20 (replace warning with error) and publish 4.0.0 via the manual Release workflow.
 - [ ] Run gates: `npm test -- --coverage`, `npm run test:v6`, demo snapshot parity.
-- [ ] Version bump to 4.0.0, tag, publish, verify CI, then deprecate v3 on npm.
+- [ ] Deprecate v3 on npm after v4 is confirmed stable.
 
 ## Later Milestone
 ### 5.0.0 Feature Line
@@ -42,7 +44,7 @@
 - Compatibility first: behavior is a contract, verified by tests.
 - Small, reversible steps with explicit release notes and migration guides.
 - Separate adapter layer for ORM-specific differences.
-- Each phase starts with a PRD captured in `docs/prd_{phase}.md` (kept local, not committed).
+- Active PRDs live under `docs/prd/` and are committed to the repo.
 - Keep this plan temporary; once the release policy is complete and stable, retain only `RELEASE-POLICY.md`.
 
 ## Working Conventions (Branching + Worktrees)
