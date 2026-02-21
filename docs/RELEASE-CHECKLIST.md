@@ -16,6 +16,7 @@ Update this document whenever release gates or publishing steps change.
 
 ### 2) Testing (Required Gates)
 - [ ] `npm test -- --coverage`
+- [ ] Save coverage artifact reference (summary + location/link) in release notes or PR evidence.
 - [ ] `npm run test:v6`
 - [ ] Demo snapshot parity across baseline/v5/v6
 
@@ -34,4 +35,4 @@ Update this document whenever release gates or publishing steps change.
 ### 6) Post‑Release
 - [ ] Deprecate the prior major on npm when a new major ships.
 - [ ] Monitor issues for CLS/metadata regressions and parity drift.
-
+- [ ] Confirm release notes include migration/support-policy deltas and links to gate evidence.

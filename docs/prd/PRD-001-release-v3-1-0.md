@@ -25,6 +25,9 @@ This PRD captures the work required to ship `sequelize-paper-trail@3.1.0` as the
 - CI:
   - GitHub Actions `CI` workflow must pass on the release commit.
   - GitHub Actions `Demo Snapshot Parity` workflow must pass for baseline/v5/v6.
+- Evidence retention:
+  - Coverage summary/artifacts are captured and linked in release evidence.
+  - Release notes include migration/support-policy deltas for this release.
 
 ## User-Facing Messaging (Must Be True)
 - README “Supported Versions” clearly states:
@@ -64,4 +67,3 @@ This PRD captures the work required to ship `sequelize-paper-trail@3.1.0` as the
 - v3.1.0 is published to npm from `master` via the manual workflow.
 - All quality gates pass (coverage, v6 suite, demo parity).
 - `release/v3` points at the v3.1.0 tag and is protected by the required checks.
-

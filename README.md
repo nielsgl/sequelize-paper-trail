@@ -1,13 +1,6 @@
 # Sequelize Paper Trail
 
 
----
-
-> **Help wanted:** *Please try out `sequelize-paper-trail@3.0.0-rc.6` and give a 👍/👎 [here](https://github.com/nielsgl/sequelize-paper-trail/pull/74) if it works as expected.*
-
----
-
-
 > Track changes to your models, for auditing or versioning. See how a model looked at any stage in its lifecycle, revert it to any version, or restore it after it has been destroyed. Record the user who created the version.
 
 
@@ -124,7 +117,7 @@ const options = {
   userModel: 'user',
 };
 ```
-2. Pass the id of the user who is responsible for the database operation to `sequelize-paper-trail` either by sequelize options or by using [continuation-local-storage](https://www.npmjs.com/package/continuation-local-storage).
+2. Pass the id of the user who is responsible for the database operation to `sequelize-paper-trail` either by sequelize options or by using CLS context.
 
 ```javascript
 Model.update({
@@ -138,8 +131,8 @@ Model.update({
 OR
 
 ```javascript
-const createNamespace = require('continuation-local-storage').createNamespace;
-const session = createNamespace('my session');
+const cls = require('cls-hooked');
+const session = cls.createNamespace('my session');
 
 session.set('userId', user.id);
 
@@ -151,8 +144,12 @@ Model.update({
 
 ```
 
-To enable continuation-local-storage set `continuationNamespace` in initialization options.
-Additionally, you may also have to call `.run()` or `.bind()` on your cls namespace, as described in the [docs](https://www.npmjs.com/package/continuation-local-storage).
+To enable CLS, set `continuationNamespace` in initialization options.
+
+- Sequelize v6: use `cls-hooked` (required for CLS path).
+- Sequelize v5: legacy `continuation-local-storage` still works; you can opt into `cls-hooked` by setting `SEQUELIZE_CLS=cls-hooked`.
+
+You may also have to call `.run()` or `.bind()` on your CLS namespace depending on your framework integration.
 
 ## Disable logging for a single call
 
@@ -223,11 +220,11 @@ const options = {
 | [enableCompression]         | Boolean | false                                                                                                                | Compresses the revision attribute in the [revisionModel] to only the diff instead of all model attributes.                                                                                                             |
 | [enableMigration]           | Boolean | false                                                                                                                | Automatically adds the [revisionAttribute] via a migration to the models that have paper trails enabled.                                                                                                               |
 | [enableStrictDiff]          | Boolean | true                                                                                                                 | Reports integers and strings as different, e.g. `3.14` !== `'3.14'`                                                                                                                                                    |
-| [continuationNamespace]     | String  |                                                                                                                      | Name of the name space used with the continuation-local-storage module.                                                                                                                                                |
-| [continuationKey]           | String  | 'userId'                                                                                                             | The continuation-local-storage key that contains the user id.                                                                                                                                                          |
+| [continuationNamespace]     | String  |                                                                                                                      | Name of the CLS namespace used for user attribution (`cls-hooked` for v6; legacy CLS path for v5).                                                                                                                   |
+| [continuationKey]           | String  | 'userId'                                                                                                             | The CLS key that contains the user id.                                                                                                                                                                                 |
 | [belongsToUserOptions]      | Object  | undefined                                                                                                            | The options used for belongsTo between userModel and Revision model                                                                                                                                                    |
 | [metaDataFields]            | Object  | undefined                                                                                                            | The keys that will be provided in the meta data object. { key: isRequired (boolean)} format. Can be used to privovide additional fields - other associations, dates, etc to the Revision model                         |
-| [metaDataContinuationKey]   | String  | 'metaData'                                                                                                           | The continuation-local-storage key that contains the meta data object, from where the metaDataFields are extracted.                                                                                                    |
+| [metaDataContinuationKey]   | String  | 'metaData'                                                                                                           | The CLS key that contains the meta data object, from where the metaDataFields are extracted.                                                                                                                          |
 
 ## Limitations
 
@@ -251,18 +248,24 @@ Notes:
 Core references:
 - `RELEASE-POLICY.md`: authoritative release/support policy (branches, deprecations, gates).
 - `docs/PROJECT.md`: product and runtime reference (behavior, structure, scripts).
-- `docs/PLAN.md`: temporary modernization plan (remove after policy is stable).
-- `docs/STATUS.md`: working status tracker (what’s done vs remaining).
+- `docs/PLAN.md`: execution-order overview for active milestones.
+- `docs/INDEX.md`: canonical PRD index, priorities, and execution waves.
+- `docs/STATUS.md`: runtime WI board (`Backlog`, `In Progress`, `Blocked`, `Done`).
+- `docs/impl/README.md`: implementation-plan format and Plan/Ship gate lifecycle.
 - `docs/TESTS.md`: test strategy + coverage expectations.
 - `docs/CI.md`: CI workflows and required gates.
 - `docs/MIGRATION.md`: living migration guide for maintainers and users.
 - `docs/RELEASE-CHECKLIST.md`: reusable checklist for releases.
 - `examples/README.md`: index of runnable example apps for each support line.
 
-Active PRDs (current work):
+Tracked PRDs (current + deferred):
 - `docs/prd/PRD-001-release-v3-1-0.md`: v3.1.0 release PRD (legacy line + Node<20 deprecation).
 - `docs/prd/PRD-002-release-v4-0-0.md`: v4.0.0 release PRD (bridge line).
 - `docs/prd/PRD-003-deep-diff-replacement.md`: deep-diff removal plan (no behavior drift).
+- `docs/prd/PRD-004-tooling-major-review.md`: tooling-major review backlog (Jest/ESLint/Prettier).
+
+PRD index:
+- `docs/INDEX.md`: ordered execution plan from PRD wave selection down to WI ordering.
 
 Archived PRDs (historical context):
 - `docs/archive/`: completed phase PRDs and demo PRDs preserved for reference.
