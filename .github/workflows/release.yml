@@ -48,8 +48,14 @@ jobs:
       - name: Run Sequelize v5 suite
         run: npm test -- --coverage
 
+      - name: Enforce skip-v6 policy
+        if: ${{ inputs.skip-v6 == 'true' && github.ref != 'refs/heads/release/v3' }}
+        run: |
+          echo "skip-v6=true is only allowed on release/v3."
+          exit 1
+
       - name: Run Sequelize v6 suite
-        if: ${{ inputs.skip-v6 != 'true' && !(github.ref == 'refs/heads/release/v3' || github.base_ref == 'release/v3') }}
+        if: ${{ github.ref != 'refs/heads/release/v3' || inputs.skip-v6 != 'true' }}
         run: npm run test:v6
 
       - name: Publish (dry run)

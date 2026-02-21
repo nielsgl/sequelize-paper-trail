@@ -17,7 +17,7 @@ Capture the CI matrix and quality gates for the Phase 5 release workflow that no
   - Runs snapshot export for baseline/v5/v6 demos and compares parity.
 
 ## Matrix (Target)
-- Node.js: active LTS (20.x, 22.x).
+- Node.js: 20.20.0 (current enforced CI baseline).
 - Sequelize: v5 (required), v6 (required for release), v7 (evaluate later).
 - Dialect: sqlite only (in-memory).
 
@@ -31,3 +31,4 @@ Capture the CI matrix and quality gates for the Phase 5 release workflow that no
 - Coverage thresholds enforce 100% branches/functions/lines/statements for `lib/index.js` and `lib/helpers.js`.
 - Demo parity is a manual gate (run it before tagging or publishing).
 - Branch protection should require the `CI` workflow for `master` (or `main`), `release/v3`, and `release/v4`.
+- Node 22.x remains a future expansion target after v4/v5 release stabilization.
