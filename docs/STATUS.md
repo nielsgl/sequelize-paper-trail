@@ -10,7 +10,7 @@ Ordered by execution wave and dependency.
 | --- | --- | --- | --- | --- | --- | --- |
 | `PRD-001 WI-001` | `PRD-001` | `WI-001` | Orchestrator bootstrap for PRD-001 (index/status/impl wiring) | 1 | - | Done |
 | `PRD-001 WI-002` | `PRD-001` | `WI-002` | Docs and messaging consistency pass (`README`, `CHANGELOG`, `MIGRATION`, `RELEASE-POLICY`, `CI`) | 2 | `PRD-001 WI-001` | Done |
-| `PRD-001 WI-003` | `PRD-001` | `WI-003` | Execute release gates (`test --coverage`, `test:v6`, demo parity) and record evidence | 2 | `PRD-001 WI-002` | Planned |
+| `PRD-001 WI-003` | `PRD-001` | `WI-003` | Execute release gates (`test --coverage`, `test:v6`, demo parity) and record evidence | 2 | `PRD-001 WI-002` | In Progress |
 | `PRD-001 WI-004` | `PRD-001` | `WI-004` | Manual release workflow dry-run, publish path, and tag verification notes | 2 | `PRD-001 WI-003` | Planned |
 | `PRD-001 WI-005` | `PRD-001` | `WI-005` | Align `release/v3` to `v3.1.0` and record branch-protection evidence | 2 | `PRD-001 WI-004` | Planned |
 | `PRD-002 WI-001` | `PRD-002` | `WI-001` | Node >=20 enforcement design and impact checklist | 3 | - | Planned |
@@ -28,7 +28,7 @@ One claimed WI per session. Use one row per active claim with concrete values.
 
 | ID | Title | owner | branch | worktree | impl | plan-gate | claim-state | claim-owner | claim-token | claimed-at | Depends On | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| _(none)_ | - | - | - | - | - | - | - | - | - | - | - | - |
+| `PRD-001 WI-003` | Execute release gates (`test --coverage`, `test:v6`, demo parity) and record evidence | `nielsgl` | `codex/prd-001-wi-003-release-gates-and-evidence` | `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-001-wi-003` | `docs/impl/PRD-001/WI-003-release-gates-and-evidence.md` | `approved` | `claimed` | `nielsgl` | `codex-prd-001-wi-003-20260222T103826Z` | `2026-02-22T10:38:26Z` | `PRD-001 WI-002` | `Plan Gate approved from explicit user implementation instruction.` |
 
 ## Blocked
 

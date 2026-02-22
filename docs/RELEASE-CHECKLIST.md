@@ -36,3 +36,4 @@ Update this document whenever release gates or publishing steps change.
 - [ ] Deprecate the prior major on npm when a new major ships.
 - [ ] Monitor issues for CLS/metadata regressions and parity drift.
 - [ ] Confirm release notes include migration/support-policy deltas and links to gate evidence.
+- [ ] Link gate evidence to the current WI implementation file (`docs/impl/PRD-<num>/WI-<num>-*.md`).
