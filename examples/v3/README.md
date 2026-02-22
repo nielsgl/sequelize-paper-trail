@@ -1,6 +1,7 @@
 # Example (v3 legacy line)
 
 This example targets the v3 support line (legacy/hotfix-only). It demonstrates all supported options and behavior in the v3 line, using an in-memory SQLite database.
+It is pinned to the latest published v3 package from npm (`sequelize-paper-trail@^3.1.0`).
 
 ## Prerequisites
 - Node 20.20.0 (recommended) or active LTS >= 20
@@ -8,14 +9,7 @@ This example targets the v3 support line (legacy/hotfix-only). It demonstrates a
 - Sequelize pinned to 5.14.0 for legacy compatibility (see `package.json`)
 
 ## Install & run
-From the repo root, refresh the local tarball if needed:
-
-```bash
-npm pack --pack-destination examples/_artifacts
-cp examples/_artifacts/sequelize-paper-trail-*.tgz examples/_artifacts/sequelize-paper-trail-local.tgz
-```
-
-Then run the example:
+Run the example:
 
 ```bash
 cd examples/v3

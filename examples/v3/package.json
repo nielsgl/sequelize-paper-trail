@@ -9,7 +9,7 @@
   "dependencies": {
     "cls-hooked": "^4.2.2",
     "sequelize": "5.14.0",
-    "sequelize-paper-trail": "file:../_artifacts/sequelize-paper-trail-local.tgz",
+    "sequelize-paper-trail": "^3.1.0",
     "sqlite3": "^4.0.9"
   }
 }
