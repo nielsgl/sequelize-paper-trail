@@ -12,7 +12,7 @@ Ordered by execution wave and dependency.
 | `PRD-001 WI-002` | `PRD-001` | `WI-002` | Docs and messaging consistency pass (`README`, `CHANGELOG`, `MIGRATION`, `RELEASE-POLICY`, `CI`) | 2 | `PRD-001 WI-001` | Done |
 | `PRD-001 WI-003` | `PRD-001` | `WI-003` | Execute release gates (`test --coverage`, `test:v6`, demo parity) and record evidence | 2 | `PRD-001 WI-002` | Done |
 | `PRD-001 WI-004` | `PRD-001` | `WI-004` | Manual release workflow dry-run, publish path, and tag verification notes | 2 | `PRD-001 WI-003` | Done |
-| `PRD-001 WI-005` | `PRD-001` | `WI-005` | Align `release/v3` to `v3.1.0` and record branch-protection evidence | 2 | `PRD-001 WI-004` | In Progress |
+| `PRD-001 WI-005` | `PRD-001` | `WI-005` | Align `release/v3` to `v3.1.0` and record branch-protection evidence | 2 | `PRD-001 WI-004` | Done |
 | `PRD-002 WI-001` | `PRD-002` | `WI-001` | Node >=20 enforcement design and impact checklist | 3 | - | Planned |
 | `PRD-002 WI-002` | `PRD-002` | `WI-002` | v4 docs, migration, and support-policy updates | 3 | `PRD-002 WI-001` | Planned |
 | `PRD-002 WI-003` | `PRD-002` | `WI-003` | Create `release/v4` branch and CI gate contract setup | 3 | `PRD-002 WI-002` | Planned |
@@ -28,7 +28,7 @@ One claimed WI per session. Use one row per active claim with concrete values.
 
 | ID | Title | owner | branch | worktree | impl | plan-gate | claim-state | claim-owner | claim-token | claimed-at | Depends On | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `PRD-001 WI-005` | Align `release/v3` to `v3.1.0` and record branch-protection evidence | `nielsgl` | `codex/prd-001-wi-005-align-release-v3-and-protection-evidence` | `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-001-wi-005` | `docs/impl/PRD-001/WI-005-align-release-v3-and-protection-evidence.md` | `approved` | `active` | `nielsgl` | `codex/prd-001-wi-005/2026-02-22T11:33:27Z` | `2026-02-22T11:33:27Z` | `PRD-001 WI-004` | `Resumed after protection update allowing force push.` |
+| _(none)_ | - | - | - | - | - | - | - | - | - | - | - | - |
 
 ## Blocked
 
@@ -48,6 +48,7 @@ Record completion and evidence location.
 | `PRD-001 WI-002` | Docs and messaging consistency pass (`README`, `CHANGELOG`, `MIGRATION`, `RELEASE-POLICY`, `CI`) | `2026-02-22T10:31:29Z` | `docs/impl/PRD-001/WI-002-docs-message-consistency.md` |
 | `PRD-001 WI-003` | Execute release gates (`test --coverage`, `test:v6`, demo parity) and record evidence | `2026-02-22T10:52:19Z` | `docs/impl/PRD-001/WI-003-release-gates-and-evidence.md` |
 | `PRD-001 WI-004` | Manual release workflow dry-run, publish path, and tag verification notes | `2026-02-22T11:21:02Z` | `docs/impl/PRD-001/WI-004-manual-release-run-and-tag-verification.md` |
+| `PRD-001 WI-005` | Align `release/v3` to `v3.1.0` and record branch-protection evidence | `2026-02-22T11:46:28Z` | `docs/impl/PRD-001/WI-005-align-release-v3-and-protection-evidence.md` |
 
 ## Reason Codes
 

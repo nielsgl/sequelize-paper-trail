@@ -4,13 +4,13 @@
 
 - PRD: `docs/prd/PRD-001-release-v3-1-0.md`
 - Depends on: `PRD-001 WI-004`
-- Status: `In Progress` (mirrors `docs/STATUS.md`)
+- Status: `Done` (mirrors `docs/STATUS.md`)
 - Branch: `codex/prd-001-wi-005-align-release-v3-and-protection-evidence`
 - Worktree: `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-001-wi-005`
 
 ## Work Item Status
 
-- Current phase: `Step 7 shipment in progress`
+- Current phase: `Step 7 cleanup completed`
 - Plan Gate: `Approved`
 - Ship Gate: `Approved`
 
@@ -86,10 +86,10 @@ Align `release/v3` to the `v3.1.0` release point and capture branch-protection e
 
 ### Execution-Context Boundary Checks
 
-- commit stage context: pending Ship Gate approval.
-- merge stage context: pending Ship Gate approval; will run on primary `master` using `git merge --no-ff`.
-- status-finalization stage context: pending Ship Gate approval; must run post-merge on primary `master`.
-- cleanup stage context: pending Ship Gate approval; must run on primary worktree.
+- commit stage context: executed from claimed WI worktree branch `codex/prd-001-wi-005-align-release-v3-and-protection-evidence` (commit `179af4c`).
+- merge stage context: executed from primary `master` using `git merge --no-ff codex/prd-001-wi-005-align-release-v3-and-protection-evidence` (merge commit `f912ae6`).
+- status-finalization stage context: runtime transition to `Done` applied post-merge from primary `master` context.
+- cleanup stage context: worktree removal and branch deletion executed from primary `master` context.
 
 ## Verification / Evidence
 
