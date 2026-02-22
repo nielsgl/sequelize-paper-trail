@@ -20,7 +20,7 @@ Define how we maintain, release, and deprecate versions of sequelize-paper-trail
 
 ## Quality Gates (Required)
 - `npm test -- --coverage` (coverage must pass)
-- `npm run test:v6` (required for `master` (current default) / `main` (post-rename), `feature/next`, and `release/v4`; optional for `release/v3`)
+- `npm run test:v6` (required for `main`, `feature/next`, and `release/v4`; optional for `release/v3`)
 - **Demo snapshot parity** across baseline/v5/v6
 - CI workflow success on the release branch
 
@@ -45,7 +45,6 @@ All publishing is manual via the Release workflow; no branch push should auto-pu
 ## Branching & Backports
 ### Branch Roles (Authoritative)
 - `main`: current stable major (latest released).
-- `master`: current stable major (latest released) until renamed to `main`.
 - `feature/next`: integration branch for the next major.
 - `release/v3`: maintenance for v3.x hotfixes (critical only).
 - `release/v4`: maintenance for v4.x bugfix-only bridge.
@@ -56,7 +55,7 @@ All publishing is manual via the Release workflow; no branch push should auto-pu
 - Require PR reviews for changes to release branches.
 
 ### How Releases Flow
-1. **Normal work** lands on `feature/next` (future major) or `master`/`main` (current major).
+1. **Normal work** lands on `feature/next` (future major) or `main` (current major).
 2. **Release branches** are cut from the appropriate major line when needed:
    - v3 hotfixes: `release/v3` (cut from the last v3 tag).
    - v4 bugfixes: `release/v4` (cut from the last v4 tag).

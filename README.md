@@ -12,7 +12,7 @@
 [![node-version](https://img.shields.io/node/v/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 [![npm-downloads-monthly](https://img.shields.io/npm/dm/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 [![npm-downloads-total](https://img.shields.io/npm/dt/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
-[![license](https://img.shields.io/npm/l/sequelize-paper-trail.svg)](https://github.com/nielsgl/sequelize-paper-trail/blob/master/LICENSE)
+[![license](https://img.shields.io/npm/l/sequelize-paper-trail.svg)](https://github.com/nielsgl/sequelize-paper-trail/blob/main/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 [![GitHub tag](https://img.shields.io/github/tag/nielsgl/sequelize-paper-trail.svg)](https://www.npmjs.org/package/sequelize-paper-trail)
 [![GitHub commits](https://img.shields.io/github/commits-since/nielsgl/sequelize-paper-trail/1.2.0.svg)]()
@@ -282,7 +282,7 @@ Please use:
 
 ### Supported Versions
 
-The library is verified against Sequelize **v5** (current baseline) and **v6.37.7**. Release-quality checks include `npm test -- --coverage`, `npm run test:v6` (required for `master` (current default) / `main` (post-rename), `feature/next`, and `release/v4`), and demo snapshot parity for baseline/v5/v6.
+The library is verified against Sequelize **v5** (current baseline) and **v6.37.7**. Release-quality checks include `npm test -- --coverage`, `npm run test:v6` (required for `main`, `feature/next`, and `release/v4`), and demo snapshot parity for baseline/v5/v6.
 
 Support lines:
 - **v3.x**: hotfix-only line (critical fixes only).
