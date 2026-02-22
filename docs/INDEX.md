@@ -11,7 +11,7 @@ This is the canonical PRD selector for workflow-orchestrator claim precedence.
 ## Execution Waves
 - Wave 1: PRD-001 WI-001
 - Wave 2: PRD-001 WI-002, PRD-001 WI-003, PRD-001 WI-004, PRD-001 WI-005
-- Wave 3: PRD-002 WI-001, PRD-002 WI-002, PRD-002 WI-003, PRD-002 WI-004
+- Wave 3: PRD-002 WI-005, PRD-002 WI-001, PRD-002 WI-002, PRD-002 WI-003, PRD-002 WI-004
 - Wave 4: PRD-003 WI-001, PRD-003 WI-002, PRD-003 WI-003
 - Wave 5: PRD-004 WI-001
 
@@ -24,6 +24,7 @@ This is the canonical PRD selector for workflow-orchestrator claim precedence.
 - WI-005: Align `release/v3` to `v3.1.0` and verify branch protection evidence.
 
 ### PRD-002 release-v4-0-0
+- WI-005: Rename default branch `master` to `main` and reconcile branch protections/workflows/docs.
 - WI-001: Node >=20 enforcement design and impact checklist.
 - WI-002: v4 docs, migration, and support policy updates.
 - WI-003: `release/v4` branch and CI gate contract setup.
