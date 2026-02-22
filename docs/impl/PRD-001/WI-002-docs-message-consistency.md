@@ -4,13 +4,13 @@
 
 - PRD: `docs/prd/PRD-001-release-v3-1-0.md`
 - Depends on: `PRD-001 WI-001`
-- Status: `In Progress` (mirrors `docs/STATUS.md`)
+- Status: `Done` (mirrors `docs/STATUS.md`)
 - Branch: `codex/prd-001-wi-002-docs-message-consistency`
 - Worktree: `.worktrees/prd-001-wi-002`
 
 ## Work Item Status
 
-- Current phase: `Step 7 cleanup in progress`
+- Current phase: `Step 7 cleanup completed`
 - Plan Gate: `Approved`
 - Ship Gate: `Approved`
 

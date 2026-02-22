@@ -9,7 +9,7 @@ Ordered by execution wave and dependency.
 | ID | PRD | WI | Title | Wave | Depends On | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | `PRD-001 WI-001` | `PRD-001` | `WI-001` | Orchestrator bootstrap for PRD-001 (index/status/impl wiring) | 1 | - | Done |
-| `PRD-001 WI-002` | `PRD-001` | `WI-002` | Docs and messaging consistency pass (`README`, `CHANGELOG`, `MIGRATION`, `RELEASE-POLICY`, `CI`) | 2 | `PRD-001 WI-001` | In Progress |
+| `PRD-001 WI-002` | `PRD-001` | `WI-002` | Docs and messaging consistency pass (`README`, `CHANGELOG`, `MIGRATION`, `RELEASE-POLICY`, `CI`) | 2 | `PRD-001 WI-001` | Done |
 | `PRD-001 WI-003` | `PRD-001` | `WI-003` | Execute release gates (`test --coverage`, `test:v6`, demo parity) and record evidence | 2 | `PRD-001 WI-002` | Planned |
 | `PRD-001 WI-004` | `PRD-001` | `WI-004` | Manual release workflow dry-run, publish path, and tag verification notes | 2 | `PRD-001 WI-003` | Planned |
 | `PRD-001 WI-005` | `PRD-001` | `WI-005` | Align `release/v3` to `v3.1.0` and record branch-protection evidence | 2 | `PRD-001 WI-004` | Planned |
@@ -28,7 +28,7 @@ One claimed WI per session. Use one row per active claim with concrete values.
 
 | ID | Title | owner | branch | worktree | impl | plan-gate | claim-state | claim-owner | claim-token | claimed-at | Depends On | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `PRD-001 WI-002` | Docs and messaging consistency pass (`README`, `CHANGELOG`, `MIGRATION`, `RELEASE-POLICY`, `CI`) | `codex` | `codex/prd-001-wi-002-docs-message-consistency` | `.worktrees/prd-001-wi-002` | `docs/impl/PRD-001/WI-002-docs-message-consistency.md` | `approved` | `active` | `codex` | `codex/prd-001-wi-002@2026-02-22T10:20:26Z` | `2026-02-22T10:20:26Z` | `PRD-001 WI-001` | `Plan Gate approved in-session; execution started.` |
+| _(none)_ | - | - | - | - | - | - | - | - | - | - | - | - |
 
 ## Blocked
 
@@ -45,6 +45,7 @@ Record completion and evidence location.
 | ID | Title | completed-at | Evidence |
 | --- | --- | --- | --- |
 | `PRD-001 WI-001` | Orchestrator bootstrap for PRD-001 (index/status/impl wiring) | `2026-02-22T10:15:47Z` | `docs/impl/PRD-001/WI-001-orchestrator-bootstrap-for-prd-001.md` |
+| `PRD-001 WI-002` | Docs and messaging consistency pass (`README`, `CHANGELOG`, `MIGRATION`, `RELEASE-POLICY`, `CI`) | `2026-02-22T10:31:29Z` | `docs/impl/PRD-001/WI-002-docs-message-consistency.md` |
 
 ## Reason Codes
 
