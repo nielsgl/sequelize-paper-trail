@@ -11,7 +11,7 @@ Ordered by execution wave and dependency.
 | `PRD-001 WI-001` | `PRD-001` | `WI-001` | Orchestrator bootstrap for PRD-001 (index/status/impl wiring) | 1 | - | Done |
 | `PRD-001 WI-002` | `PRD-001` | `WI-002` | Docs and messaging consistency pass (`README`, `CHANGELOG`, `MIGRATION`, `RELEASE-POLICY`, `CI`) | 2 | `PRD-001 WI-001` | Done |
 | `PRD-001 WI-003` | `PRD-001` | `WI-003` | Execute release gates (`test --coverage`, `test:v6`, demo parity) and record evidence | 2 | `PRD-001 WI-002` | Done |
-| `PRD-001 WI-004` | `PRD-001` | `WI-004` | Manual release workflow dry-run, publish path, and tag verification notes | 2 | `PRD-001 WI-003` | Planned |
+| `PRD-001 WI-004` | `PRD-001` | `WI-004` | Manual release workflow dry-run, publish path, and tag verification notes | 2 | `PRD-001 WI-003` | In Progress |
 | `PRD-001 WI-005` | `PRD-001` | `WI-005` | Align `release/v3` to `v3.1.0` and record branch-protection evidence | 2 | `PRD-001 WI-004` | Planned |
 | `PRD-002 WI-001` | `PRD-002` | `WI-001` | Node >=20 enforcement design and impact checklist | 3 | - | Planned |
 | `PRD-002 WI-002` | `PRD-002` | `WI-002` | v4 docs, migration, and support-policy updates | 3 | `PRD-002 WI-001` | Planned |
@@ -28,7 +28,7 @@ One claimed WI per session. Use one row per active claim with concrete values.
 
 | ID | Title | owner | branch | worktree | impl | plan-gate | claim-state | claim-owner | claim-token | claimed-at | Depends On | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| _(none)_ | - | - | - | - | - | - | - | - | - | - | - | - |
+| `PRD-001 WI-004` | Manual release workflow dry-run, publish path, and tag verification notes | `Niels van Galen Last` | `codex/prd-001-wi-004-manual-release-run-and-tag-verification` | `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-001-wi-004` | `docs/impl/PRD-001/WI-004-manual-release-run-and-tag-verification.md` | `approved` | `claimed` | `Niels van Galen Last` | `c8cd6f71-99f9-4839-b530-2e573b61d574` | `2026-02-22T11:00:40Z` | `PRD-001 WI-003` | `Dependency unblocked; publish run 22275995037 succeeded; awaiting Ship Gate.` |
 
 ## Blocked
 

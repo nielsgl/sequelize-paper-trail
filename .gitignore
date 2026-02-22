@@ -26,3 +26,4 @@ examples/**/node_modules/
 examples/**/package-lock.json
 demos/_artifacts/
 demos/**/node_modules/
+.worktrees/
