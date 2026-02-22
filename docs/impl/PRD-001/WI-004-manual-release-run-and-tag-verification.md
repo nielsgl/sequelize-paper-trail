@@ -4,15 +4,15 @@
 
 - PRD: `docs/prd/PRD-001-release-v3-1-0.md`
 - Depends on: `PRD-001 WI-003`
-- Status: `In Progress` (mirrors `docs/STATUS.md`)
+- Status: `Done` (mirrors `docs/STATUS.md`)
 - Branch: `codex/prd-001-wi-004-manual-release-run-and-tag-verification`
 - Worktree: `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-001-wi-004`
 
 ## Work Item Status
 
-- Current phase: `Step 6 ship-gate pending approval`
+- Current phase: `Step 7 cleanup completed`
 - Plan Gate: `Approved`
-- Ship Gate: `Pending`
+- Ship Gate: `Approved`
 
 ## Scope
 
@@ -83,6 +83,13 @@ Document and execute the manual release workflow path for v3.1.0:
   - classification: `guarded retry` (dependency-remediated retry)
   - guard: rerun only after explicit dependency fix evidence from owner and monitor for successful publish completion.
   - recovery path: single rerun executed; publish step succeeded and no further retries required.
+
+### Execution-Context Boundary Checks
+
+- commit stage context: executed from claimed WI worktree branch `codex/prd-001-wi-004-manual-release-run-and-tag-verification` (commit `f58b006`).
+- merge stage context: executed from primary worktree branch `master` using `git merge --no-ff codex/prd-001-wi-004-manual-release-run-and-tag-verification`.
+- status-finalization stage context: runtime transition to `Done` applied post-merge from primary `master` context.
+- cleanup stage context: branch/worktree cleanup executed from primary worktree after close-out commit.
 
 ## Verification / Evidence
 
@@ -166,7 +173,7 @@ Document and execute the manual release workflow path for v3.1.0:
 - Executed release workflow publish path and captured failure evidence (`ENEEDAUTH` due missing `NPM_TOKEN`).
 - Re-ran publish after dependency remediation; publish succeeded and npm now serves `3.1.0` as `latest`.
 - Created and pushed tag `v3.1.0` to the published commit SHA.
-- Updated runtime and mirrored WI state back to `In Progress` pending Ship Gate actions.
+- Completed post-merge status finalization with runtime/mirrored WI state set to `Done`.
 
 ### Why this option was chosen
 
@@ -197,7 +204,7 @@ Document and execute the manual release workflow path for v3.1.0:
 
 ### Follow-up recommendations, if any
 
-- Request Ship Gate approval to allow commit + merge + status finalization + cleanup.
+- Continue with WI-005 (`release/v3` alignment and branch-protection evidence) now that WI-004 is done.
 
 ## Blocked Reason Codes
 
