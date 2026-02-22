@@ -20,6 +20,12 @@ Update this document whenever release gates or publishing steps change.
 - [ ] `npm run test:v6`
 - [ ] Demo snapshot parity across baseline/v5/v6
 
+### 2A) Security Gate Evidence (Required)
+- [ ] `npm audit --omit=dev --json` confirms zero runtime/prod vulnerabilities.
+- [ ] `npm audit --json` snapshot is captured and triaged (runtime vs dev/test/release path).
+- [ ] Any unresolved high/critical findings are listed as explicit exceptions with risk, owner, and follow-up target WI/version.
+- [ ] Security-gate evidence is linked from the active WI file in `docs/impl/PRD-<num>/WI-<num>-*.md`.
+
 ### 3) Release Automation
 - [ ] Confirm `.github/workflows/release.yml` is required on the release branch.
 - [ ] Verify the workflow runs install/test/test:v6 and uses any required flags.

@@ -14,7 +14,7 @@ Ordered by execution wave and dependency.
 | `PRD-001 WI-004` | `PRD-001` | `WI-004` | Manual release workflow dry-run, publish path, and tag verification notes | 2 | `PRD-001 WI-003` | Done |
 | `PRD-001 WI-005` | `PRD-001` | `WI-005` | Align `release/v3` to `v3.1.0` and record branch-protection evidence | 2 | `PRD-001 WI-004` | Done |
 | `PRD-002 WI-005` | `PRD-002` | `WI-005` | Rename default branch `master` to `main` and reconcile protections/workflows/docs | 3 | - | Done |
-| `PRD-002 WI-006` | `PRD-002` | `WI-006` | Security vulnerability triage/remediation and exception list before v4 release | 3 | `PRD-002 WI-005` | Planned |
+| `PRD-002 WI-006` | `PRD-002` | `WI-006` | Security vulnerability triage/remediation and exception list before v4 release | 3 | `PRD-002 WI-005` | In Progress |
 | `PRD-002 WI-001` | `PRD-002` | `WI-001` | Node >=20 enforcement design and impact checklist | 3 | `PRD-002 WI-006` | Planned |
 | `PRD-002 WI-002` | `PRD-002` | `WI-002` | v4 docs, migration, and support-policy updates | 3 | `PRD-002 WI-001` | Planned |
 | `PRD-002 WI-003` | `PRD-002` | `WI-003` | Create `release/v4` branch and CI gate contract setup | 3 | `PRD-002 WI-002` | Planned |
@@ -30,7 +30,7 @@ One claimed WI per session. Use one row per active claim with concrete values.
 
 | ID | Title | owner | branch | worktree | impl | plan-gate | claim-state | claim-owner | claim-token | claimed-at | Depends On | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| _(none)_ | - | - | - | - | - | - | - | - | - | - | - | - |
+| `PRD-002 WI-006` | Security vulnerability triage/remediation and exception list before v4 release | `codex` | `codex/prd-002-wi-006-security-vulnerability-triage-and-remedia` | `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-002-wi-006` | `docs/impl/PRD-002/WI-006-security-vulnerability-triage-and-remediation.md` | `approved` | `active` | `codex` | `codex/prd-002-wi-006` | `2026-02-22T12:24:30Z` | `PRD-002 WI-005` | `Plan approved via explicit user directive to implement full WI-006 plan.` |
 
 ## Blocked
 
