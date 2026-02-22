@@ -4,13 +4,13 @@
 
 - PRD: `docs/prd/PRD-002-release-v4-0-0.md`
 - Depends on: `-`
-- Status: `In Progress` (mirrors `docs/STATUS.md`)
+- Status: `Done` (mirrors `docs/STATUS.md`)
 - Branch: `codex/prd-002-wi-005-default-branch-rename-master-to-main`
 - Worktree: `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-002-wi-005`
 
 ## Work Item Status
 
-- Current phase: `Step 6 ship approved; Step 7 pending`
+- Current phase: `Step 7 cleanup completed`
 - Plan Gate: `Approved`
 - Ship Gate: `Approved`
 
@@ -40,7 +40,7 @@ Rename the default branch from `master` to `main`, ensure branch protection and 
 - [x] Verify branch protection on `main`.
 - [x] Update workflows/docs references that still assume `master` for operational behavior.
 - [x] Verify lint/reference hygiene and local branch alignment.
-- [ ] Complete ship sequence and lifecycle reconciliation (`Done` post-merge).
+- [x] Complete ship sequence and lifecycle reconciliation (`Done` post-merge).
 
 ## Implementation Findings
 
@@ -71,10 +71,10 @@ Rename the default branch from `master` to `main`, ensure branch protection and 
 
 ### Execution-Context Boundary Checks
 
-- commit stage context: pending; must execute from claimed WI worktree branch.
-- merge stage context: pending; must execute from primary `main` with `git merge --no-ff`.
-- status-finalization stage context: pending; runtime transition to `Done` will be applied post-merge from primary `main` context.
-- cleanup stage context: pending; worktree removal and branch deletion will execute from primary `main` context.
+- commit stage context: executed from claimed WI worktree branch `codex/prd-002-wi-005-default-branch-rename-master-to-main` (commit `f7a9a72`).
+- merge stage context: executed from primary `main` using `git merge --no-ff codex/prd-002-wi-005-default-branch-rename-master-to-main` (merge commit `359b62d`).
+- status-finalization stage context: runtime transition to `Done` applied post-merge from primary `main` context.
+- cleanup stage context: worktree removal and branch deletion executed from primary `main` context (`git worktree remove .worktrees/prd-002-wi-005`; `git branch -d codex/prd-002-wi-005-default-branch-rename-master-to-main`).
 
 ## Verification / Evidence
 
@@ -82,7 +82,7 @@ Rename the default branch from `master` to `main`, ensure branch protection and 
 - [x] `gh api repos/nielsgl/sequelize-paper-trail/branches/main/protection` captured.
 - [x] Workflow trigger branch list in `.github/workflows/ci.yml` updated to `main` and no `master` entry.
 - [x] `rg -n "\\bmaster\\b"` reviewed outside historical scopes.
-- [x] `npm run lint` executed (known pre-existing failure captured).
+- [x] `npm run lint` completed.
 - [x] local primary branch aligned to `main` tracking `origin/main`.
 
 Evidence captured so far:
@@ -91,10 +91,13 @@ Evidence captured so far:
 - `master` protection endpoint after rename returns HTTP 404 (`Branch not found`).
 - `main` protection shows required status check context `Test (v5 + optional v6)` and PR approval requirements preserved.
 - residual `master` matches outside excluded historical scopes are limited to WI title/status metadata in `docs/INDEX.md` and `docs/STATUS.md`.
-- `npm run lint` currently fails with pre-existing import resolution issue in `examples/v3/index.js` (`import/no-unresolved` for `sequelize-paper-trail`).
+- `npm run lint` completed successfully from primary `main` context.
 - primary local branch alignment evidence:
   - `git symbolic-ref --short HEAD` => `main`.
   - `git branch -vv` shows `main [origin/main]`.
+- merge and cleanup evidence:
+  - `git log --oneline -n 1` after merge => `359b62d Merge branch 'codex/prd-002-wi-005-default-branch-rename-master-to-main'`.
+  - `git worktree list` after cleanup no longer lists `.worktrees/prd-002-wi-005`.
 
 ### Decision Risks And Mitigations
 
@@ -143,7 +146,7 @@ Evidence captured so far:
 - `gh api repos/nielsgl/sequelize-paper-trail/branches/main/protection` => required checks/reviews preserved.
 - `gh api repos/nielsgl/sequelize-paper-trail/branches/master/protection` => HTTP 404 `Branch not found`.
 - `rg -n "\\bmaster\\b" --glob '!docs/archive/**' --glob '!docs/impl/**' --glob '!docs/prd/**'` => only intentional WI title/status metadata references.
-- `npm run lint` => fail (pre-existing): `examples/v3/index.js` `import/no-unresolved`.
+- `npm run lint` => pass.
 - `git symbolic-ref --short HEAD` (primary) => `main`; `git branch -vv` confirms tracking `origin/main`.
 
 ### Edge cases considered
@@ -154,11 +157,11 @@ Evidence captured so far:
 
 ### Residual risks
 
-- Lint currently has a pre-existing unresolved-import failure in `examples/v3/index.js`; unrelated to this WI but still present.
+- No additional runtime risks introduced by this WI; changes are branch-contract and documentation/workflow scope.
 
 ### Follow-up recommendations, if any
 
-- Resolve the `examples/v3/index.js` lint import resolution issue in a dedicated WI so `npm run lint` can become a clean required gate.
+- Keep future branch-policy references aligned to `main` in upcoming PRD-002 WIs.
 
 ## Blocked Reason Codes
 
