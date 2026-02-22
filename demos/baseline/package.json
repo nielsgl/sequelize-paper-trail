@@ -2,7 +2,7 @@
 	"name": "sequelize-paper-trail-demo-baseline",
 	"version": "0.0.0",
 	"private": true,
-	"description": "Baseline demo for sequelize-paper-trail (npm latest or master pack).",
+	"description": "Baseline demo for sequelize-paper-trail (npm latest or main pack).",
 	"scripts": {
 		"test": "jest --config ./jest.config.js",
 		"test:export": "DEMO_NAME=baseline EXPORT_DB_SNAPSHOT=1 jest --config ./jest.config.js",

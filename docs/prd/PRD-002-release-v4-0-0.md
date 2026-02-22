@@ -47,3 +47,19 @@ v4.x is a **bridge** line: bugfix-only, focused on getting users safely from the
 - README + `docs/MIGRATION.md` clearly instruct Node>=20 and Sequelize v5/v6 usage.
 - v3 is deprecated on npm (after v4 release is confirmed stable).
 
+## Work Items (Mirrors `docs/STATUS.md`)
+
+### PRD-002 WI-005 Rename default branch and reconcile workflows/docs
+- Status: `In Progress` (mirrors `docs/STATUS.md`)
+
+### PRD-002 WI-001 Node >=20 enforcement design and impact checklist
+- Status: `Planned` (mirrors `docs/STATUS.md`)
+
+### PRD-002 WI-002 v4 docs, migration, and support-policy updates
+- Status: `Planned` (mirrors `docs/STATUS.md`)
+
+### PRD-002 WI-003 Create `release/v4` branch and CI gate contract setup
+- Status: `Planned` (mirrors `docs/STATUS.md`)
+
+### PRD-002 WI-004 v4 release workflow execution and v3 deprecate plan
+- Status: `Planned` (mirrors `docs/STATUS.md`)
