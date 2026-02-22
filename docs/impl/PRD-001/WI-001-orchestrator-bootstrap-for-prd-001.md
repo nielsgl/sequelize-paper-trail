@@ -4,15 +4,15 @@
 
 - PRD: `docs/prd/PRD-001-release-v3-1-0.md`
 - Depends on: `-`
-- Status: `In Progress` (mirrors `docs/STATUS.md`)
+- Status: `Done` (mirrors `docs/STATUS.md`)
 - Branch: `codex/prd-001-wi-001-orchestrator-bootstrap-for-prd-001`
 - Worktree: `.worktrees/prd-001-wi-001`
 
 ## Work Item Status
 
-- Current phase: `Step 4 implementation evidence captured`
+- Current phase: `Step 7 cleanup completed`
 - Plan Gate: `Approved`
-- Ship Gate: `Pending`
+- Ship Gate: `Approved`
 
 ## Scope
 

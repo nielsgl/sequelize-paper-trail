@@ -71,7 +71,7 @@ This PRD captures the work required to ship `sequelize-paper-trail@3.1.0` as the
 ## Work Item Mirror Status
 
 ### PRD-001 WI-001 Orchestrator bootstrap for PRD-001
-- Status: `In Progress` (mirrors `docs/STATUS.md`)
+- Status: `Done` (mirrors `docs/STATUS.md`)
 
 ### PRD-001 WI-002 Docs and messaging consistency pass
 - Status: `Planned` (mirrors `docs/STATUS.md`)
