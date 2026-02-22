@@ -282,14 +282,14 @@ Please use:
 
 ### Supported Versions
 
-The library is verified against Sequelize **v5** (current baseline) and **v6.37.7** via `npm run test:v6`. Both versions are covered by the user-journey suites (with coverage enforced) and CLS behavior is exercised through the adapter layer. Continuing CI runs should include `npm run test:v6` to ensure deterministic compatibility before declaring wider support for future releases.
+The library is verified against Sequelize **v5** (current baseline) and **v6.37.7**. Release-quality checks include `npm test -- --coverage`, `npm run test:v6` (required for `master` (current default) / `main` (post-rename), `feature/next`, and `release/v4`), and demo snapshot parity for baseline/v5/v6.
 
 Support lines:
 - **v3.x**: hotfix-only line (critical fixes only).
 - **v4.x**: bugfix-only bridge supporting Sequelize v5 + v6, Node >=20.
 - **v5.x**: feature line; Sequelize v6 primary, v7 experimental later.
 
-Node versions **<20** are deprecated and will be unsupported in the next major release. A runtime warning is emitted on `init()` unless `SUPPRESS_NODE_DEPRECATION=1` is set.
+Node versions **<20** are deprecated on the v3 line. A runtime warning is emitted once on `init()` unless `SUPPRESS_NODE_DEPRECATION=1` is set. Node **>=20** becomes required in the next major release.
 
 ## Contributing
 

@@ -10,7 +10,7 @@ Define how we maintain, release, and deprecate versions of sequelize-paper-trail
 
 ## Deprecation & Warnings
 - **Install-time deprecation:** After a new major ships, deprecate the prior major with `npm deprecate` and a clear migration message.
-- **Runtime warnings:** v3.x warns on install/usage that the line is hotfix-only and recommends upgrading.
+- **Runtime warnings:** v3.1.0 emits a Node <20 runtime warning once on `init()` (opt-out: `SUPPRESS_NODE_DEPRECATION=1`).
 - **Policy messaging:** README + CHANGELOG + migration notes must call out support levels and upgrade paths.
 
 ## Versioning Strategy
@@ -20,7 +20,7 @@ Define how we maintain, release, and deprecate versions of sequelize-paper-trail
 
 ## Quality Gates (Required)
 - `npm test -- --coverage` (coverage must pass)
-- `npm run test:v6`
+- `npm run test:v6` (required for `master` (current default) / `main` (post-rename), `feature/next`, and `release/v4`; optional for `release/v3`)
 - **Demo snapshot parity** across baseline/v5/v6
 - CI workflow success on the release branch
 

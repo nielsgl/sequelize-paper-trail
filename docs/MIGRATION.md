@@ -10,7 +10,7 @@ Update this document whenever runtime requirements, peer support, or behavioral 
 This library is verified against Sequelize **v5** and **v6.37.7**.
 
 ### Prerequisites
-- **Node**: use 20.20.0 as the recommended baseline (active LTS >=20 is acceptable). Node <20 is deprecated and will be removed in the next major.
+- **Node**: use 20.20.0 as the recommended baseline (active LTS >=20 is acceptable). Node <20 is deprecated on the v3 line, and Node >=20 is required in the next major.
 - **npm**: canonical package manager (lockfile `package-lock.json`).
 - **Sequelize**: use `^5` for v5 apps or `^6` for v6 apps (both are accepted as peer deps).
 - **CLS package**:
@@ -61,3 +61,4 @@ This library is verified against Sequelize **v5** and **v6.37.7**.
 - **v3.x**: hotfix‑only line (critical fixes only). v3.1.0 adds a runtime warning on Node <20 (opt-out via `SUPPRESS_NODE_DEPRECATION=1`).
 - **v4.x**: bugfix‑only bridge supporting Sequelize v5 + v6, Node >=20.
 - **v5.x**: feature line; Sequelize v6 primary, v7 experimental later.
+- Upgrade path: `v3 -> v4 -> v5`.

@@ -6,5 +6,5 @@
 ## 3.1.0
 - Add a runtime warning when running on Node <20 (emitted once on `init()`).
 - Allow opting out of the warning with `SUPPRESS_NODE_DEPRECATION=1`.
-- Document the deprecation path: warn in the next minor, enforce Node >=20 in the next major.
-- Release policy + doc map, and test gates including Sequelize v6 and demo parity.
+- Document the deprecation path: v3 warns now, and Node >=20 is required in the next major.
+- Release policy + doc map, and release gates including coverage, `test:v6`, and demo snapshot parity.
