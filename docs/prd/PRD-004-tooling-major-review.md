@@ -23,3 +23,4 @@ Phase 6 work (tooling major review) is intentionally deferred, but it must stay 
 - A single WI tracks the review outcome with explicit decision (`go` / `no-go` / `defer`).
 - Decision includes required config migration notes and test impact notes.
 - `docs/STATUS.md` and `docs/PLAN.md` reference this PRD as tracked deferred work.
+- Deferred high/critical dev-tooling vulnerabilities from `PRD-002 WI-006` have a remediation WI linked under this PRD.

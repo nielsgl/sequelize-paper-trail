@@ -23,6 +23,7 @@ Ordered by execution wave and dependency.
 | `PRD-003 WI-002` | `PRD-003` | `WI-002` | Local diff adapter implementation plan and compatibility proof points | 4 | `PRD-003 WI-001` | Planned |
 | `PRD-003 WI-003` | `PRD-003` | `WI-003` | Remove `deep-diff` from runtime deps and update changelog/status | 4 | `PRD-003 WI-002` | Planned |
 | `PRD-004 WI-001` | `PRD-004` | `WI-001` | Tooling-major review decision (Jest 30, ESLint 9, Prettier latest) | 5 | - | Planned |
+| `PRD-004 WI-002` | `PRD-004` | `WI-002` | Remediate deferred high/critical dev-tooling vulnerabilities from PRD-002 WI-006 exceptions | 5 | `PRD-004 WI-001` | Planned |
 
 ## In Progress
 

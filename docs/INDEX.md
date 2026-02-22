@@ -13,7 +13,7 @@ This is the canonical PRD selector for workflow-orchestrator claim precedence.
 - Wave 2: PRD-001 WI-002, PRD-001 WI-003, PRD-001 WI-004, PRD-001 WI-005
 - Wave 3: PRD-002 WI-005, PRD-002 WI-006, PRD-002 WI-001, PRD-002 WI-002, PRD-002 WI-003, PRD-002 WI-004
 - Wave 4: PRD-003 WI-001, PRD-003 WI-002, PRD-003 WI-003
-- Wave 5: PRD-004 WI-001
+- Wave 5: PRD-004 WI-001, PRD-004 WI-002
 
 ## PRD to WI Mapping
 ### PRD-001 release-v3-1-0
@@ -38,3 +38,4 @@ This is the canonical PRD selector for workflow-orchestrator claim precedence.
 
 ### PRD-004 tooling-major-review
 - WI-001: Formal tooling-major review decision (Jest 30, ESLint 9, Prettier latest).
+- WI-002: Remediate deferred high/critical dev-tooling vulnerabilities from WI-006 exceptions.
