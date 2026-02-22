@@ -52,6 +52,9 @@ v4.x is a **bridge** line: bugfix-only, focused on getting users safely from the
 ### PRD-002 WI-005 Rename default branch and reconcile workflows/docs
 - Status: `Done` (mirrors `docs/STATUS.md`)
 
+### PRD-002 WI-006 Security vulnerability triage and remediation plan before v4 release
+- Status: `In Progress` (mirrors `docs/STATUS.md`)
+
 ### PRD-002 WI-001 Node >=20 enforcement design and impact checklist
 - Status: `Planned` (mirrors `docs/STATUS.md`)
 

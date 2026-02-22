@@ -23,6 +23,10 @@ Define how we maintain, release, and deprecate versions of sequelize-paper-trail
 - `npm run test:v6` (required for `main`, `feature/next`, and `release/v4`; optional for `release/v3`)
 - **Demo snapshot parity** across baseline/v5/v6
 - CI workflow success on the release branch
+- Security evidence gate (required before release approval):
+  - `npm audit --omit=dev --json` shows zero runtime/prod vulnerabilities,
+  - full `npm audit --json` findings are triaged,
+  - unresolved high/critical dev-tooling findings have explicit exceptions with owner + follow-up target WI/version.
 
 ## Release Flow
 All publishing is manual via the Release workflow; no branch push should auto-publish.
