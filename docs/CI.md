@@ -7,10 +7,10 @@ Capture the CI matrix and quality gates for the Phase 5 release workflow that no
 - **CI:** `.github/workflows/ci.yml`
   - Triggers: push + pull_request on `master` (current default), `main` (if renamed), `feature/next`, `release/v3`, `release/v4`.
   - Runs: `npm ci`, `npm test -- --coverage`.
-  - Runs `npm run test:v6` for all branches **except** `release/v3`.
+  - Runs `npm run test:v6` for `master`/`main`, `feature/next`, and `release/v4` (`release/v3` is exempt).
 - **Release (npm):** `.github/workflows/release.yml`
   - Trigger: `workflow_dispatch` only (manual).
-  - Runs: `npm ci`, `npm test -- --coverage`, `npm run test:v6` (skippable only for `release/v3`).
+  - Runs: `npm ci`, `npm test -- --coverage`, and `npm run test:v6` (required except for `release/v3`).
   - Publishes to **npm** using `NPM_TOKEN` and release environment approval.
 - **Demo Parity:** `.github/workflows/demo-parity.yml`
   - Trigger: `workflow_dispatch` only (manual).
@@ -24,7 +24,7 @@ Capture the CI matrix and quality gates for the Phase 5 release workflow that no
 ## Required Checks
 - Install: `npm ci`
 - Tests: `npm test -- --coverage`
-- Sequelize v6 tests: `npm run test:v6` (required for `main`, `feature/next`, `release/v4`)
+- Sequelize v6 tests: `npm run test:v6` (required for `master`/`main`, `feature/next`, `release/v4`; optional for `release/v3`)
 - Lint: `npm run lint` (opt-in for now; schedule a dedicated lint job once the tooling stabilizes)
 
 ## Notes
