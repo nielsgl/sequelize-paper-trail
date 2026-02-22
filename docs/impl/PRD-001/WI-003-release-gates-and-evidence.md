@@ -4,13 +4,13 @@
 
 - PRD: `docs/prd/PRD-001-release-v3-1-0.md`
 - Depends on: `PRD-001 WI-002`
-- Status: `In Progress` (mirrors `docs/STATUS.md`)
+- Status: `Done` (mirrors `docs/STATUS.md`)
 - Branch: `codex/prd-001-wi-003-release-gates-and-evidence`
 - Worktree: `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-001-wi-003`
 
 ## Work Item Status
 
-- Current phase: `Step 7 close-out in progress`
+- Current phase: `Step 7 cleanup completed`
 - Plan Gate: `Approved`
 - Ship Gate: `Approved`
 
