@@ -4,15 +4,15 @@
 
 - PRD: `docs/prd/PRD-002-release-v4-0-0.md`
 - Depends on: `PRD-002 WI-006`
-- Status: `In Progress` (mirrors `docs/STATUS.md`)
+- Status: `Done` (mirrors `docs/STATUS.md`)
 - Branch: `codex/prd-002-wi-001-node-gte20-enforcement-design`
 - Worktree: `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-002-wi-001`
 
 ## Work Item Status
 
-- Current phase: `Step 4 implementation in progress`
+- Current phase: `Step 7 cleanup completed`
 - Plan Gate: `Approved`
-- Ship Gate: `Pending`
+- Ship Gate: `Approved`
 
 ## Scope
 
@@ -49,7 +49,7 @@ Implement hard runtime enforcement for Node >=20 in `init()` and update user-fac
 - [x] Update tests to assert throw behavior across supported and unsupported runtime scenarios.
 - [x] Update README and migration policy text for v4 enforcement semantics.
 - [x] Execute verification command set and record results.
-- [ ] Reconcile runtime/PRD/WI status labels at close-out.
+- [x] Reconcile runtime/PRD/WI status labels at close-out.
 
 ## Implementation Findings
 
@@ -79,7 +79,14 @@ Implement hard runtime enforcement for Node >=20 in `init()` and update user-fac
 
 - `README.md` support-policy language now states v4 runtime enforcement and explicit error code behavior.
 - `docs/MIGRATION.md` prerequisite language now states fail-closed v4 enforcement behavior.
-- `docs/prd/PRD-002-release-v4-0-0.md` WI-001 mirror status updated to `In Progress`.
+- `docs/prd/PRD-002-release-v4-0-0.md` WI-001 mirror status updated to `Done`.
+
+### Execution-Context Boundary Checks
+
+- commit stage context: executed from claimed WI branch `codex/prd-002-wi-001-node-gte20-enforcement-design` (commit `99024c0`).
+- merge stage context: executed from primary `main` using `git merge --no-ff codex/prd-002-wi-001-node-gte20-enforcement-design` (merge commit on `main`).
+- status-finalization stage context: runtime transition to `Done` applied post-merge from primary `main` context.
+- cleanup stage context: completed from primary `main` context via `git worktree remove .worktrees/prd-002-wi-001` and `git branch -d codex/prd-002-wi-001-node-gte20-enforcement-design`.
 
 ### First-Mutating-Command Context Proof
 
@@ -153,7 +160,7 @@ Implement hard runtime enforcement for Node >=20 in `init()` and update user-fac
 - Added deterministic unsupported-runtime error contract (`ERR_UNSUPPORTED_NODE_VERSION`) for Node `<20` and unknown/malformed runtime metadata.
 - Updated `test/node-deprecation.spec.js` to assert throw semantics and no-op suppression env behavior.
 - Updated v4 policy text in `README.md` and `docs/MIGRATION.md`.
-- Updated mirrored PRD status for WI-001 to `In Progress` in `docs/prd/PRD-002-release-v4-0-0.md`.
+- Updated mirrored PRD status for WI-001 to `Done` in `docs/prd/PRD-002-release-v4-0-0.md`.
 
 ### Why this option was chosen
 
