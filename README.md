@@ -289,7 +289,7 @@ Support lines:
 - **v4.x**: bugfix-only bridge supporting Sequelize v5 + v6, Node >=20.
 - **v5.x**: feature line; Sequelize v6 primary, v7 experimental later.
 
-Node versions **<20** are deprecated on the v3 line. A runtime warning is emitted once on `init()` unless `SUPPRESS_NODE_DEPRECATION=1` is set. Node **>=20** becomes required in the next major release.
+Node versions **<20** are unsupported on the v4 line. `init()` now throws `ERR_UNSUPPORTED_NODE_VERSION` for Node <20 or unknown/malformed Node runtime metadata. `SUPPRESS_NODE_DEPRECATION` no longer bypasses runtime enforcement in v4.
 
 ## Contributing
 

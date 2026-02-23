@@ -19,7 +19,16 @@ const setProcessVersions = (value, fn) => {
 const setNodeVersion = (version, fn) =>
 	setProcessVersions({ ...process.versions, node: version }, fn);
 
-describe('node version deprecation warning', () => {
+const getInitError = (init, sequelize) => {
+	try {
+		init(sequelize, {});
+	} catch (error) {
+		return error;
+	}
+	throw new Error('Expected init() to throw');
+};
+
+describe('node version enforcement', () => {
 	let originalEnv;
 
 	beforeEach(() => {
@@ -37,95 +46,82 @@ describe('node version deprecation warning', () => {
 		jest.resetModules();
 	});
 
-	it('warns once when Node is below the minimum', () => {
-		const warnSpy = jest
-			.spyOn(console, 'warn')
-			.mockImplementation(() => undefined);
-
+	it('throws when Node is below the minimum', () => {
 		setNodeVersion('18.19.0', () => {
 			jest.isolateModules(() => {
 				const { init } = require('../lib/index');
 				const sequelize = createSequelize();
-				init(sequelize, {});
-				init(sequelize, {});
+				expect(() => init(sequelize, {})).toThrow(
+					'Unsupported Node runtime',
+				);
+				expect(() => init(sequelize, {})).toThrow(
+					'Node >=20 is required.',
+				);
+				expect(getInitError(init, sequelize).code).toBe(
+					'ERR_UNSUPPORTED_NODE_VERSION',
+				);
 				return sequelize.close();
 			});
 		});
-
-		expect(warnSpy).toHaveBeenCalledTimes(1);
-		warnSpy.mockRestore();
 	});
 
-	it('does not warn when Node meets the minimum', () => {
-		const warnSpy = jest
-			.spyOn(console, 'warn')
-			.mockImplementation(() => undefined);
-
+	it('does not throw when Node meets the minimum', () => {
 		setNodeVersion('22.22.0', () => {
 			jest.isolateModules(() => {
 				const { init } = require('../lib/index');
 				const sequelize = createSequelize();
-				init(sequelize, {});
+				expect(() => init(sequelize, {})).not.toThrow();
 				return sequelize.close();
 			});
 		});
-
-		expect(warnSpy).not.toHaveBeenCalled();
-		warnSpy.mockRestore();
 	});
 
-	it('does not warn when Node version is unavailable', () => {
-		const warnSpy = jest
-			.spyOn(console, 'warn')
-			.mockImplementation(() => undefined);
-
+	it('throws when Node version is unavailable', () => {
 		setProcessVersions({}, () => {
 			jest.isolateModules(() => {
 				const { init } = require('../lib/index');
 				const sequelize = createSequelize();
-				init(sequelize, {});
+				expect(() => init(sequelize, {})).toThrow(
+					'Unsupported Node runtime "unknown"',
+				);
+				expect(getInitError(init, sequelize).code).toBe(
+					'ERR_UNSUPPORTED_NODE_VERSION',
+				);
 				return sequelize.close();
 			});
 		});
-
-		expect(warnSpy).not.toHaveBeenCalled();
-		warnSpy.mockRestore();
 	});
 
-	it('does not warn when Node version is malformed', () => {
-		const warnSpy = jest
-			.spyOn(console, 'warn')
-			.mockImplementation(() => undefined);
-
+	it('throws when Node version is malformed', () => {
 		setProcessVersions({ node: 'not-a-version' }, () => {
 			jest.isolateModules(() => {
 				const { init } = require('../lib/index');
 				const sequelize = createSequelize();
-				init(sequelize, {});
+				expect(() => init(sequelize, {})).toThrow(
+					'Unsupported Node runtime "not-a-version"',
+				);
+				expect(getInitError(init, sequelize).code).toBe(
+					'ERR_UNSUPPORTED_NODE_VERSION',
+				);
 				return sequelize.close();
 			});
 		});
-
-		expect(warnSpy).not.toHaveBeenCalled();
-		warnSpy.mockRestore();
 	});
 
-	it('does not warn when suppressed via env', () => {
+	it('does not bypass enforcement when SUPPRESS_NODE_DEPRECATION=1', () => {
 		process.env.SUPPRESS_NODE_DEPRECATION = '1';
-		const warnSpy = jest
-			.spyOn(console, 'warn')
-			.mockImplementation(() => undefined);
-
 		setNodeVersion('18.19.0', () => {
 			jest.isolateModules(() => {
 				const { init } = require('../lib/index');
 				const sequelize = createSequelize();
-				init(sequelize, {});
+				expect(() => init(sequelize, {})).toThrow(
+					'Unsupported Node runtime',
+				);
+				expect(getInitError(init, sequelize).code).toBe(
+					'ERR_UNSUPPORTED_NODE_VERSION',
+				);
 				return sequelize.close();
 			});
 		});
-
-		expect(warnSpy).not.toHaveBeenCalled();
-		warnSpy.mockRestore();
 	});
 });
