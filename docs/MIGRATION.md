@@ -10,7 +10,7 @@ Update this document whenever runtime requirements, peer support, or behavioral 
 This library is verified against Sequelize **v5** and **v6.37.7**.
 
 ### Prerequisites
-- **Node**: use 20.20.0 as the recommended baseline (active LTS >=20 is acceptable). Node <20 is deprecated on the v3 line, and Node >=20 is required in the next major.
+- **Node**: use 20.20.0 as the recommended baseline (active LTS >=20 is acceptable). On v4, Node <20 is unsupported and `init()` throws `ERR_UNSUPPORTED_NODE_VERSION` for Node <20 or unknown/malformed Node runtime metadata.
 - **npm**: canonical package manager (lockfile `package-lock.json`).
 - **Sequelize**: use `^5` for v5 apps or `^6` for v6 apps (both are accepted as peer deps).
 - **CLS package**:
