@@ -26,6 +26,13 @@ v4.x is a **bridge** line: bugfix-only, focused on getting users safely from the
 - Demo snapshot parity across baseline/v5/v6
 - CI workflow success on the v4 release branch
 
+## Branch Execution Contract
+
+- `WI-002` (docs/policy alignment): implement on `main` (via feature/worktree branch based on `main`).
+- `WI-003` (release branch + protection): implement on `main`, then create/configure `release/v4`.
+- `WI-004` (release execution): run release workflow from `release/v4` only.
+- Return-to-main rule: once v4 release verification and post-release actions are complete in `WI-004`, switch active development back to `main`.
+
 ## Execution Plan (Checklist)
 1) Cut the bridge branch:
    - Create `release/v4` from the v4 release commit (or cut from `feature/next` once v4 changes land).
@@ -33,7 +40,7 @@ v4.x is a **bridge** line: bugfix-only, focused on getting users safely from the
    - Replace Node<20 warning with Node<20 **error** on `init()`.
    - Update README support policy + migration guide for v4.
 3) Run gates (local + CI) and demo parity.
-4) Publish v4.0.0 via `.github/workflows/release.yml` (manual only).
+4) Publish v4.0.0 via `.github/workflows/release.yml` (manual only) from `release/v4`.
 5) Post-release:
    - `npm deprecate` v3 major with a clear upgrade message pointing to v4/v5.
    - Keep `release/v3` hotfix-only.
@@ -44,7 +51,10 @@ v4.x is a **bridge** line: bugfix-only, focused on getting users safely from the
 
 ## Acceptance Criteria
 - v4.0.0 published to npm.
+- Publish/tag evidence confirms release executed from `release/v4`.
 - README + `docs/MIGRATION.md` clearly instruct Node>=20 and Sequelize v5/v6 usage.
+- Demo parity gate evidence is recorded as part of release approval.
+- `CHANGELOG` and release notes are finalized for v4.0.0.
 - v3 is deprecated on npm (after v4 release is confirmed stable).
 
 ## Work Items (Mirrors `docs/STATUS.md`)
