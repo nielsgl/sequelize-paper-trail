@@ -20,11 +20,21 @@ on:
           - 'true'
           - 'false'
 
+permissions:
+  contents: read
+
 jobs:
   deprecate:
     runs-on: ubuntu-latest
     environment: release
     steps:
+      - name: Enforce main-only execution
+        run: |
+          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
+            echo "This workflow may only run from refs/heads/main."
+            exit 1
+          fi
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
