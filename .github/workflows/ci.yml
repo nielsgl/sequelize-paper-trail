@@ -80,8 +80,9 @@ jobs:
       - name: Pack local library for example override
         run: |
           rm -f examples/_artifacts/sequelize-paper-trail-local.tgz
-          package_tgz=$(npm pack --pack-destination examples/_artifacts | tail -n1)
-          cp "examples/_artifacts/${package_tgz}" examples/_artifacts/sequelize-paper-trail-local.tgz
+          npm pack --pack-destination examples/_artifacts
+          latest_tgz=$(ls -t examples/_artifacts/sequelize-paper-trail-*.tgz | head -n1)
+          cp "${latest_tgz}" examples/_artifacts/sequelize-paper-trail-local.tgz
 
       - name: Smoke test examples/v3
         run: |
