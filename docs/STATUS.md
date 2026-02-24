@@ -72,3 +72,4 @@ Record completion and evidence location.
 - Historical phase and demo PRDs remain in `docs/archive/`.
 - Active PRDs remain in `docs/prd/`.
 - Runtime WI execution now uses this file plus `docs/INDEX.md` and `docs/impl/`.
+- Post-release corrective patch `v4.0.1` evidence is recorded in `docs/impl/PRD-002/WI-004-v4-release-and-v3-deprecate-plan.md`.

@@ -202,6 +202,22 @@ Execute v4.0.0 release end-to-end with complete evidence trail, then apply contr
 - [x] v3 deprecation executed with evidence and verified on published v3 versions.
 - [x] Runtime status close-out to `Done` after merge.
 
+## Post-Release Corrective Patch (4.0.1)
+
+- Corrective patch rationale: `v4.0.0` could generate duplicate `revisionId`/`RevisionId` columns for `RevisionChange` when default attributes were used.
+- Patch release commit on `release/v4`: `4ac1cdee87d7236a11089e663c871ef0716a471c`.
+- Release workflow evidence:
+  - dry-run: `https://github.com/nielsgl/sequelize-paper-trail/actions/runs/22348241289` (`success`)
+  - publish: `https://github.com/nielsgl/sequelize-paper-trail/actions/runs/22348277651` (`success`)
+- CI evidence for added example smoke gate:
+  - `https://github.com/nielsgl/sequelize-paper-trail/actions/runs/22348121946` (`Test` + `Examples Smoke` both `success`)
+- Registry/tag evidence:
+  - `npm view sequelize-paper-trail@4.0.1 version` -> `4.0.1`
+  - `npm view sequelize-paper-trail dist-tags --json` -> `latest: 4.0.1`
+  - `git ls-remote --tags origin 'v4.0.1^{}'` -> `4ac1cdee87d7236a11089e663c871ef0716a471c`
+- GitHub release evidence:
+  - `https://github.com/nielsgl/sequelize-paper-trail/releases/tag/v4.0.1` (latest)
+
 ## Ship Gate Prompt
 
 `Ship Approval Gate: Do you approve commit + merge + status update + cleanup for PRD-002 WI-004? Reply with "ship approved" or "approved".`
