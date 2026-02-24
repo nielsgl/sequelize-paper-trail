@@ -23,6 +23,7 @@ on:
 jobs:
   deprecate:
     runs-on: ubuntu-latest
+    environment: release
     steps:
       - name: Setup Node
         uses: actions/setup-node@v4
