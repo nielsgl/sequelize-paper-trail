@@ -8,9 +8,11 @@ Capture the CI matrix and quality gates for the Phase 5 release workflow that no
   - Triggers: push + pull_request on `main`, `feature/next`, `release/v3`, `release/v4`.
   - Runs: `npm ci`, `npm test -- --coverage`.
   - Runs `npm run test:v6` for `main`, `feature/next`, and `release/v4` (`release/v3` is exempt).
+  - Runs examples smoke checks for `examples/v3` and `examples/v4` (v4 is validated against the current workspace package override).
 - **Release (npm):** `.github/workflows/release.yml`
   - Trigger: `workflow_dispatch` only (manual).
   - Runs: `npm ci`, `npm test -- --coverage`, and `npm run test:v6` (required except for `release/v3`).
+  - Requires `Examples Smoke` check success on the release commit before publish/dry-run steps continue.
   - Publishes to **npm** using `NPM_TOKEN` and release environment approval.
 - **Demo Parity:** `.github/workflows/demo-parity.yml`
   - Trigger: `workflow_dispatch` only (manual).
@@ -31,4 +33,5 @@ Capture the CI matrix and quality gates for the Phase 5 release workflow that no
 - Coverage thresholds enforce 100% branches/functions/lines/statements for `lib/index.js` and `lib/helpers.js`.
 - Demo parity is a manual gate (run it before tagging or publishing).
 - Branch protection should require the `Test (v5 + optional v6)` status check for `main`, `release/v3`, and `release/v4`.
+- Branch protection should require both `Test (v5 + optional v6)` and `Examples Smoke` for `main`, `release/v3`, and `release/v4`.
 - Node 22.x remains a future expansion target after v4/v5 release stabilization.

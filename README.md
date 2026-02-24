@@ -263,6 +263,7 @@ Tracked PRDs (current + deferred):
 - `docs/prd/PRD-002-release-v4-0-0.md`: v4.0.0 release PRD (bridge line).
 - `docs/prd/PRD-003-deep-diff-replacement.md`: deep-diff removal plan (no behavior drift).
 - `docs/prd/PRD-004-tooling-major-review.md`: tooling-major review backlog (Jest/ESLint/Prettier).
+- `docs/prd/PRD-005-release-v5-0-0.md`: v5.0.0 release PRD (feature line release execution).
 
 PRD index:
 - `docs/INDEX.md`: ordered execution plan from PRD wave selection down to WI ordering.
