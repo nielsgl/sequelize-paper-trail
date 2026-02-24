@@ -56,3 +56,37 @@ jobs:
       - name: Run Sequelize v6 suite
         if: ${{ steps.v6.outputs.enabled == 'true' && !(github.ref == 'refs/heads/release/v3' || github.base_ref == 'release/v3') }}
         run: npm run test:v6
+
+  examples-smoke:
+    name: Examples Smoke
+    runs-on: ubuntu-latest
+    needs: test
+    env:
+      NODE_OPTIONS: '--max-old-space-size=4096'
+      SEQUELIZE_CLS: cls-hooked
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.20.0'
+          cache: npm
+
+      - name: Pack local library for example override
+        run: |
+          rm -f examples/_artifacts/sequelize-paper-trail-local.tgz
+          package_tgz=$(npm pack --pack-destination examples/_artifacts | tail -n1)
+          cp "examples/_artifacts/${package_tgz}" examples/_artifacts/sequelize-paper-trail-local.tgz
+
+      - name: Smoke test examples/v3
+        run: |
+          npm --prefix examples/v3 ci
+          npm --prefix examples/v3 run start
+
+      - name: Smoke test examples/v4 against current commit
+        run: |
+          npm --prefix examples/v4 pkg set dependencies.sequelize-paper-trail="file:../_artifacts/sequelize-paper-trail-local.tgz"
+          npm --prefix examples/v4 ci
+          npm --prefix examples/v4 run start
