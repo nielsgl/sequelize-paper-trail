@@ -4,13 +4,13 @@
 
 - PRD: `docs/prd/PRD-002-release-v4-0-0.md`
 - Depends on: `PRD-002 WI-003`
-- Status: `In Progress` (mirrors `docs/STATUS.md`)
+- Status: `Done` (mirrors `docs/STATUS.md`)
 - Branch: `codex/prd-002-wi-004-v4-release-and-v3-deprecate-plan`
 - Worktree: `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-002-wi-004`
 
 ## Work Item Status
 
-- Current phase: `Step 6 ship-gate approved`
+- Current phase: `Step 7 cleanup completed`
 - Plan Gate: `Approved`
 - Ship Gate: `Approved`
 
@@ -65,7 +65,7 @@ Execute v4.0.0 release end-to-end with complete evidence trail, then apply contr
 - [x] Run deprecate workflow dry-run and verify printed command.
 - [x] Run deprecate workflow real execution and verify success.
 - [x] Verify deprecation externally for v3 (`3.1.0`, `2.5.2`).
-- [ ] Reconcile `docs/STATUS.md`, PRD mirror status, and WI evidence summary at close-out (post-merge).
+- [x] Reconcile `docs/STATUS.md`, PRD mirror status, and WI evidence summary at close-out (post-merge).
 
 ## Implementation Findings
 
@@ -200,7 +200,7 @@ Execute v4.0.0 release end-to-end with complete evidence trail, then apply contr
 - [x] GitHub Releases page updated with `v4.0.0` as latest.
 - [x] `CHANGELOG` and release notes finalized and linked.
 - [x] v3 deprecation executed with evidence and verified on published v3 versions.
-- [ ] Runtime status close-out to `Done` after merge.
+- [x] Runtime status close-out to `Done` after merge.
 
 ## Ship Gate Prompt
 
