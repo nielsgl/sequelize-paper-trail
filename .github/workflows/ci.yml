@@ -79,11 +79,11 @@ jobs:
 
       - name: Smoke test examples/v3
         run: |
-          npm --prefix examples/v3 ci
+          npm --prefix examples/v3 install
           npm --prefix examples/v3 run start
 
       - name: Smoke test examples/v4 against current commit
         run: |
-          npm --prefix examples/v4 ci
+          npm --prefix examples/v4 install
           npm --prefix examples/v4 install --no-save "$GITHUB_WORKSPACE"
           npm --prefix examples/v4 run start
