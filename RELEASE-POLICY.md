@@ -41,6 +41,22 @@ All publishing is manual via the Release workflow; no branch push should auto-pu
 - Maintain Sequelize v5 + v6 compatibility.
 - Publish major (4.0.0), then patch releases as needed.
 
+#### v4 Bridge Operating Policy (Enforced)
+- Required runtime contract:
+  - Node `<20` is unsupported and must fail fast at runtime (`ERR_UNSUPPORTED_NODE_VERSION`).
+  - Sequelize support remains limited to v5 and v6 adapters for the full v4 line.
+- Allowed change classes:
+  - correctness bugfixes,
+  - compatibility fixes for Sequelize v5/v6 and Node>=20,
+  - documentation and release-process clarifications.
+- Disallowed change classes:
+  - net-new features,
+  - support expansion to new Sequelize majors,
+  - behavior rewrites that belong to v5 line planning.
+- Documentation ownership across PRD-002:
+  - WI-002 owns support-policy and migration wording alignment,
+  - WI-004 owns release-note and `CHANGELOG` finalization for the release event.
+
 ### v5.x (feature)
 - Primary development line.
 - Drop Sequelize v5 support; v6 is default; evaluate v7 experimentally.
@@ -81,3 +97,4 @@ All publishing is manual via the Release workflow; no branch push should auto-pu
 - CHANGELOG entry
 - Migration guide (if behavior or support changes)
 - CI status and gate results recorded
+- For PRD-002 sequencing: WI-002 updates support-policy/migration wording; WI-004 owns release-note and `CHANGELOG` finalization.

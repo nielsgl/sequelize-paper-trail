@@ -52,6 +52,25 @@ This library is verified against Sequelize **v5** and **v6.37.7**.
    SEQUELIZE_ADAPTER=v6 npm test
    ```
 
+### v3 -> v4 Migration Checklist (Bridge-Line Specific)
+
+1. Upgrade runtime first:
+   - ensure deployment images and local dev use Node `>=20`,
+   - remove reliance on `SUPPRESS_NODE_DEPRECATION` as a compatibility mechanism.
+2. Validate adapter path for your Sequelize major:
+   - v5 apps: keep `^5` and validate existing hooks/transactions behavior,
+   - v6 apps: keep `^6` and verify CLS flow with `cls-hooked` where used.
+3. Re-run core write-path scenarios:
+   - create/update/destroy revision capture,
+   - user attribution via options (`userId`) and via CLS context (`continuationNamespace`).
+4. Execute release gates before promoting:
+   - `npm test -- --coverage`,
+   - `npm run test:v6`,
+   - demo snapshot parity for baseline/v5/v6.
+5. Update release docs in this sequence:
+   - align support-policy and migration wording,
+   - finalize release notes and `CHANGELOG` before publish approval.
+
 ### Rollback Strategy
 - Revert to the previous tag and reinstall dependencies.
 - If CLS fails, confirm the namespace and key are set before your write.
