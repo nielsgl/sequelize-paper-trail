@@ -3,6 +3,12 @@
 ## Unreleased
 - (Reserved)
 
+## 4.0.0
+- Enforce Node.js `>=20` at runtime on `init()` with fail-fast behavior for unsupported runtimes.
+- Formalize bridge-line support for Sequelize `^5 || ^6` with no feature expansion.
+- Finalize v4 bridge documentation and migration guidance for `v3 -> v4`.
+- Standardize release gates for v4 publishing: coverage, Sequelize v6 suite, and demo snapshot parity.
+
 ## 3.1.0
 - Add a runtime warning when running on Node <20 (emitted once on `init()`).
 - Allow opting out of the warning with `SUPPRESS_NODE_DEPRECATION=1`.
