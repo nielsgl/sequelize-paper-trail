@@ -3,9 +3,9 @@
 This is the canonical PRD selector for workflow-orchestrator claim precedence.
 
 ## Active PRDs
-- PRD-001: release-v3-1-0 | Active: yes | Priority: P0 | Execution waves: 1,2
+- PRD-001: release-v3-1-0 | Active: no | Priority: P0 | Execution waves: 1,2
 - PRD-002: release-v4-0-0 | Active: no | Priority: P1 | Execution waves: 3
-- PRD-003: deep-diff-replacement | Active: no | Priority: P2 | Execution waves: 4
+- PRD-003: deep-diff-replacement | Active: yes | Priority: P2 | Execution waves: 4
 - PRD-004: tooling-major-review | Active: no | Priority: P3 | Execution waves: 5
 
 ## Execution Waves

@@ -12,10 +12,10 @@ This file tracks execution order at plan level. Runtime WI state is tracked in `
 
 ## Immediate Next Steps
 
-1. Execute `PRD-001 WI-001` (Wave 1) to bootstrap orchestrator flow for PRD-001.
-2. Complete `PRD-001 WI-002..WI-005` (Wave 2) in dependency order.
-3. Start `PRD-002 WI-001..WI-004` (Wave 3) after all PRD-001 items are done.
-4. Start `PRD-003 WI-001..WI-003` (Wave 4) after PRD-002 is done.
+1. Execute `PRD-003 WI-001` (Wave 4): golden diff-behavior fixture matrix.
+2. Execute `PRD-003 WI-002` (Wave 4): local diff adapter compatibility plan.
+3. Execute `PRD-003 WI-003` (Wave 4): remove `deep-diff`, then update changelog/status.
+4. Start `PRD-004 WI-001..WI-002` (Wave 5) after PRD-003 is done.
 
 ## Milestones
 
@@ -25,7 +25,7 @@ This file tracks execution order at plan level. Runtime WI state is tracked in `
 
 - **v4.0.0 release line (`PRD-002`)**
   - Enforce Node >=20 and finalize migration/support-policy updates.
-  - Output: published 4.0.0, `release/v4` contract in place, v3 deprecation plan ready.
+  - Output: published 4.0.0, `release/v4` contract in place, v3 deprecation executed.
 
 - **deep-diff replacement (`PRD-003`)**
   - Lock behavior with golden fixtures before dependency removal.
