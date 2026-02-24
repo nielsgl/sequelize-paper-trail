@@ -71,7 +71,7 @@ All publishing is manual via the Release workflow; no branch push should auto-pu
 
 ### Branch Protection (Required)
 - Protect `main`, `release/v3`, and `release/v4`.
-- Require the `CI` workflow to pass before merge.
+- Require the `Test (v5 + optional v6)` status check to pass before merge.
 - Require PR reviews for changes to release branches.
 
 ### How Releases Flow
