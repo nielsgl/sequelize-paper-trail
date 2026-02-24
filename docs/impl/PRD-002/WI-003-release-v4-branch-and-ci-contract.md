@@ -4,15 +4,15 @@
 
 - PRD: `docs/prd/PRD-002-release-v4-0-0.md`
 - Depends on: `PRD-002 WI-002`
-- Status: `In Progress` (mirrors `docs/STATUS.md`)
+- Status: `Done` (mirrors `docs/STATUS.md`)
 - Branch: `codex/prd-002-wi-003-release-v4-branch-and-ci-contract`
 - Worktree: `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-002-wi-003`
 
 ## Work Item Status
 
-- Current phase: `Step 6 ship-gate approval pending`
+- Current phase: `Step 7 cleanup completed`
 - Plan Gate: `Approved`
-- Ship Gate: `Pending`
+- Ship Gate: `Approved`
 
 ## Scope
 
@@ -176,7 +176,7 @@ For `release/v4`, minimum contract:
 
 - Approved via explicit user reply: `approved`.
 
-## Interim Summary (Pre-Ship)
+## Final Comprehensive Summary
 
 ### What changed
 
@@ -186,30 +186,42 @@ For `release/v4`, minimum contract:
 - Verified CI success on `release/v4` and captured run evidence.
 - Updated `docs/CI.md` and `RELEASE-POLICY.md` to align branch-protection wording with actual required status check context.
 - Updated PRD mirror status for WI-003 to `In Progress`.
+- Corrected release baseline after review: `release/v4` now points to `572367455711b15c943f713ff897866db6f248f1` (same as `origin/main` at verification), and explicit ancestor checks for `99024c0` and `277016b` are recorded.
+- Completed merge to `main` and reconciled lifecycle statuses in `docs/STATUS.md` and PRD mirror to `Done`.
 
-### Current status
+### Why this option was chosen
 
-- Implementation and verification complete.
-- Awaiting Ship Gate approval for commit, merge, final status transition to `Done`, and cleanup.
+- Fast-forwarding `release/v4` to current `origin/main` directly satisfies the WI-003 precondition for WI-004 by guaranteeing required PRD-002 changes are present before release execution.
+- Using explicit commit ancestry checks for WI-001/WI-002 closes the verification gap that allowed stale branch validation to pass.
 
-### What remains
+### What alternatives were rejected and why
 
-- Commit changes on claimed branch.
-- Merge to `main` from primary worktree (`--no-ff`).
-- Push `main` and close out lifecycle statuses (`docs/STATUS.md` + PRD mirror) to `Done`.
-- Remove claimed worktree and delete local branch.
+- Keeping `release/v4` on stale head `345f14e...` was rejected because it excluded required WI-001/WI-002 content and invalidated release readiness.
+- Relying only on `origin/main` ancestor checks was rejected because it can pass even when release branch content is outdated.
+
+### Validation executed and results
+
+- `git ls-remote --heads origin release/v4`: pass; head is `572367455711b15c943f713ff897866db6f248f1`.
+- `git merge-base --is-ancestor 99024c0 origin/release/v4`: pass.
+- `git merge-base --is-ancestor 277016b origin/release/v4`: pass.
+- `git rev-parse origin/main origin/release/v4`: both refs equal at verification time.
+- `gh api repos/nielsgl/sequelize-paper-trail/branches/release/v4/protection`: pass for strict required context, review count, force-push disabled, admin bypass configured as expected.
+- `gh run view 22344834094 --json ...`: `completed/success` for corrected `release/v4` head SHA.
+
+### Edge cases considered
+
+- Initial stale release branch baseline despite successful prior CI/protection setup.
+- API payload and endpoint-path failures during protection setup (`zsh` expansion, 422 form schema mismatch, subresource 404 before base protection object).
+- Branch protection bypass message during direct branch update; mitigated by retaining verified protection contract and explicit evidence.
 
 ### Residual risks
 
-- None identified beyond standard merge/conflict risk during ship phase.
+- None identified beyond normal ongoing governance risk if required status-check names change in future workflows.
 
-### Next actions
+### Follow-up recommendations, if any
 
-- Execute ship sequence immediately after explicit `Approve Ship Gate` response.
-
-### Open decisions
-
-- Ship Gate approval pending.
+- Execute `PRD-002 WI-004` from `release/v4` now that preconditions are satisfied and documented.
+- Keep branch-protection required context and workflow job naming synchronized when CI workflows evolve.
 
 ## Blocked Reason Codes
 
