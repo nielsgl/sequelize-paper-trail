@@ -30,5 +30,5 @@ Capture the CI matrix and quality gates for the Phase 5 release workflow that no
 ## Notes
 - Coverage thresholds enforce 100% branches/functions/lines/statements for `lib/index.js` and `lib/helpers.js`.
 - Demo parity is a manual gate (run it before tagging or publishing).
-- Branch protection should require the `CI` workflow for `main`, `release/v3`, and `release/v4`.
+- Branch protection should require the `Test (v5 + optional v6)` status check for `main`, `release/v3`, and `release/v4`.
 - Node 22.x remains a future expansion target after v4/v5 release stabilization.
