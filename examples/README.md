@@ -11,15 +11,19 @@ npm run start
 ```
 
 ### Note on package source
-By default, the examples use a local tarball (`file:../_artifacts/sequelize-paper-trail-local.tgz`) so you can test the current working tree without publishing.
-To refresh the tarball after changes, run from the repo root:
+Package source is version-specific:
+- `examples/v3` uses published `sequelize-paper-trail@^3.1.0`.
+- `examples/v4` uses published `sequelize-paper-trail@^4.0.0`.
+- `examples/v5` uses a local tarball (`file:../_artifacts/sequelize-paper-trail-local.tgz`) for unreleased feature-line testing.
+
+To refresh the local tarball for `examples/v5`, run from the repo root:
 
 ```bash
 npm pack --pack-destination examples/_artifacts
 cp examples/_artifacts/sequelize-paper-trail-*.tgz examples/_artifacts/sequelize-paper-trail-local.tgz
 ```
 
-If you want to test the published package instead, replace `sequelize-paper-trail` in the example's `package.json` with the desired version (e.g., `^3.1.0`, `^4.0.0`).
+If you want to switch package source for a given example, edit `sequelize-paper-trail` in that example's `package.json`.
 
 ## Example index
 - `examples/v3` - legacy line (Sequelize v5 + sqlite3@4); intended for hotfix-only scenarios.
