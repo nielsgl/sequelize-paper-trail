@@ -10,9 +10,11 @@ Execute v4.0.0 release end-to-end with complete evidence trail, then apply contr
 
 ## In Scope
 
+- Version bump on `release/v4` to `4.0.0` with committed release candidate SHA.
 - Manual release workflow execution (dry-run then publish).
 - npm publish verification (version/tag/package metadata).
 - git tag/release commit integrity verification.
+- GitHub release entry creation so the releases page reflects v4 as latest.
 - `npm deprecate` plan and execution for v3 major line.
 - Rollback decision tree documentation for release failures.
 
@@ -37,6 +39,9 @@ Execute v4.0.0 release end-to-end with complete evidence trail, then apply contr
   - `dist-tag=latest` (unless explicitly approved alternative)
   - `dry-run=true` first, then `dry-run=false`
   - `skip-v6=false` (v4 must run v6 suite)
+- Release candidate SHA lock:
+  - record `origin/release/v4` SHA before dry-run,
+  - verify same SHA before publish.
 
 ## Required Deprecation Policy
 
@@ -45,6 +50,8 @@ Execute v4.0.0 release end-to-end with complete evidence trail, then apply contr
   - upgrade target (`v4` bridge and/or `v5` feature line),
   - brief reason (support/runtime policy),
   - migration-doc reference.
+- Command template:
+  - `npm deprecate "sequelize-paper-trail@<4.0.0" "v3 is legacy. Upgrade to v4 (bridge) or v5 (feature line). See docs/MIGRATION.md."`
 
 ## Non-Sufficient Completion Rule
 
@@ -54,7 +61,8 @@ The following is not sufficient:
 - tag existence without commit integrity check,
 - deprecate message draft without execution or explicit deferred decision,
 - release without required demo parity pass evidence,
-- release without `CHANGELOG` and release notes finalization.
+- release without `CHANGELOG` and release notes finalization,
+- npm publish without corresponding GitHub release entry update.
 
 ## Plan Gate Prompt
 
@@ -62,11 +70,14 @@ The following is not sufficient:
 
 ## Tasks
 
+- [ ] Bump `package.json`/lockfile to `4.0.0` on `release/v4` and commit release candidate.
+- [ ] Record release candidate SHA and verify it remains unchanged before publish.
 - [ ] Run release workflow dry-run and record run evidence.
 - [ ] Run release workflow publish execution and record run evidence.
 - [ ] Run demo parity workflow for release candidate and record pass evidence (`mismatches: 0`).
 - [ ] Verify npm package visibility and metadata integrity for `4.0.0`.
-- [ ] Verify git tag points to expected release commit and release notes linkage.
+- [ ] Create/push `v4.0.0` tag (if not created by tooling) and verify tag points to expected release commit.
+- [ ] Create/update GitHub release entry for `v4.0.0` so Releases page latest release is current.
 - [ ] Finalize `CHANGELOG` and release notes content for v4.0.0 before publish sign-off.
 - [ ] Execute or explicitly approve deferred `npm deprecate` for v3 with final message text.
 - [ ] Record rollback/support decision tree outcome for any failed step.
@@ -77,6 +88,9 @@ The following is not sufficient:
 - [ ] Workflow evidence:
   - dry-run run URL + conclusion + key logs
   - publish run URL + conclusion + key logs
+- [ ] Release candidate SHA evidence:
+  - pre-dry-run `git rev-parse origin/release/v4`
+  - pre-publish `git rev-parse origin/release/v4` (must match)
 - [ ] Demo parity evidence:
   - workflow run URL + conclusion
   - parity summary (`mismatches: 0`) captured
@@ -87,6 +101,7 @@ The following is not sufficient:
 - [ ] Tag/repo evidence:
   - `git rev-parse v4.0.0^{}` matches intended release commit
   - release notes URL/reference
+  - GitHub release URL/reference for `v4.0.0` (latest designation confirmed)
 - [ ] Docs/release-note evidence:
   - `CHANGELOG` includes v4.0.0 entry with migration/support highlights
   - release notes include gate evidence links and upgrade guidance
@@ -112,6 +127,7 @@ The following is not sufficient:
 - Release workflow evidence for dry-run and publish is attached.
 - Demo parity evidence is attached and shows no mismatches for required comparison set.
 - Tag integrity and release notes references are captured.
+- GitHub Releases page is updated with `v4.0.0` release entry and current latest release marker.
 - `CHANGELOG` and release notes are finalized and linked.
 - v3 deprecation step is either executed with evidence or explicitly deferred with tracked owner/follow-up.
 - Post-release execution context is switched back to `main` for ongoing development.

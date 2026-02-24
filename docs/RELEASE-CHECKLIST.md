@@ -40,10 +40,12 @@ Update this document whenever release gates or publishing steps change.
 ### 4) Versioning & Tags
 - [ ] Bump version with `npm version` (patch/minor/major as appropriate).
 - [ ] Tag the release from the correct branch (`main` or `release/v*`).
+- [ ] Verify tag points to the intended release commit SHA.
 
 ### 5) Publishing
 - [ ] Push release branch and ensure CI passes.
 - [ ] Publish to npm once automation succeeds.
+- [ ] Create/update GitHub Release entry for the same tag so `https://github.com/<owner>/<repo>/releases` reflects the current release.
 
 ### 6) Post‑Release
 - [ ] Deprecate the prior major on npm when a new major ships.

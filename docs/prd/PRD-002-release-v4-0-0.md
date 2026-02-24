@@ -55,6 +55,7 @@ v4.x is a **bridge** line: bugfix-only, focused on getting users safely from the
 - README + `docs/MIGRATION.md` clearly instruct Node>=20 and Sequelize v5/v6 usage.
 - Demo parity gate evidence is recorded as part of release approval.
 - `CHANGELOG` and release notes are finalized for v4.0.0.
+- GitHub Releases page includes v4.0.0 release entry as latest release.
 - v3 is deprecated on npm (after v4 release is confirmed stable).
 
 ## Work Items (Mirrors `docs/STATUS.md`)
