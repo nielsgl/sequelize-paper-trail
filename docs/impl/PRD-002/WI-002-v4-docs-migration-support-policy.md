@@ -4,13 +4,13 @@
 
 - PRD: `docs/prd/PRD-002-release-v4-0-0.md`
 - Depends on: `PRD-002 WI-001`
-- Status: `In Progress` (mirrors `docs/STATUS.md`)
+- Status: `Done` (mirrors `docs/STATUS.md`)
 - Branch: `codex/prd-002-wi-002-v4-docs-migration-support-policy`
 - Worktree: `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-002-wi-002`
 
 ## Work Item Status
 
-- Current phase: `Step 6 ship approved; post-merge close-out pending`
+- Current phase: `Step 7 cleanup completed`
 - Plan Gate: `Approved`
 - Ship Gate: `Approved`
 
@@ -65,7 +65,7 @@ Deliver complete, user-facing v4 bridge documentation updates across README, mig
 - [x] Update release checklist to add explicit WI-004 follow-up for changelog/release-note finalization.
 - [x] Expand v4 bridge documentation with substantive contract details (support matrix/checklist/operating policy).
 - [x] Remove internal WI references from user-facing `README.md`/`docs/MIGRATION.md` sections.
-- [ ] Reconcile status mirrors (`docs/STATUS.md` runtime state and PRD WI status line) at close-out.
+- [x] Reconcile status mirrors (`docs/STATUS.md` runtime state and PRD WI status line) at close-out.
 
 ## Implementation Findings
 
@@ -145,31 +145,42 @@ Deliver complete, user-facing v4 bridge documentation updates across README, mig
 
 ### What changed
 
-- Pending post-merge close-out update.
+- Claimed `PRD-002 WI-002` and delivered substantive v4 docs/policy updates in `README.md`, `docs/MIGRATION.md`, `RELEASE-POLICY.md`, and `docs/RELEASE-CHECKLIST.md`.
+- Added explicit v4 bridge contract details (Node>=20 enforcement, Sequelize v5/v6 support, bugfix-only scope) and a concrete v3->v4 migration checklist.
+- Addressed review feedback by removing internal WI references from user-facing docs while retaining ownership sequencing in internal workflow artifacts.
+- Reconciled runtime/PRD/WI mirrors to `Done`.
 
 ### Why this option was chosen
 
-- Pending.
+- It satisfies WI-002 acceptance by providing actionable, externally usable v4 guidance and consistent policy language without leaking internal workflow mechanics into user-facing docs.
 
 ### What alternatives were rejected and why
 
-- Pending.
+- Minimal sequencing-only notes were rejected because they did not provide sufficient operational guidance for users or release operators.
+- Keeping WI identifiers in README/MIGRATION was rejected after review feedback to keep user docs external-facing and implementation-agnostic.
 
 ### Validation executed and results
 
-- Pending post-merge close-out update.
+- `rg` cross-file consistency scan: pass for v4 bridge policy/migration/support wording.
+- `npm run lint` in claimed worktree: known nested-worktree self-import resolver issue in `examples/v3/index.js`.
+- `npm run lint` in primary worktree: pass.
+- `uv run skillhub-validate-workflow-docs`: unavailable in environment.
+- `skills-ref validate`: unavailable in environment.
 
 ### Edge cases considered
 
-- Pending.
+- Node `<20` and malformed runtime metadata documentation alignment with runtime enforcement.
+- Mixed Sequelize v5/v6 consumer paths and CLS guidance parity.
+- Separation of external consumer docs from internal WI sequencing metadata.
 
 ### Residual risks
 
-- Pending post-merge close-out update.
+- Worktree-specific lint resolver behavior can still report false positives in nested worktree paths; baseline primary-worktree lint remains clean.
 
 ### Follow-up recommendations, if any
 
-- Pending post-merge close-out update.
+- Execute `PRD-002 WI-003` next for release/v4 branch and CI contract setup.
+- Keep release-note and `CHANGELOG` finalization in `PRD-002 WI-004` as documented.
 
 ## Blocked Reason Codes
 

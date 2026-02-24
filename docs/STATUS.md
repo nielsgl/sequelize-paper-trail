@@ -16,7 +16,7 @@ Ordered by execution wave and dependency.
 | `PRD-002 WI-005` | `PRD-002` | `WI-005` | Rename default branch `master` to `main` and reconcile protections/workflows/docs | 3 | - | Done |
 | `PRD-002 WI-006` | `PRD-002` | `WI-006` | Security vulnerability triage/remediation and exception list before v4 release | 3 | `PRD-002 WI-005` | Done |
 | `PRD-002 WI-001` | `PRD-002` | `WI-001` | Node >=20 enforcement design and impact checklist | 3 | `PRD-002 WI-006` | Done |
-| `PRD-002 WI-002` | `PRD-002` | `WI-002` | v4 docs, migration, and support-policy updates | 3 | `PRD-002 WI-001` | In Progress |
+| `PRD-002 WI-002` | `PRD-002` | `WI-002` | v4 docs, migration, and support-policy updates | 3 | `PRD-002 WI-001` | Done |
 | `PRD-002 WI-003` | `PRD-002` | `WI-003` | Create `release/v4` branch and CI gate contract setup | 3 | `PRD-002 WI-002` | Planned |
 | `PRD-002 WI-004` | `PRD-002` | `WI-004` | v4 release workflow execution and post-release `npm deprecate` plan for v3 | 3 | `PRD-002 WI-003` | Planned |
 | `PRD-003 WI-001` | `PRD-003` | `WI-001` | Golden diff-behavior fixture matrix (nested/object/array/null/ordering) | 4 | - | Planned |
@@ -31,7 +31,7 @@ One claimed WI per session. Use one row per active claim with concrete values.
 
 | ID | Title | owner | branch | worktree | impl | plan-gate | claim-state | claim-owner | claim-token | claimed-at | Depends On | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `PRD-002 WI-002` | v4 docs, migration, and support-policy updates | `codex` | `codex/prd-002-wi-002-v4-docs-migration-support-policy` | `/Users/niels.van.Galen.last/code/sequelize-paper-trail/.worktrees/prd-002-wi-002` | `docs/impl/PRD-002/WI-002-v4-docs-migration-support-policy.md` | `pending` | `claimed` | `codex` | `codex/prd-002-wi-002@2026-02-23T19:44:48Z` | `2026-02-23T19:44:48Z` | `PRD-002 WI-001` | `planning-path=plan-mode` |
+| _(none)_ | - | - | - | - | - | - | - | - | - | - | - | - |
 
 ## Blocked
 
@@ -55,6 +55,7 @@ Record completion and evidence location.
 | `PRD-002 WI-005` | Rename default branch `master` to `main` and reconcile protections/workflows/docs | `2026-02-22T12:11:56Z` | `docs/impl/PRD-002/WI-005-default-branch-rename-master-to-main.md` |
 | `PRD-002 WI-006` | Security vulnerability triage/remediation and exception list before v4 release | `2026-02-22T12:28:28Z` | `docs/impl/PRD-002/WI-006-security-vulnerability-triage-and-remediation.md` |
 | `PRD-002 WI-001` | Node >=20 enforcement design and impact checklist | `2026-02-23T15:41:31Z` | `docs/impl/PRD-002/WI-001-node-gte20-enforcement-design.md` |
+| `PRD-002 WI-002` | v4 docs, migration, and support-policy updates | `2026-02-24T10:06:00Z` | `docs/impl/PRD-002/WI-002-v4-docs-migration-support-policy.md` |
 
 ## Reason Codes
 
