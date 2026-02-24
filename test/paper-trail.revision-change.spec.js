@@ -44,6 +44,31 @@ describe('sequelize-paper-trail user journeys (v5 baseline)', () => {
 			expect(revisionIds).toContain(changes[0].RevisionId);
 		});
 
+		it('works with default revisionId attribute when revision changes are enabled', async () => {
+			const defaultCtx = await setupDatabase({
+				paperTrailOptions: {
+					enableRevisionChangeModel: true,
+				},
+			});
+			const { Model, RevisionChange, sequelize } = defaultCtx;
+
+			const user = await Model.create({ name: 'Default FK' });
+			await user.update({ name: 'Default FK 2' });
+
+			const changes = await RevisionChange.findAll({
+				order: [['createdAt', 'ASC']],
+			});
+			expect(changes.length).toBeGreaterThan(0);
+			expect(changes.every(change => change.revisionId != null)).toEqual(true);
+			const tableColumns = await sequelize
+				.getQueryInterface()
+				.describeTable('RevisionChanges');
+			expect(Object.keys(tableColumns)).toContain('revisionId');
+			expect(Object.keys(tableColumns)).not.toContain('RevisionId');
+
+			await sequelize.close();
+		});
+
 		it('does not create RevisionChange rows when disabled', async () => {
 			const disabledCtx = await setupDatabase({
 				paperTrailOptions: { enableRevisionChangeModel: false },
