@@ -3,6 +3,11 @@
 ## Unreleased
 - (Reserved)
 
+## 4.0.1
+- Fix `RevisionChange` association setup to avoid duplicate `revisionId`/`RevisionId` columns when `enableRevisionChangeModel` is enabled with default attributes.
+- Add regression coverage for default revision-change FK behavior and schema column guard checks.
+- Add CI example smoke checks for `examples/v3` and `examples/v4` to catch install/start regressions earlier.
+
 ## 4.0.0
 - Enforce Node.js `>=20` at runtime on `init()` with fail-fast behavior for unsupported runtimes.
 - Formalize bridge-line support for Sequelize `^5 || ^6` with no feature expansion.
