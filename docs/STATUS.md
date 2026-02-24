@@ -24,6 +24,12 @@ Ordered by execution wave and dependency.
 | `PRD-003 WI-003` | `PRD-003` | `WI-003` | Remove `deep-diff` from runtime deps and update changelog/status | 4 | `PRD-003 WI-002` | Planned |
 | `PRD-004 WI-001` | `PRD-004` | `WI-001` | Tooling-major review decision (Jest 30, ESLint 9, Prettier latest) | 5 | - | Planned |
 | `PRD-004 WI-002` | `PRD-004` | `WI-002` | Remediate deferred high/critical dev-tooling vulnerabilities from PRD-002 WI-006 exceptions | 5 | `PRD-004 WI-001` | Planned |
+| `PRD-005 WI-001` | `PRD-005` | `WI-001` | Lock v5 release contract and branch strategy | 6 | `PRD-003 WI-003`, `PRD-004 WI-002` | Planned |
+| `PRD-005 WI-002` | `PRD-005` | `WI-002` | Finalize v5 runtime support matrix and migration contract | 6 | `PRD-005 WI-001` | Planned |
+| `PRD-005 WI-003` | `PRD-005` | `WI-003` | Refresh v5 docs, migration guide, and examples guidance | 6 | `PRD-005 WI-002` | Planned |
+| `PRD-005 WI-004` | `PRD-005` | `WI-004` | Execute v5 release gates and assemble evidence pack | 6 | `PRD-005 WI-003` | Planned |
+| `PRD-005 WI-005` | `PRD-005` | `WI-005` | Publish/tag/release v5.0.0 and complete post-release actions | 6 | `PRD-005 WI-004` | Planned |
+| `PRD-005 WI-006` | `PRD-005` | `WI-006` | Reduce npm package footprint for v5.0.1 (lowest priority) | 7 | `PRD-005 WI-005` | Planned |
 
 ## In Progress
 

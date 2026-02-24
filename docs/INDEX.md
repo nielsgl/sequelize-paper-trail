@@ -7,6 +7,7 @@ This is the canonical PRD selector for workflow-orchestrator claim precedence.
 - PRD-002: release-v4-0-0 | Active: no | Priority: P1 | Execution waves: 3
 - PRD-003: deep-diff-replacement | Active: yes | Priority: P2 | Execution waves: 4
 - PRD-004: tooling-major-review | Active: no | Priority: P3 | Execution waves: 5
+- PRD-005: release-v5-0-0 | Active: no | Priority: P4 | Execution waves: 6,7
 
 ## Execution Waves
 - Wave 1: PRD-001 WI-001
@@ -14,6 +15,8 @@ This is the canonical PRD selector for workflow-orchestrator claim precedence.
 - Wave 3: PRD-002 WI-005, PRD-002 WI-006, PRD-002 WI-001, PRD-002 WI-002, PRD-002 WI-003, PRD-002 WI-004
 - Wave 4: PRD-003 WI-001, PRD-003 WI-002, PRD-003 WI-003
 - Wave 5: PRD-004 WI-001, PRD-004 WI-002
+- Wave 6: PRD-005 WI-001, PRD-005 WI-002, PRD-005 WI-003, PRD-005 WI-004, PRD-005 WI-005
+- Wave 7: PRD-005 WI-006
 
 ## PRD to WI Mapping
 ### PRD-001 release-v3-1-0
@@ -39,3 +42,11 @@ This is the canonical PRD selector for workflow-orchestrator claim precedence.
 ### PRD-004 tooling-major-review
 - WI-001: Formal tooling-major review decision (Jest 30, ESLint 9, Prettier latest).
 - WI-002: Remediate deferred high/critical dev-tooling vulnerabilities from WI-006 exceptions.
+
+### PRD-005 release-v5-0-0
+- WI-001: Lock v5 release contract and branch strategy.
+- WI-002: Finalize v5 runtime support matrix and migration contract.
+- WI-003: Refresh v5 docs/migration/examples guidance.
+- WI-004: Execute v5 release gates and evidence pack.
+- WI-005: Publish/tag/release v5.0.0 and complete post-release actions.
+- WI-006: Reduce npm package footprint for v5.0.1 (lowest-priority follow-up).
