@@ -1,0 +1,47 @@
+name: Deprecate npm versions
+
+on:
+  workflow_dispatch:
+    inputs:
+      range:
+        description: 'Semver range to deprecate (without package name)'
+        required: true
+        default: '<4.0.0'
+      message:
+        description: 'Deprecation message'
+        required: true
+        default: 'v3 is legacy. Upgrade to v4 (bridge) or v5 (feature line). See docs/MIGRATION.md.'
+      dry_run:
+        description: 'Print command only (true) or execute deprecate (false)'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  deprecate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm whoami
+
+      - name: Dry run command preview
+        if: ${{ inputs.dry_run == 'true' }}
+        run: |
+          echo "npm deprecate \"sequelize-paper-trail@${{ inputs.range }}\" \"${{ inputs.message }}\""
+
+      - name: Deprecate npm versions
+        if: ${{ inputs.dry_run != 'true' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm deprecate "sequelize-paper-trail@${{ inputs.range }}" "${{ inputs.message }}"
