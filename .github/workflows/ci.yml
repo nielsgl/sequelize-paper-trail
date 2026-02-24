@@ -77,13 +77,6 @@ jobs:
       - name: Install root dependencies
         run: npm ci
 
-      - name: Pack local library for example override
-        run: |
-          rm -f examples/_artifacts/sequelize-paper-trail-local.tgz
-          npm pack --pack-destination examples/_artifacts
-          latest_tgz=$(ls -t examples/_artifacts/sequelize-paper-trail-*.tgz | head -n1)
-          cp "${latest_tgz}" examples/_artifacts/sequelize-paper-trail-local.tgz
-
       - name: Smoke test examples/v3
         run: |
           npm --prefix examples/v3 ci
@@ -91,6 +84,6 @@ jobs:
 
       - name: Smoke test examples/v4 against current commit
         run: |
-          npm --prefix examples/v4 pkg set dependencies.sequelize-paper-trail="file:../_artifacts/sequelize-paper-trail-local.tgz"
           npm --prefix examples/v4 ci
+          npm --prefix examples/v4 install --no-save "$GITHUB_WORKSPACE"
           npm --prefix examples/v4 run start
