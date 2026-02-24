@@ -59,7 +59,7 @@ v4.x is a **bridge** line: bugfix-only, focused on getting users safely from the
 - Status: `Done` (mirrors `docs/STATUS.md`)
 
 ### PRD-002 WI-002 v4 docs, migration, and support-policy updates
-- Status: `Planned` (mirrors `docs/STATUS.md`)
+- Status: `In Progress` (mirrors `docs/STATUS.md`)
 
 ### PRD-002 WI-003 Create `release/v4` branch and CI gate contract setup
 - Status: `Planned` (mirrors `docs/STATUS.md`)

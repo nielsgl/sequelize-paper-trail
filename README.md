@@ -289,6 +289,21 @@ Support lines:
 - **v4.x**: bugfix-only bridge supporting Sequelize v5 + v6, Node >=20.
 - **v5.x**: feature line; Sequelize v6 primary, v7 experimental later.
 
+#### v4 Bridge Contract (What is guaranteed)
+
+| Area | v4 Guarantee | Notes |
+| --- | --- | --- |
+| Node runtime | `>=20` required | `init()` throws `ERR_UNSUPPORTED_NODE_VERSION` for `<20` or unknown/malformed metadata. |
+| Sequelize adapters | `^5` and `^6` supported | v4 bridge is the compatibility line before v5 feature-line adoption. |
+| Change scope | Bugfix-only | No new features or semantic-expansion work in v4 releases. |
+| CLS behavior | Supported for v5/v6 paths | `cls-hooked` is required for Sequelize v6 CLS usage. |
+
+#### v3 -> v4 Upgrade Outcomes
+
+- Runtime expectation changes from warning to hard enforcement for Node version support.
+- Application teams should validate both default and CLS-enabled write paths before cutting over.
+- Maintainers should align support policy, migration guidance, and release notes before publishing the v4 bridge release.
+
 Node versions **<20** are unsupported on the v4 line. `init()` now throws `ERR_UNSUPPORTED_NODE_VERSION` for Node <20 or unknown/malformed Node runtime metadata. `SUPPRESS_NODE_DEPRECATION` no longer bypasses runtime enforcement in v4.
 
 ## Contributing

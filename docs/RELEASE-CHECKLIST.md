@@ -11,8 +11,15 @@ Update this document whenever release gates or publishing steps change.
 ### 1) Docs & Messaging
 - [ ] Update README “Supported Versions” and deprecation warnings.
 - [ ] Update `CHANGELOG` with user‑visible changes and migration notes.
+- [ ] For `PRD-002 WI-002`, record the follow-up to finalize release-note + `CHANGELOG` entries in `PRD-002 WI-004` (do not finalize changelog in WI-002).
 - [ ] Ensure `RELEASE-POLICY.md` and `docs/CI.md` reflect any process changes.
 - [ ] Update the migration guide if behavior or support changes.
+
+### 1A) v4 Bridge Contract Checks (When Shipping v4)
+- [ ] README contains explicit v4 bridge contract details (Node>=20 enforcement + Sequelize v5/v6 support scope).
+- [ ] Migration guide contains a concrete `v3 -> v4` checklist with runtime/CLS verification steps.
+- [ ] Release policy includes v4 allowed/disallowed change classes (bugfix-only, no feature expansion).
+- [ ] Release-note and `CHANGELOG` finalization is tracked in WI-004 before publish approval.
 
 ### 2) Testing (Required Gates)
 - [ ] `npm test -- --coverage`
