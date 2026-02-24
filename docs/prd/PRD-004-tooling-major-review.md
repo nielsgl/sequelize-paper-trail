@@ -1,26 +1,51 @@
-# PRD-004: Tooling Major Upgrade Review
+# PRD-004: Tooling and Security Remediation for v5 Readiness
 
-## Context
+## Why This PRD Exists
 
-Phase 6 work (tooling major review) is intentionally deferred, but it must stay traceable as a PRD/WI item so it is not lost between release lines.
+Current CI/install output includes multiple deprecated tooling dependencies and unresolved dev-tooling vulnerability backlog from PRD-002 WI-006 exceptions. We need a decision-complete remediation path before final v5 release execution.
 
-## Goals
+## Outcome Required
 
-- Run a formal go/no-go review for major upgrades:
+Produce a concrete tooling/security decision and execute the approved remediation set so v5 release can proceed with explicit risk posture.
+
+## In Scope
+
+- Formal go/no-go/defer decision for major tooling upgrades:
   - Jest 30
   - ESLint 9
   - Prettier latest major
-- Produce migration risk notes and rollout sequencing.
-- Decide whether to execute in v5 line or defer again with explicit rationale.
+- Remediation of deferred high/critical dev-tooling vulnerabilities where feasible.
+- Explicit exception carry-forward for anything intentionally deferred.
 
-## Non-Goals
+## Out of Scope
 
-- No tooling major upgrade implementation in this PRD.
-- No runtime behavior changes.
+- Runtime feature changes.
+- Diff adapter replacement (PRD-003).
+- v5 publish/tag execution (PRD-005).
+
+## Decision Rules
+
+1. Every deferred high/critical item must end in one of:
+   - fixed,
+   - accepted exception with owner/date/reason,
+   - blocked by external dependency with tracked follow-up.
+2. No ambiguous “we should” outputs.
+3. Release-impacting risks must be explicitly labeled as blocking or non-blocking for PRD-005.
+
+## Execution Structure
+
+- `PRD-004 WI-001`: tooling-major decision record and sequencing.
+- `PRD-004 WI-002`: implement approved remediation and refresh exception list.
+
+## Required Gates
+
+- `npm run lint`
+- `npm test -- --coverage`
+- `npm run test:v6`
+- Security evidence refresh (`npm audit --json`, `npm audit --omit=dev --json`)
 
 ## Acceptance Criteria
 
-- A single WI tracks the review outcome with explicit decision (`go` / `no-go` / `defer`).
-- Decision includes required config migration notes and test impact notes.
-- `docs/STATUS.md` and `docs/PLAN.md` reference this PRD as tracked deferred work.
-- Deferred high/critical dev-tooling vulnerabilities from `PRD-002 WI-006` have a remediation WI linked under this PRD.
+- WI-001 decision is explicit (`go`/`no-go`/`defer`) with rationale and rollout order.
+- WI-002 applies approved changes and updates vulnerability evidence.
+- Remaining exceptions (if any) are explicit and linked to PRD-005 release risk decision.
