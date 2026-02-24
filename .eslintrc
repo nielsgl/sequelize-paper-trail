@@ -62,6 +62,12 @@
 				"import/extensions": "off",
 				"import/no-dynamic-require": "off"
 			}
+		},
+		{
+			"files": ["examples/**/*.js"],
+			"rules": {
+				"import/no-unresolved": "off"
+			}
 		}
 	]
 }
